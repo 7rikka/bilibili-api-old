@@ -1,0 +1,11 @@
+package cc.nekoneko.bilibili.config;
+
+/**
+ * 接口地址
+ */
+public class UrlConfig {
+    /**
+     * 动态详情信息
+     */
+    public static final String DYNAMIC_DETAIL = "https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/get_dynamic_detail";
+}
