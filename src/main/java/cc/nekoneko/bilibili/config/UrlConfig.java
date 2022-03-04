@@ -12,4 +12,8 @@ public class UrlConfig {
      * 领取大会员礼包
      */
     public static final String RECIVE_PRIVILEGE = "https://api.bilibili.com/x/vip/privilege/receive";
+    /**
+     * 获取个人信息
+     */
+    public static final String USER_INFO = "https://api.bilibili.com/x/space/acc/info";
 }

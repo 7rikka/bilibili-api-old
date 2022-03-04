@@ -6,7 +6,7 @@ import lombok.Data;
  * 牌子
  */
 @Data
-public class Pendant {
+public class BilibiliPendant {
     private Integer pid;
     private String name;
     private String image;

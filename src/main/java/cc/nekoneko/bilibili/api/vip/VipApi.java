@@ -26,21 +26,26 @@ public class VipApi implements IVip {
      */
     @Override
     public boolean recivePrivilege(BilibiliLoginInfo loginInfo, VipPrivilegeEnum type) {
+        //准备参数
         Map<String, String> map = new HashMap<>();
         map.put("type", String.valueOf(type.value()));
         map.put("csrf", loginInfo.getCsrf());
+        //构建请求
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(RECIVE_PRIVILEGE)
                 .postForm(map)
                 .cookie(loginInfo)
                 .buildRequest();
+        //发送请求
         BiliResult result = Call.doCall(request);
         System.out.println(result);
+        //处理返回结果
+        //领取成功 OR 重复领取
         if (result.getCode() == 0 || result.getCode() == 69801) {
-            //领取成功
+            log.info("领取权益: {} 成功", type.name());
             return true;
         } else {
-            log.error("领取权益: {} 失败",type.name());
+            log.error("领取权益: {} 失败", type.name());
             return false;
         }
     }
