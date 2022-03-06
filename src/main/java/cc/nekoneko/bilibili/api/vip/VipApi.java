@@ -38,7 +38,6 @@ public class VipApi implements IVip {
                 .buildRequest();
         //发送请求
         BiliResult result = Call.doCall(request);
-        System.out.println(result);
         //处理返回结果
         //领取成功 OR 重复领取
         if (result.getCode() == 0 || result.getCode() == 69801) {

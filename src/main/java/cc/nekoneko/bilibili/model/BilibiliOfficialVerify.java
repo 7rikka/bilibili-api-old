@@ -1,12 +1,14 @@
 package cc.nekoneko.bilibili.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * 用户认证信息
  */
 @Data
-public class UserOfficialVerify {
+@Builder
+public class BilibiliOfficialVerify {
     /**
      * -1：无
      * 0：认证

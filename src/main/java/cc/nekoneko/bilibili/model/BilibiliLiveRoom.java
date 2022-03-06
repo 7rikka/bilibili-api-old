@@ -1,8 +1,13 @@
 package cc.nekoneko.bilibili.model;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * 直播间信息
  */
+@Data
+@Builder
 public class BilibiliLiveRoom {
     private Integer roomStatus;
     private Integer liveStatus;

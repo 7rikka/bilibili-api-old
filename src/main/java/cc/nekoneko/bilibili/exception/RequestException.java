@@ -1,15 +1,7 @@
 package cc.nekoneko.bilibili.exception;
 
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSink;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class RequestException extends RuntimeException {
     private final Request request;
@@ -27,39 +19,39 @@ public class RequestException extends RuntimeException {
         System.err.println("错误: 请求路径:" + request.url());
     }
 
-    public String getExceptionInfo() throws IOException {
-        return String.format("""
-                请求地址: %s
-                请求方式: %s
-                请求体参数: %s
-                响应状态码: %s
-                响应内容: %s
-                """, request.url(), request.method(), getRequestBody(request.body()), response.code(), getResponseBody(response.body()));
-    }
+//    public String getExceptionInfo() throws IOException {
+//        return String.format("""
+//                请求地址: %s
+//                请求方式: %s
+//                请求体参数: %s
+//                响应状态码: %s
+//                响应内容: %s
+//                """, request.url(), request.method(), getRequestBody(request.body()), response.code(), getResponseBody(response.body()));
+//    }
 
-    public String getResponseBody(ResponseBody body) {
-        try {
-            if (null != body) {
-                return body.string();
-            }
-        } catch (IOException ignored) {
+//    public String getResponseBody(ResponseBody body) {
+//        try {
+//            if (null != body) {
+//                return body.string();
+//            }
+//        } catch (IOException ignored) {
+//
+//        }
+//        return null;
+//
+//    }
 
-        }
-        return null;
-
-    }
-
-    public String getRequestBody(RequestBody body) {
-        if (null == body) {
-            return null;
-        }
-        Buffer buffer=new Buffer();
-        try {
-            body.writeTo(buffer);
-            return buffer.readString(StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public String getRequestBody(RequestBody body) {
+//        if (null == body) {
+//            return null;
+//        }
+//        Buffer buffer=new Buffer();
+//        try {
+//            body.writeTo(buffer);
+//            return buffer.readString(StandardCharsets.UTF_8);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 }

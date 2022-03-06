@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 @Data
 public class BilibiliLoginInfo {
     /**
+     * 用户UID
+     */
+    private Integer uid;
+    /**
      * SESSDATA
      */
     private String SESSDATA;

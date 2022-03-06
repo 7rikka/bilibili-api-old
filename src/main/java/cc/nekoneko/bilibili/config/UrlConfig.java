@@ -16,4 +16,12 @@ public class UrlConfig {
      * 获取个人信息
      */
     public static final String USER_INFO = "https://api.bilibili.com/x/space/acc/info";
+    /**
+     * 发送私信
+     */
+    public static final String SEND_MESSAGE = "https://api.vc.bilibili.com/web_im/v1/web_im/send_msg";
+    /**
+     * 上传图片
+     */
+    public static final String UPLOAD_IMAGE = "https://api.bilibili.com/x/dynamic/feed/draw/upload_bfs";
 }

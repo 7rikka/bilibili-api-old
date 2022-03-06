@@ -56,11 +56,11 @@ public class BilibiliUser {
     /**
      *
      */
-    private String coins;
+    private Double coins;
     /**
      *
      */
-    private String fans_badge;
+    private Boolean fans_badge;
     private BilibiliFansMedal fans_medal;
     private Boolean is_followed;
     private String top_photo;
@@ -70,7 +70,7 @@ public class BilibiliUser {
     /**
      * 认证信息
      */
-    private UserOfficialVerify official;
+    private BilibiliOfficialVerify official;
     /**
      * 牌子
      */
@@ -81,6 +81,7 @@ public class BilibiliUser {
     private VipInfo vip;
     private BilibiliSchool school;
     private BilibiliLiveRoom live_room;
+    private BilibiliNameplate nameplate;
     /**
      * 强转
      */

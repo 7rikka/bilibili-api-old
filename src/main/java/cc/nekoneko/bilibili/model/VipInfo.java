@@ -1,11 +1,13 @@
 package cc.nekoneko.bilibili.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * 大会员信息
  */
 @Data
+@Builder
 public class VipInfo {
     /**
      * 大会员类型
@@ -29,6 +31,7 @@ public class VipInfo {
     private String avatar_subscript_url;
     private Label label;
     @Data
+    @Builder
     public static class Label{
         private String path;
         private String text;
