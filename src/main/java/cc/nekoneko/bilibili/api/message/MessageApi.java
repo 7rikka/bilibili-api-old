@@ -48,10 +48,10 @@ public class MessageApi implements IMessage {
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0) {
             long msgKey = result.getData().get("msg_key").getLong();
-            log.info("发送图片私信[{}]成功, 信息id: {}.",message,msgKey);
+            log.info("发送文字私信[{}]成功, 信息id: {}.",message,msgKey);
             return msgKey;
         } else {
-            log.error("发送图片私信[{}]失败. ",message,result);
+            log.error("发送文字私信[{}]失败, 返回: {}.",message,result);
             return null;
         }
     }
@@ -89,7 +89,7 @@ public class MessageApi implements IMessage {
             log.info("发送图片私信[{}]成功, 信息id: {}.",file.getName(),msgKey);
             return msgKey;
         } else {
-            log.error("发送图片私信[{}]失败, 返回{}.",file.getName(),result);
+            log.error("发送图片私信[{}]失败, 返回: {}.",file.getName(),result);
             return null;
         }
     }
@@ -113,13 +113,13 @@ public class MessageApi implements IMessage {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0 || result.getCode() == 21042) {
-            log.info("已撤回私信: {}",messageId);
+            log.info("已撤回私信: {}.",messageId);
             return true;
         } else if (result.getCode() == 21041) {
-            log.error("撤回私信: {} 失败! 已超期, 无法撤回.",messageId);
+            log.error("撤回私信: {} 失败, 已超期, 无法撤回.",messageId);
             return false;
         } else {
-            log.error("撤回私信: {} 失败! ",result);
+            log.error("撤回私信: {} 失败, 返回: {}.",messageId,result);
             return false;
         }
     }
