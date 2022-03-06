@@ -7,7 +7,7 @@ public interface ISpace {
     /**
      * 获取用户信息（不登录状态获取）
      *
-     * @param mid
+     * @param uid
      * @return
      */
     BilibiliUser getUserInfo(int uid);
@@ -15,7 +15,7 @@ public interface ISpace {
     /**
      * 获取用户信息（登录状态获取）
      *
-     * @param mid
+     * @param uid
      * @return
      */
     BilibiliUser getUserInfo(int uid, BilibiliLoginInfo loginInfo);

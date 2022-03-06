@@ -1,13 +1,17 @@
 package cc.nekoneko.bilibili.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 粉丝牌子
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BilibiliMedal {
     private Integer uid;
     private Integer target_id;

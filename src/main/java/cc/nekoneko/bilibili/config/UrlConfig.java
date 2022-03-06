@@ -24,4 +24,12 @@ public class UrlConfig {
      * 上传图片
      */
     public static final String UPLOAD_IMAGE = "https://api.bilibili.com/x/dynamic/feed/draw/upload_bfs";
+    /**
+     * 获取所有成就勋章
+     */
+    public static final String ALL_MEDAL_INFO = "https://api.bilibili.com/x/member/medal/all/info";
+    /**
+     * 获取我的成就勋章
+     */
+    public static final String MY_MEDAL_INFO = "https://api.bilibili.com/x/member/medal/my/info";
 }
