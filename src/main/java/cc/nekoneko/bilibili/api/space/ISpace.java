@@ -1,22 +1,13 @@
 package cc.nekoneko.bilibili.api.space;
 
-import cc.nekoneko.bilibili.model.BilibiliLoginInfo;
 import cc.nekoneko.bilibili.model.BilibiliUser;
 
 public interface ISpace {
     /**
-     * 获取用户信息（不登录状态获取）
+     * 获取用户信息
      *
      * @param uid
      * @return
      */
     BilibiliUser getUserInfo(int uid);
-
-    /**
-     * 获取用户信息（登录状态获取）
-     *
-     * @param uid
-     * @return
-     */
-    BilibiliUser getUserInfo(int uid, BilibiliLoginInfo loginInfo);
 }

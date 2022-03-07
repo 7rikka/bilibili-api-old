@@ -15,17 +15,22 @@ import static cc.nekoneko.bilibili.config.UrlConfig.RECIVE_PRIVILEGE;
 
 @Slf4j
 public class VipApi implements IVip {
+    private final BilibiliLoginInfo loginInfo;
+
+    public VipApi(BilibiliLoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
+    }
 
     /**
      * 领取大会员权益
      *
-     * @param loginInfo 登录信息
-     * @param type      领取礼包类型
-     * @return code=69800, message=网络繁忙 请稍后再试
+     * @param type 领取礼包类型
+     * @return 领取是否成功
+     * code=69800, message=网络繁忙 请稍后再试
      * code=69801, message=你已领取过该权益
      */
     @Override
-    public boolean recivePrivilege(BilibiliLoginInfo loginInfo, VipPrivilegeEnum type) {
+    public boolean recivePrivilege(VipPrivilegeEnum type) {
         //准备参数
         Map<String, String> map = new HashMap<>();
         map.put("type", String.valueOf(type.value()));

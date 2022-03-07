@@ -16,10 +16,15 @@ import static cc.nekoneko.bilibili.config.UrlConfig.ALL_MEDAL_INFO;
 import static cc.nekoneko.bilibili.config.UrlConfig.MY_MEDAL_INFO;
 
 @Slf4j
-public class MemberApi implements IMember{
+public class MemberApi implements IMember {
+    private final BilibiliLoginInfo loginInfo;
+
+    public MemberApi(BilibiliLoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
+    }
 
     @Override
-    public List<BilibiliNameplate> getAllMedalInfo(BilibiliLoginInfo loginInfo) {
+    public List<BilibiliNameplate> getAllMedalInfo() {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(ALL_MEDAL_INFO)
                 .get()
@@ -28,12 +33,12 @@ public class MemberApi implements IMember{
         BiliResult result = Call.doCall(request);
         System.out.println(result);
         if (result.getCode() == 0) {
-            List<BilibiliNameplate> nameplateList=new LinkedList<>();
+            List<BilibiliNameplate> nameplateList = new LinkedList<>();
             ONode list = result.getData().get("list");
             list.forEach((s, oNode) -> {
                 String typeName = oNode.get("name").getString();
                 oNode.get("data").forEach(oNode1 -> {
-                    oNode1.get("right").forEach(right->{
+                    oNode1.get("right").forEach(right -> {
                         BilibiliNameplate nameplate = right.toObject(BilibiliNameplate.class);
                         nameplate.setType(typeName);
                         nameplateList.add(nameplate);
@@ -47,20 +52,19 @@ public class MemberApi implements IMember{
     }
 
     @Override
-    public List<BilibiliNameplate> getMyMedalInfo(BilibiliLoginInfo loginInfo) {
+    public List<BilibiliNameplate> getMyMedalInfo() {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(MY_MEDAL_INFO)
                 .get()
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result);
         if (result.getCode() == 0) {
-            List<BilibiliNameplate> list=new LinkedList<>();
+            List<BilibiliNameplate> list = new LinkedList<>();
             ONode node = result.getData();
             node.forEach(oNode -> {
                 String name = oNode.get("name").getString();
-                oNode.get("list").forEach(item->{
+                oNode.get("list").forEach(item -> {
                     BilibiliNameplate nameplate = item.toObject(BilibiliNameplate.class);
                     nameplate.setType(name);
                     list.add(nameplate);

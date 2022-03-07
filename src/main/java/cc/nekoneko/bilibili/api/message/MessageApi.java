@@ -20,6 +20,7 @@ import static cc.nekoneko.bilibili.config.UrlConfig.UPLOAD_IMAGE;
 
 @Slf4j
 public class MessageApi implements IMessage {
+    private final BilibiliLoginInfo loginInfo;
     public static final Map<String, String> pictureType;
 
     static {
@@ -29,16 +30,19 @@ public class MessageApi implements IMessage {
         pictureType.put("gif", "gif");
     }
 
+    public MessageApi(BilibiliLoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
+    }
+
     /**
      * 发送一条文字私信
      *
-     * @param loginInfo  登录信息
      * @param receiverId 接收人UID
      * @param message    私信内容
      * @return 私信id, 可用于撤回消息
      */
     @Override
-    public Long sendMessage(BilibiliLoginInfo loginInfo, int receiverId, String message) {
+    public Long sendMessage(int receiverId, String message) {
         Map<String, String> map = getMessageData(loginInfo.getCsrf(), loginInfo.getUid(), receiverId, 1, message);
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(SEND_MESSAGE)
@@ -48,10 +52,10 @@ public class MessageApi implements IMessage {
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0) {
             long msgKey = result.getData().get("msg_key").getLong();
-            log.info("发送文字私信[{}]成功, 信息id: {}.",message,msgKey);
+            log.info("发送文字私信[{}]成功, 信息id: {}.", message, msgKey);
             return msgKey;
         } else {
-            log.error("发送文字私信[{}]失败, 返回: {}.",message,result);
+            log.error("发送文字私信[{}]失败, 返回: {}.", message, result);
             return null;
         }
     }
@@ -60,16 +64,15 @@ public class MessageApi implements IMessage {
      * 发送一条图片私信
      * code=21037, message=图片格式不合法，不要调戏接口啦
      *
-     * @param loginInfo
      * @param receiverId
      * @param file
      * @return
      * @throws IOException
      */
     @Override
-    public Long sendPictureMessage(BilibiliLoginInfo loginInfo, int receiverId, File file) throws IOException {
+    public Long sendPictureMessage(int receiverId, File file) throws IOException {
         //先上传图片
-        BilibiliPictureInfo pictureInfo = uploadPicture(loginInfo, file);
+        BilibiliPictureInfo pictureInfo = uploadPicture(file);
         ONode node = ONode.newObject()
                 .set("height", pictureInfo.getHeight())
                 .set("width", pictureInfo.getWidth())
@@ -86,10 +89,10 @@ public class MessageApi implements IMessage {
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0) {
             long msgKey = result.getData().get("msg_key").getLong();
-            log.info("发送图片私信[{}]成功, 信息id: {}.",file.getName(),msgKey);
+            log.info("发送图片私信[{}]成功, 信息id: {}.", file.getName(), msgKey);
             return msgKey;
         } else {
-            log.error("发送图片私信[{}]失败, 返回: {}.",file.getName(),result);
+            log.error("发送图片私信[{}]失败, 返回: {}.", file.getName(), result);
             return null;
         }
     }
@@ -104,7 +107,7 @@ public class MessageApi implements IMessage {
      * @return
      */
     @Override
-    public boolean recallMessage(BilibiliLoginInfo loginInfo, int receiverId, long messageId) {
+    public boolean recallMessage(int receiverId, long messageId) {
         Map<String, String> map = getMessageData(loginInfo.getCsrf(), loginInfo.getUid(), receiverId, 5, String.valueOf(messageId));
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(SEND_MESSAGE)
@@ -113,13 +116,13 @@ public class MessageApi implements IMessage {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0 || result.getCode() == 21042) {
-            log.info("已撤回私信: {}.",messageId);
+            log.info("已撤回私信: {}.", messageId);
             return true;
         } else if (result.getCode() == 21041) {
-            log.error("撤回私信: {} 失败, 已超期, 无法撤回.",messageId);
+            log.error("撤回私信: {} 失败, 已超期, 无法撤回.", messageId);
             return false;
         } else {
-            log.error("撤回私信: {} 失败, 返回: {}.",messageId,result);
+            log.error("撤回私信: {} 失败, 返回: {}.", messageId, result);
             return false;
         }
     }
@@ -127,13 +130,12 @@ public class MessageApi implements IMessage {
     /**
      * 上传图片
      *
-     * @param loginInfo
      * @param file
      * @return
      * @throws IOException
      */
     @Override
-    public BilibiliPictureInfo uploadPicture(BilibiliLoginInfo loginInfo, File file) throws IOException {
+    public BilibiliPictureInfo uploadPicture(File file) throws IOException {
         if (!file.getName().contains(".")) {
             throw new RuntimeException("文件名不合法!");
         }

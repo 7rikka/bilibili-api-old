@@ -65,8 +65,10 @@ public class BilibiliRequest {
     }
 
     public BilibiliRequest cookie(BilibiliLoginInfo loginInfo) {
-        String cookie = "SESSDATA=" + loginInfo.getSESSDATA() + "; ";
-        builder.header("Cookie", cookie);
+        if (null != loginInfo) {
+            String cookie = "SESSDATA=" + loginInfo.getSESSDATA() + "; ";
+            builder.header("Cookie", cookie);
+        }
         return this;
     }
 

@@ -4,7 +4,6 @@ import cc.nekoneko.bilibili.model.BiliResult;
 import cc.nekoneko.bilibili.model.BilibiliLoginInfo;
 import cc.nekoneko.bilibili.model.BilibiliUser;
 import cc.nekoneko.bilibili.util.BiliRequestFactor;
-import cc.nekoneko.bilibili.util.BilibiliRequest;
 import cc.nekoneko.bilibili.util.Call;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Request;
@@ -16,15 +15,10 @@ import static cc.nekoneko.bilibili.config.UrlConfig.USER_INFO;
 
 @Slf4j
 public class SpaceApi implements ISpace {
-    /**
-     * 获取用户信息（不登录状态获取）
-     *
-     * @param uid
-     * @return
-     */
-    @Override
-    public BilibiliUser getUserInfo(int uid) {
-        return getUserInfo(uid, null);
+    private final BilibiliLoginInfo loginInfo;
+
+    public SpaceApi(BilibiliLoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
     }
 
     /**
@@ -34,17 +28,14 @@ public class SpaceApi implements ISpace {
      * @return
      */
     @Override
-    public BilibiliUser getUserInfo(int uid, BilibiliLoginInfo loginInfo) {
+    public BilibiliUser getUserInfo(int uid) {
         Map<String, String> map = new HashMap<>();
         map.put("mid", String.valueOf(uid));
-        BilibiliRequest bilibiliRequest = BiliRequestFactor.getBiliRequest()
+        Request request = BiliRequestFactor.getBiliRequest()
                 .url(USER_INFO, map)
-                .get();
-        //是否登录获取
-        if (null != loginInfo) {
-            bilibiliRequest.cookie(loginInfo);
-        }
-        Request request = bilibiliRequest.buildRequest();
+                .cookie(loginInfo)
+                .get()
+                .buildRequest();
         BiliResult biliResult = Call.doCall(request);
         if (biliResult.getCode() == 0) {
             return biliResult.getData().toObject(BilibiliUser.class);
@@ -153,9 +144,8 @@ public class SpaceApi implements ISpace {
 //                    .build();
 //            return null;
         } else {
-            log.error("获取UID: {} 信息错误! {}",uid,biliResult);
+            log.error("获取UID: {} 信息错误! {}", uid, biliResult);
             return null;
         }
-
     }
 }
