@@ -32,4 +32,12 @@ public class UrlConfig {
      * 获取我的成就勋章
      */
     public static final String MY_MEDAL_INFO = "https://api.bilibili.com/x/member/medal/my/info";
+    /**
+     * 新建收藏夹
+     */
+    public static final String ADD_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/add";
+    /**
+     * 收藏夹信息
+     */
+    public static final String FOLDER_INFO = "https://api.bilibili.com/x/v3/fav/folder/info";
 }

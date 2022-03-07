@@ -8,7 +8,8 @@ import nya.nekoneko.bilibili.enums.VipPrivilegeEnum;
 public interface IVip {
     /**
      * 领取大会员权益
-     * @return
+     *
+     * @return 领取是否成功
      */
     boolean recivePrivilege(VipPrivilegeEnum type);
 }

@@ -1,5 +1,7 @@
 package nya.nekoneko.bilibili;
 
+import nya.nekoneko.bilibili.api.fav.FavApi;
+import nya.nekoneko.bilibili.api.fav.IFav;
 import nya.nekoneko.bilibili.api.member.IMember;
 import nya.nekoneko.bilibili.api.member.MemberApi;
 import nya.nekoneko.bilibili.api.message.IMessage;
@@ -19,6 +21,7 @@ public class BilibiliClient {
     public IMessage message;
     public ISpace space;
     public IVip vip;
+    public IFav fav;
 
     public BilibiliClient() {
         this.loginInfo = new BilibiliLoginInfo();
@@ -38,5 +41,6 @@ public class BilibiliClient {
         this.message = new MessageApi(loginInfo);
         this.space = new SpaceApi(loginInfo);
         this.vip = new VipApi(loginInfo);
+        this.fav=new FavApi(loginInfo);
     }
 }

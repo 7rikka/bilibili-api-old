@@ -47,6 +47,9 @@ public class BilibiliRequest {
     public BilibiliRequest postForm(Map<String, String> form) {
         FormBody.Builder formBody = new FormBody.Builder();
         for (Map.Entry<String, String> item : form.entrySet()) {
+            if (null == item.getValue()) {
+                continue;
+            }
             formBody.add(item.getKey(), item.getValue());
         }
         builder.post(formBody.build());
