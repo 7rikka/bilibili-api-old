@@ -17,12 +17,12 @@ public class BilibiliFolder {
      * 收藏夹完整id(原始id + uid最后两位)
      */
     @ONodeAttr(name = "id")
-    private long id;
+    private int id;
     /**
      * 收藏夹原始id
      */
     @ONodeAttr(name = "fid")
-    private long fid;
+    private int fid;
     /**
      *
      */

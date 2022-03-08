@@ -43,5 +43,9 @@ public class UrlConfig {
     /**
      * 编辑收藏夹信息
      */
-    public static final String EDIT_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/info";
+    public static final String EDIT_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/edit";
+    /**
+     * 删除收藏夹
+     */
+    public static final String DEL_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/del";
 }
