@@ -40,4 +40,8 @@ public class UrlConfig {
      * 收藏夹信息
      */
     public static final String FOLDER_INFO = "https://api.bilibili.com/x/v3/fav/folder/info";
+    /**
+     * 编辑收藏夹信息
+     */
+    public static final String EDIT_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/info";
 }

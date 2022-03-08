@@ -1,5 +1,7 @@
 package nya.nekoneko.bilibili.api.fav;
 
+import nya.nekoneko.bilibili.model.BilibiliFolder;
+
 public interface IFav {
     /**
      * @param title 收藏夹名称
@@ -10,5 +12,7 @@ public interface IFav {
      */
     Integer newFavFolder(String title,String desc,boolean hide,String cover);
 
-    void getFolderInfo(int id);
+    BilibiliFolder getFavFolderInfo(int id);
+
+    boolean editFavFolder(BilibiliFolder folder);
 }
