@@ -2,7 +2,6 @@ package nya.nekoneko.bilibili.api.message;
 
 import nya.nekoneko.bilibili.model.BilibiliPictureInfo;
 
-import java.io.File;
 import java.io.IOException;
 
 public interface IMessage {
@@ -20,11 +19,11 @@ public interface IMessage {
      * code=21037, message=图片格式不合法，不要调戏接口啦
      *
      * @param receiverId
-     * @param file
+     * @param pictureInfo
      * @return
      * @throws IOException
      */
-    Long sendPictureMessage(int receiverId, File file) throws IOException;
+    Long sendPictureMessage(int receiverId, BilibiliPictureInfo pictureInfo) throws IOException;
 
     /**
      * 撤回私信
@@ -34,13 +33,4 @@ public interface IMessage {
      * @return
      */
     boolean recallMessage(int receiverId, long messageId);
-
-    /**
-     * 上传图片
-     *
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    BilibiliPictureInfo uploadPicture(File file) throws IOException;
 }

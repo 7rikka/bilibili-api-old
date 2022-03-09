@@ -1,18 +1,15 @@
 package nya.nekoneko.bilibili.api.message;
 
+import lombok.extern.slf4j.Slf4j;
+import nya.nekoneko.bilibili.config.UrlConfig;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 import nya.nekoneko.bilibili.model.BilibiliPictureInfo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
-import lombok.extern.slf4j.Slf4j;
-import nya.nekoneko.bilibili.config.UrlConfig;
 import okhttp3.Request;
 import org.noear.snack.ONode;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,20 +60,17 @@ public class MessageApi implements IMessage {
      * code=21037, message=图片格式不合法，不要调戏接口啦
      *
      * @param receiverId
-     * @param file
+     * @param pictureInfo
      * @return
-     * @throws IOException
      */
     @Override
-    public Long sendPictureMessage(int receiverId, File file) throws IOException {
-        //先上传图片
-        BilibiliPictureInfo pictureInfo = uploadPicture(file);
+    public Long sendPictureMessage(int receiverId, BilibiliPictureInfo pictureInfo) {
         ONode node = ONode.newObject()
                 .set("height", pictureInfo.getHeight())
                 .set("width", pictureInfo.getWidth())
                 .set("imageType", pictureType.get(pictureInfo.getSuffix()))
                 .set("original", 1)
-                .set("size", (int) (file.length() / 1024))
+                .set("size", pictureInfo.getSize() / 1024)
                 .set("url", pictureInfo.getUrl());
         Map<String, String> messageData = getMessageData(loginInfo.getCsrf(), loginInfo.getUid(), receiverId, 2, node.toString());
         Request request = BiliRequestFactor.getBiliRequest()
@@ -87,10 +81,10 @@ public class MessageApi implements IMessage {
         BiliResult result = Call.doCall(request);
         if (result.getCode() == 0) {
             long msgKey = result.getData().get("msg_key").getLong();
-            log.info("发送图片私信[{}]成功, 信息id: {}.", file.getName(), msgKey);
+            log.info("发送图片私信[{}]成功, 信息id: {}.", pictureInfo.getFilename(), msgKey);
             return msgKey;
         } else {
-            log.error("发送图片私信[{}]失败, 返回: {}.", file.getName(), result);
+            log.error("发送图片私信[{}]失败, 返回: {}.", pictureInfo.getFilename(), result);
             return null;
         }
     }
@@ -124,43 +118,6 @@ public class MessageApi implements IMessage {
             return false;
         }
     }
-
-    /**
-     * 上传图片
-     *
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    @Override
-    public BilibiliPictureInfo uploadPicture(File file) throws IOException {
-        if (!file.getName().contains(".")) {
-            throw new RuntimeException("文件名不合法!");
-        }
-        String suffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-        if (!pictureType.containsKey(suffix)) {
-            throw new RuntimeException("不支持的文件格式:" + suffix + "!");
-        }
-        Map<String, String> map = new HashMap<>();
-        map.put("biz", "im");
-        map.put("csrf", loginInfo.getCsrf());
-        map.put("build", "0");
-        map.put("mobi_app", "web");
-        Request request = BiliRequestFactor.getBiliRequest()
-                .url(UrlConfig.UPLOAD_IMAGE)
-                .uploadFile(new FileInputStream(file), file.getName(), map)
-                .cookie(loginInfo)
-                .buildRequest();
-        BiliResult result = Call.doCall(request);
-        if (result.getCode() == 0) {
-            BilibiliPictureInfo info = result.getData().toObject(BilibiliPictureInfo.class);
-            info.setSuffix(suffix);
-            return info;
-        } else {
-            return null;
-        }
-    }
-
     /**
      * 生成私信参数
      *

@@ -48,4 +48,12 @@ public class UrlConfig {
      * 删除收藏夹
      */
     public static final String DEL_FAV_FOLDER = "https://api.bilibili.com/x/v3/fav/folder/del";
+    /**
+     * 上传封面
+     */
+    public static final String UPLOAD_COVER = "https://member.bilibili.com/x/vu/web/cover/up";
+    /**
+     * 粉丝勋章领取状态总览
+     */
+    public static final String FAN_MEDAL_STAT = "https://member.bilibili.com/x/web/medal/fans";
 }

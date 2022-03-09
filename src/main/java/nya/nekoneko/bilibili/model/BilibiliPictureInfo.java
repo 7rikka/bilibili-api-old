@@ -30,4 +30,12 @@ public class BilibiliPictureInfo {
      * 图片后缀名
      */
     private String suffix;
+    /**
+     * 图片大小
+     */
+    private long size;
+    /**
+     * 图片文件名
+     */
+    private String filename;
 }
