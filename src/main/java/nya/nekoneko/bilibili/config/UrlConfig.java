@@ -56,4 +56,8 @@ public class UrlConfig {
      * 粉丝勋章领取状态总览
      */
     public static final String FAN_MEDAL_STAT = "https://member.bilibili.com/x/web/medal/fans";
+    /**
+     * 投稿前获取信息
+     */
+    public static final String ARCHIVE_PRE = "https://member.bilibili.com/x/vupre/web/archive/pre";
 }

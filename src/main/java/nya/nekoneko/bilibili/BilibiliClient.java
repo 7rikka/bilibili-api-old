@@ -1,5 +1,7 @@
 package nya.nekoneko.bilibili;
 
+import nya.nekoneko.bilibili.api.archive.ArchiveApi;
+import nya.nekoneko.bilibili.api.archive.IArchive;
 import nya.nekoneko.bilibili.api.fav.FavApi;
 import nya.nekoneko.bilibili.api.fav.IFav;
 import nya.nekoneko.bilibili.api.medal.IMedal;
@@ -28,6 +30,7 @@ public class BilibiliClient {
     public IFav fav;
     public IUpload upload;
     public IMedal medal;
+    public IArchive archive;
 
     public BilibiliClient() {
         this.loginInfo = new BilibiliLoginInfo();
@@ -50,5 +53,6 @@ public class BilibiliClient {
         this.fav = new FavApi(loginInfo);
         this.upload = new UploadApi(loginInfo);
         this.medal = new MedalApi(loginInfo);
+        this.archive = new ArchiveApi(loginInfo);
     }
 }
