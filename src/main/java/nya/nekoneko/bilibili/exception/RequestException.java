@@ -16,7 +16,7 @@ public class RequestException extends RuntimeException {
 
     @Override
     public void printStackTrace() {
-        System.err.println("错误: 请求路径:" + request.url());
+        System.err.println("错误: 请求路径: " + request.url() +"\n异常信息: "+this.getMessage());
     }
 
 //    public String getExceptionInfo() throws IOException {
