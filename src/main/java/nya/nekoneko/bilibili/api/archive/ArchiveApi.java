@@ -72,4 +72,17 @@ public class ArchiveApi implements IArchive {
         }
         return null;
     }
+
+    @Override
+    public List<String> getCoverList(String fns) {
+        Map<String, String> map = new HashMap<>();
+        map.put("fns", fns);
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_RECOVER_LIST, map)
+                .get()
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        return result.getData().toObjectList(String.class);
+    }
 }

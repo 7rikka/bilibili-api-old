@@ -60,4 +60,8 @@ public class UrlConfig {
      * 投稿前获取信息
      */
     public static final String ARCHIVE_PRE = "https://member.bilibili.com/x/vupre/web/archive/pre";
+    /**
+     * 获取自动生成的缩略图列表
+     */
+    public static final String GET_RECOVER_LIST = "https://member.bilibili.com/x/vupre/web/archive/recovers";
 }

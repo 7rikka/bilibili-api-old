@@ -55,7 +55,7 @@ public class BilibiliActivity {
      *
      */
     @ONodeAttr(name = "new")
-    private int isnew;
+    private int isNew;
     /**
      *
      */

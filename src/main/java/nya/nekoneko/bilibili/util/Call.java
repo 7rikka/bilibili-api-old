@@ -16,22 +16,32 @@ import java.time.Duration;
  */
 public class Call {
     private static final OkHttpClient client = new OkHttpClient().newBuilder()
-            .readTimeout(Duration.ofSeconds(30))
-            .connectTimeout(Duration.ofSeconds(30))
-            .callTimeout(Duration.ofSeconds(30))
+            .readTimeout(Duration.ofSeconds(100))
+            .connectTimeout(Duration.ofSeconds(100))
+            .callTimeout(Duration.ofSeconds(100))
             .build();
+//    static {
+//        client.dispatcher().setMaxRequestsPerHost(16);
+//        client.dispatcher().setMaxRequests(16);
+//    }
 
     public static BiliResult doCall(Request request) {
+        String result = doCallGetString(request);
+        return ONode.deserialize(result, BiliResult.class);
+    }
+
+    public static String doCallGetString(Request request) {
         try {
             Response response = client.newCall(request).execute();
             if (200 != response.code()) {
+                System.out.println(response.body().string());
                 throw new RequestException(request, response, "HTTP CODE: " + response.code());
             }
             ResponseBody body = response.body();
             if (null == body) {
                 throw new RequestException(request, response, "Body为空");
             }
-            return ONode.deserialize(body.string(), BiliResult.class);
+            return body.string().strip();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RequestException(request, null, e.getMessage());

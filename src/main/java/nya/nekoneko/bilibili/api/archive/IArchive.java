@@ -29,4 +29,9 @@ public interface IArchive {
      * @return
      */
     List<BilibiliVideoType> getVideoTypeList();
+
+    /**
+     * 获取缩略图
+     */
+    List<String> getCoverList(String fns);
 }

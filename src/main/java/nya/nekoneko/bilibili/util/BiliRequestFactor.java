@@ -7,7 +7,7 @@ public class BiliRequestFactor {
      *
      * @return 请求
      */
-    public static BilibiliRequest getBiliRequest() {
-        return new BilibiliRequest();
+    public static BiliRequest getBiliRequest() {
+        return new BiliRequest();
     }
 }
