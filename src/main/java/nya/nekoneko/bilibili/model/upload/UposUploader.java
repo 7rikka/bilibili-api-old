@@ -40,6 +40,7 @@ public class UposUploader implements Uploader {
     public String upload(BilibiliLoginInfo bilibiliLoginInfo,File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
+        PrintUtil.info("使用UposUploader上传: "+fileName);
         long fileSize = file.length();
         //probe_version: 20211012
         //STEP1.获取上传信息
