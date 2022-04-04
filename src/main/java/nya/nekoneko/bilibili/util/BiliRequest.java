@@ -67,6 +67,11 @@ public class BiliRequest {
         builder.post(multipartBodyBuilder.build());
         return this;
     }
+    public BiliRequest post(byte[] b){
+        RequestBody body = RequestBody.create(b,OCTET_STREAM);
+        builder.post(body);
+        return this;
+    }
     public BiliRequest put(byte[] b){
         RequestBody body = RequestBody.create(b,OCTET_STREAM);
         builder.put(body);

@@ -40,7 +40,7 @@ public class UposUploader implements Uploader {
     public String upload(BilibiliLoginInfo bilibiliLoginInfo,File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
-        PrintUtil.info("使用UposUploader上传: "+fileName);
+        PrintUtil.info("使用 UposUploader 上传: "+fileName);
         long fileSize = file.length();
         //probe_version: 20211012
         //STEP1.获取上传信息
@@ -59,8 +59,8 @@ public class UposUploader implements Uploader {
                 .get()
                 .cookie(bilibiliLoginInfo)
                 .buildRequest();
-        String result = Call.doCallGetString(request);
-        ONode node = ONode.loadStr(result);
+        String result1 = Call.doCallGetString(request);
+        ONode node = ONode.loadStr(result1);
         String auth = node.get("auth").getString();
         String bizId = node.get("biz_id").getString();
         int chunkSize = Integer.parseInt(node.get("chunk_size").getString());

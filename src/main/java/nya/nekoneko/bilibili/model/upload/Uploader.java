@@ -23,5 +23,5 @@ public interface Uploader {
     //build: 2100400
     //size: 583841
     //webVersion: 2.0.0
-    public String upload(BilibiliLoginInfo bilibiliLoginInfo, File file) throws Exception;
+    String upload(BilibiliLoginInfo bilibiliLoginInfo, File file) throws Exception;
 }
