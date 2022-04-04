@@ -31,18 +31,26 @@ public class UposUploader implements Uploader {
     //  bda2
     //  qn
     //  ws
-    private static final String upcdn = "qn";
+    private static String upcdn = "qn";
 
-    //private static final String upcdn = "bda2";
-    //private static final String upcdn = "ws";
+    public UposUploader() {
+    }
+    public UposUploader(int type) {
+        if (1 == type) {
+            upcdn = "bda2";
+        } else if (2 == type) {
+            upcdn = "ws";
+        } else {
+            upcdn = "qn";
+        }
+    }
     //http://member.bilibili.com/x/vupre/web/profile?scene=transAndConv&t=1648959564583
     //http://member.bilibili.com/x/vupre/web/profile?scene=videoUgc&t=1648959564583
     public String upload(BilibiliLoginInfo bilibiliLoginInfo,File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
-        PrintUtil.info("使用 UposUploader 上传: "+fileName);
+        PrintUtil.info("使用 UposUploader("+upcdn+") 上传: "+fileName);
         long fileSize = file.length();
-        //probe_version: 20211012
         //STEP1.获取上传信息
         Map<String, String> map = new HashMap<>();
         map.put("name", fileName);

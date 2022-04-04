@@ -47,4 +47,17 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
+    public static String doCallGetHearer(Request request,String headerName) {
+        try {
+            Response response = client.newCall(request).execute();
+            if (200 != response.code()) {
+                System.out.println(response.body().string());
+                throw new RequestException(request, response, "HTTP CODE: " + response.code());
+            }
+            return response.header(headerName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RequestException(request, null, e.getMessage());
+        }
+    }
 }

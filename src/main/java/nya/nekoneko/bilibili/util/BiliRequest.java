@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 public class BiliRequest {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private static final MediaType XML = MediaType.parse("application/xml");
     private static final MediaType OCTET_STREAM = MediaType.parse("application/octet-stream");
     private final Request.Builder builder = new Request.Builder();
 
@@ -40,6 +41,11 @@ public class BiliRequest {
 
     public BiliRequest postJson(String json) {
         RequestBody body = RequestBody.create(json, JSON);
+        builder.post(body);
+        return this;
+    }
+    public BiliRequest postXml(String xml) {
+        RequestBody body = RequestBody.create(xml, XML);
         builder.post(body);
         return this;
     }
