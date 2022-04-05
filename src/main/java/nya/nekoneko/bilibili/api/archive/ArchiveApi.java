@@ -85,4 +85,23 @@ public class ArchiveApi implements IArchive {
         BiliResult result = Call.doCall(request);
         return result.getData().toObjectList(String.class);
     }
+
+    @Override
+    public void getArchiveView(String bvid, String history) {
+        Map<String, String> map = new HashMap<>();
+        map.put("bvid", bvid);
+        map.put("history", history);
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_ARCHIVE_VIEW, map)
+                .get()
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result);
+    }
+
+    @Override
+    public void getArchiveView(String bvid) {
+        getArchiveView(bvid, null);
+    }
 }

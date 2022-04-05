@@ -64,4 +64,8 @@ public class UrlConfig {
      * 获取自动生成的缩略图列表
      */
     public static final String GET_RECOVER_LIST = "https://member.bilibili.com/x/vupre/web/archive/recovers";
+    /**
+     * 获取稿件投稿信息
+     */
+    public static final String GET_ARCHIVE_VIEW = "https://member.bilibili.com/x/vupre/web/archive/view";
 }

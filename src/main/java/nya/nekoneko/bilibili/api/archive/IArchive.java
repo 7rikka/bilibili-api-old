@@ -26,7 +26,7 @@ public interface IArchive {
 
     /**
      * 获取分区列表
-     * @return
+     * @return 分区列表
      */
     List<BilibiliVideoType> getVideoTypeList();
 
@@ -34,4 +34,11 @@ public interface IArchive {
      * 获取缩略图
      */
     List<String> getCoverList(String fns);
+
+    /**
+     * 获取稿件投稿信息
+     */
+    void getArchiveView(String bvid,String history);
+    void getArchiveView(String bvid);
+
 }

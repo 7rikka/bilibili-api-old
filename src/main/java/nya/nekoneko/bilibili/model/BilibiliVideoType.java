@@ -62,7 +62,9 @@ public class BilibiliVideoType {
     @ONodeAttr(name = "notice")
     private String notice;
     /**
-     *
+     * 稿件类型
+     * 1.自制
+     * 2.转载
      */
     @ONodeAttr(name = "copy_right")
     private int copyright;

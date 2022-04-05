@@ -6,7 +6,6 @@ public class StatUtil {
     private static final String[] speedUnit = {"Byte/s", "KB/s", "MB/s", "GB/s"};
 
     public static void uploadInfoStat(long start, long end, long fileSize) {
-        double l = 1.0 * fileSize / 1024 / 1024;
         PrintUtil.info("文件大小: " + convertFileSize(fileSize));
         PrintUtil.info("上传用时: " + convertUploadTime(start, end));
         PrintUtil.info("平均速度: " + convertSpeed(start, end, fileSize));
