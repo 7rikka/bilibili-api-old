@@ -10,6 +10,8 @@ import nya.nekoneko.bilibili.api.member.IMember;
 import nya.nekoneko.bilibili.api.member.MemberApi;
 import nya.nekoneko.bilibili.api.message.IMessage;
 import nya.nekoneko.bilibili.api.message.MessageApi;
+import nya.nekoneko.bilibili.api.my.IMy;
+import nya.nekoneko.bilibili.api.my.MyApi;
 import nya.nekoneko.bilibili.api.space.ISpace;
 import nya.nekoneko.bilibili.api.space.SpaceApi;
 import nya.nekoneko.bilibili.api.upload.IUpload;
@@ -31,6 +33,7 @@ public class BilibiliClient {
     public IUpload upload;
     public IMedal medal;
     public IArchive archive;
+    public IMy my;
 
     public BilibiliClient() {
         this.loginInfo = new BilibiliLoginInfo();
@@ -54,5 +57,6 @@ public class BilibiliClient {
         this.upload = new UploadApi(loginInfo);
         this.medal = new MedalApi(loginInfo);
         this.archive = new ArchiveApi(loginInfo);
+        this.my = new MyApi(loginInfo);
     }
 }

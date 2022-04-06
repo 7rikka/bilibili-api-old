@@ -41,7 +41,9 @@ public class MyApi implements IMy {
         map.put("csrf", loginInfo.getCsrf());
         map.put("page_size", String.valueOf(pageSize));
         map.put("data_type", "1");
-        map.put("cursor", String.valueOf(cursor));
+        if (null != cursor) {
+            map.put("cursor", String.valueOf(cursor));
+        }
         map.put("build", "0");
         map.put("mobi_app", "web");
         Request request = BiliRequestFactor.getBiliRequest()
