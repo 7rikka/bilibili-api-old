@@ -2,6 +2,7 @@ package nya.nekoneko.bilibili.api.space;
 
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
+import nya.nekoneko.bilibili.model.BilibiliRelationStat;
 import nya.nekoneko.bilibili.model.BilibiliUser;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
@@ -35,9 +36,9 @@ public class SpaceApi implements ISpace {
                 .cookie(loginInfo)
                 .get()
                 .buildRequest();
-        BiliResult biliResult = Call.doCall(request);
-        if (biliResult.getCode() == 0) {
-            return biliResult.getData().toObject(BilibiliUser.class);
+        BiliResult result = Call.doCall(request);
+        if (result.getCode() == 0) {
+            return result.getData().toObject(BilibiliUser.class);
 //            System.out.println(node.toString());
 //            return BilibiliUser.builder()
 //                    .uid(node.get("mid").getInt())
@@ -143,8 +144,24 @@ public class SpaceApi implements ISpace {
 //                    .build();
 //            return null;
         } else {
-            log.error("获取UID: {} 信息错误! {}", uid, biliResult);
+            log.error("获取UID: {} 信息错误! {}", uid, result);
             return null;
         }
+    }
+
+    @Override
+    public BilibiliRelationStat getRelationStat(int uid) {
+        Map<String, String> map = new HashMap<>();
+        map.put("vmid", String.valueOf(uid));
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.RELATION_STAT, map)
+                .cookie(loginInfo)
+                .get()
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        if (0 == result.getCode()) {
+            return result.getData().toObject(BilibiliRelationStat.class);
+        }
+        return null;
     }
 }

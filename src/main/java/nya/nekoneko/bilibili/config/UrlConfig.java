@@ -68,4 +68,13 @@ public class UrlConfig {
      * 获取稿件投稿信息
      */
     public static final String GET_ARCHIVE_VIEW = "https://member.bilibili.com/x/vupre/web/archive/view";
+    /**
+     * 获取用户关注数、粉丝数信息
+     */
+    public static final String RELATION_STAT = "https://api.bilibili.com/x/relation/stat";
+    /**
+     * 获取我的系统通知
+     */
+//    public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_user_notify";
+    public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_notify_list";
 }

@@ -1,5 +1,6 @@
 package nya.nekoneko.bilibili.api.space;
 
+import nya.nekoneko.bilibili.model.BilibiliRelationStat;
 import nya.nekoneko.bilibili.model.BilibiliUser;
 
 public interface ISpace {
@@ -10,4 +11,6 @@ public interface ISpace {
      * @return
      */
     BilibiliUser getUserInfo(int uid);
+
+    BilibiliRelationStat getRelationStat(int uid);
 }
