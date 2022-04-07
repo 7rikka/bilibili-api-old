@@ -77,4 +77,8 @@ public class UrlConfig {
      */
 //    public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_user_notify";
     public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_notify_list";
+    /**
+     * 获取最近收到的弹幕
+     */
+    public static final String GET_RECENT_DANMAKU_LIST = "https://api.bilibili.com/x/v2/dm/recent";
 }
