@@ -6,7 +6,8 @@ package nya.nekoneko.bilibili.enums;
 public enum VipPrivilegeEnum {
     B_COIN_TICKET("5.0B币券", 1),
     SHOPPING_TICKET("年度专享会员购优惠券", 2),
-    MANGA_PACKAGE("大会员专享漫画礼包", 3);
+    MANGA_PACKAGE("大会员专享漫画礼包", 3),
+    FREIGHT_TICKET("大会员专享漫画礼包", 4);
     private final String name;
     private final int value;
 

@@ -1,4 +1,4 @@
-package nya.nekoneko.bilibili.model.upload;
+package nya.nekoneko.bilibili.api.uploader;
 
 import lombok.extern.slf4j.Slf4j;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;

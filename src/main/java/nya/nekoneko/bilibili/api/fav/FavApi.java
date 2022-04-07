@@ -140,31 +140,22 @@ public class FavApi implements IFav {
      */
     @Override
     public boolean delFavFolder(int id) {
-        Map<String, String> map = new HashMap<>();
-        map.put("media_ids", String.valueOf(id));
-        map.put("csrf", loginInfo.getCsrf());
-        Request request = BiliRequestFactor.getBiliRequest()
-                .url(UrlConfig.DEL_FAV_FOLDER)
-                .postForm(map)
-                .cookie(loginInfo)
-                .buildRequest();
-        BiliResult result = Call.doCall(request);
-        if (result.getCode() == 0) {
-            return true;
-        }
-        log.error("删除收藏夹失败: {}", result);
-        return false;
+        return delFavFolder(String.valueOf(id));
     }
 
     @Override
     public boolean delFavFolder(int[] ids) {
-        StringJoiner sj=new StringJoiner(",");
+        StringJoiner sj = new StringJoiner(",");
         for (int id : ids) {
             sj.add(String.valueOf(id));
         }
-        String idString = sj.toString();
+        return delFavFolder(sj.toString());
+
+    }
+
+    private boolean delFavFolder(String ids) {
         Map<String, String> map = new HashMap<>();
-        map.put("media_ids", idString);
+        map.put("media_ids", ids);
         map.put("csrf", loginInfo.getCsrf());
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.DEL_FAV_FOLDER)

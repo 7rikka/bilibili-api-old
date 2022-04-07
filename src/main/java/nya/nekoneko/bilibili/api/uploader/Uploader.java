@@ -1,4 +1,4 @@
-package nya.nekoneko.bilibili.model.upload;
+package nya.nekoneko.bilibili.api.uploader;
 
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 
