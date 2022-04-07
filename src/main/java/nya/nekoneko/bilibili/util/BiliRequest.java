@@ -5,6 +5,7 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -16,12 +17,20 @@ public class BiliRequest {
     private static final MediaType XML = MediaType.parse("application/xml");
     private static final MediaType OCTET_STREAM = MediaType.parse("application/octet-stream");
     private final Request.Builder builder = new Request.Builder();
-
+    private String url;
+    private Map<String,String> paramMap=new HashMap<>();
     public BiliRequest url(String url) {
-        builder.url(url);
+//        builder.url(url);
+        this.url = url;
         return this;
     }
 
+    public BiliRequest addParam(String key, Object value) {
+        if (null != value) {
+            paramMap.put(key, String.valueOf(value));
+        }
+        return this;
+    }
     public BiliRequest url(String url, Map<String, String> params) {
         HttpUrl httpUrl = HttpUrl.parse(url);
         HttpUrl.Builder httpBuilder = Objects.requireNonNull(httpUrl).newBuilder();
@@ -74,13 +83,11 @@ public class BiliRequest {
         return this;
     }
     public BiliRequest post(byte[] b){
-        RequestBody body = RequestBody.create(b,OCTET_STREAM);
-        builder.post(body);
+        builder.post(RequestBody.create(b,OCTET_STREAM));
         return this;
     }
     public BiliRequest put(byte[] b){
-        RequestBody body = RequestBody.create(b,OCTET_STREAM);
-        builder.put(body);
+        builder.put(RequestBody.create(b,OCTET_STREAM));
         return this;
     }
 
@@ -93,6 +100,7 @@ public class BiliRequest {
     }
 
     public Request buildRequest() {
+        url(this.url,this.paramMap);
         addHeaders();
         return builder.build();
     }

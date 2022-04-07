@@ -78,7 +78,9 @@ public class ArchiveApi implements IArchive {
         Map<String, String> map = new HashMap<>();
         map.put("fns", fns);
         Request request = BiliRequestFactor.getBiliRequest()
-                .url(UrlConfig.GET_RECOVER_LIST, map)
+//                .url(UrlConfig.GET_RECOVER_LIST, map)
+                .url(UrlConfig.GET_RECOVER_LIST)
+                .addParam("fns",fns)
                 .get()
                 .cookie(loginInfo)
                 .buildRequest();

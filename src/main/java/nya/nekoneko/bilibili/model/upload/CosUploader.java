@@ -156,7 +156,7 @@ public class CosUploader implements Uploader{
                 .buildRequest();
         while (true) {
             try {
-                String eTag = Call.doCallGetHearer(request,"ETag");
+                String eTag = Call.doCallGetHeader(request,"ETag");
                 eTag = eTag.replace("\"", "");
                 infoMap.put(chunkIndex,eTag);
                 PrintUtil.info(info+eTag);

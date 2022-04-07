@@ -47,7 +47,7 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
-    public static String doCallGetHearer(Request request,String headerName) {
+    public static String doCallGetHeader(Request request, String headerName) {
         try {
             Response response = client.newCall(request).execute();
             if (200 != response.code()) {
