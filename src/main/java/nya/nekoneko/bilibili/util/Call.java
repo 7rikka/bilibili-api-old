@@ -47,6 +47,23 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
+    public static byte[] doCallGetBytes(Request request) {
+        try {
+            Response response = client.newCall(request).execute();
+            if (200 != response.code()) {
+                System.out.println(response.body().string());
+                throw new RequestException(request, response, "HTTP CODE: " + response.code());
+            }
+            ResponseBody body = response.body();
+            if (null == body) {
+                throw new RequestException(request, response, "Body为空");
+            }
+            return body.bytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RequestException(request, null, e.getMessage());
+        }
+    }
     public static String doCallGetHeader(Request request, String headerName) {
         try {
             Response response = client.newCall(request).execute();

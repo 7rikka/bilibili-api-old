@@ -22,6 +22,10 @@ public class BilibiliUser {
     @ONodeAttr(name = "mid")
     private Integer uid;
     /**
+     * hash
+     */
+    private String hash;
+    /**
      * 用户名
      */
     @ONodeAttr(name = "name")
