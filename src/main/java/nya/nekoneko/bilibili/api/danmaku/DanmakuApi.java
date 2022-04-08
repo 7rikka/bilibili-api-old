@@ -2,9 +2,6 @@ package nya.nekoneko.bilibili.api.danmaku;
 
 import bilibili.community.service.dm.v1.Dm;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.TextFormat;
-import com.googlecode.protobuf.format.JsonFormat;
-import com.googlecode.protobuf.format.ProtobufFormatter;
 import nya.nekoneko.bilibili.config.UrlConfig;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliDanmaku;
@@ -18,7 +15,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DanmakuApi implements IDanmaku {
     private final BilibiliLoginInfo loginInfo;
@@ -80,6 +76,7 @@ public class DanmakuApi implements IDanmaku {
         byte[] result = Call.doCallGetBytes(request);
         Dm.DmSegMobileReply dmSegMobileReply = Dm.DmSegMobileReply.parseFrom(result);
         for (Dm.DanmakuElem item : dmSegMobileReply.getElemsList()) {
+            System.out.println(item);
             BilibiliDanmaku danmaku = BilibiliDanmaku.builder()
                     .cid(cid)
                     .id(item.getId())
@@ -87,6 +84,7 @@ public class DanmakuApi implements IDanmaku {
                     .mode(item.getMode())
                     .fontsize(item.getFontsize())
                     .color(String.valueOf(item.getColor()))
+                    .weight(item.getWeight())
                     .content(item.getContent())
                     .ctime(LocalDateTime.ofEpochSecond(item.getCtime(), 0, ZoneOffset.ofHours(8)))
                     .pool(item.getPool())

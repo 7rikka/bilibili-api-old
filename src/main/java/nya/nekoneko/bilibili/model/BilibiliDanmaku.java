@@ -70,6 +70,11 @@ public class BilibiliDanmaku {
     /**
      *
      */
+    @ONodeAttr(name = "weight")
+    private Integer weight;
+    /**
+     *
+     */
     @ONodeAttr(name = "msg")
     private String content;
     /**
