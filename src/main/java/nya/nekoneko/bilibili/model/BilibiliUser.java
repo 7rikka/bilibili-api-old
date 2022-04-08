@@ -43,23 +43,33 @@ public class BilibiliUser {
     /**
      * 头像
      */
-    @ONodeAttr(name = "face")
-    private String face;
+    @ONodeAttr(name = "avatar")
+    private String avatar;
     /**
      *
      */
     @ONodeAttr(name = "face_nft")
-    private Integer face_nft;
+    private Integer faceNft;
+    /**
+     *
+     */
+    @ONodeAttr(name = "face_nft_new")
+    private Integer faceNftNew;
     /**
      * 账号权限
      */
     @ONodeAttr(name = "rank")
     private Integer rank;
     /**
+     * 账号权限
+     */
+    @ONodeAttr(name = "DisplayRank")
+    private Integer displayRank;
+    /**
      * 当前等级
      */
-    @ONodeAttr(name = "level")
-    private Integer level;
+    @ONodeAttr(name = "level_info")
+    private BilibiliLevelInfo levelInfo;
     /**
      *
      */
@@ -106,7 +116,9 @@ public class BilibiliUser {
     @ONodeAttr(name = "birthday")
     private String birthday;
     /**
-     *
+     * 是否为硬核会员
+     * 0: 否
+     * 1: 是
      */
     @ONodeAttr(name = "is_senior_member")
     private Integer isSeniorMember;
@@ -118,8 +130,8 @@ public class BilibiliUser {
     /**
      * 认证信息
      */
-    @ONodeAttr(name = "official")
-    private BilibiliOfficialVerify official;
+    @ONodeAttr(name = "official_verify")
+    private BilibiliOfficialVerify officialVerify;
     /**
      * 头像框
      */
@@ -170,4 +182,34 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "series")
     private String series;
+    /**
+     *
+     */
+    @ONodeAttr(name = "fans_detail")
+    private String fans_detail;
+    /**
+     *
+     */
+    @ONodeAttr(name = "following")
+    private String following;
+    /**
+     *
+     */
+    @ONodeAttr(name = "is_followed")
+    private String is_followed;
+    /**
+     *
+     */
+    @ONodeAttr(name = "user_sailing")
+    private BilibiliUserSailing userSailing;
+    /**
+     *
+     */
+    @ONodeAttr(name = "is_contractor")
+    private Integer is_contractor;
+    /**
+     *
+     */
+    @ONodeAttr(name = "contract_desc")
+    private String contractDesc;
 }

@@ -6,4 +6,8 @@ public class PrintUtil {
     public static void info(String s) {
         printer.info(s);
     }
+
+    public static void error(String s) {
+        printer.error(s);
+    }
 }

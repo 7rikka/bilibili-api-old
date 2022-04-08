@@ -38,10 +38,10 @@ public class BilibiliPendant {
      *
      */
     @ONodeAttr(name = "image_enhance")
-    private String image_enhance;
+    private String imageEnhance;
     /**
      *
      */
     @ONodeAttr(name = "image_enhance_frame")
-    private String image_enhance_frame;
+    private String imageEnhanceFrame;
 }

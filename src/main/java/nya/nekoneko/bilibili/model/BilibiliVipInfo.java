@@ -53,23 +53,32 @@ public class BilibiliVipInfo {
     /**
      *
      */
-    @ONodeAttr(name = "nicknameColor")
-    private String nickname_color;
+    @ONodeAttr(name = "nickname_color")
+    private String nicknameColor;
     /**
      *
      */
     @ONodeAttr(name = "role")
     private Integer role;
     /**
+     *
+     */
+    @ONodeAttr(name = "status_warn")
+    private String statusWarn;
+    /**
      * 大会员图标角标地址
      */
     @ONodeAttr(name = "avatarSubscript_url")
-    private String avatar_subscript_url;
+    private String avatarSubscriptUrl;
     /**
      *
      */
     @ONodeAttr(name = "label")
     private Label label;
+    @ONodeAttr(name = "due_remark")
+    private String dueRemark;
+    @ONodeAttr(name = "due_remark")
+    private Integer accessStatus;
 
     @Data
     @Builder

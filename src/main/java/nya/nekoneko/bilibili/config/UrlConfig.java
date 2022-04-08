@@ -84,5 +84,13 @@ public class UrlConfig {
     /**
      * 获取视频实时弹幕
      */
-    public static final String GET_VIDEO_DANMAKU = "https://api.bilibili.com/x/v2/dm/web/seg.so";
+    public static final String GET_VIDEO_DANMAKU_LIST = "https://api.bilibili.com/x/v2/dm/web/seg.so";
+    /**
+     * 获取最近收到的评论
+     */
+    public static final String GET_RECENT_REPLY_LIST = "https://member.bilibili.com/x/web/replies";
+    /**
+     * 获取视频评论
+     */
+    public static final String GET_VIDEO_REPLY_LIST = "https://api.bilibili.com/x/v2/reply/main";
 }

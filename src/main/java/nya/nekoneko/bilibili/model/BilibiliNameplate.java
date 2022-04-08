@@ -45,7 +45,7 @@ public class BilibiliNameplate {
      * 勋章等级
      */
     @ONodeAttr(name = "level")
-    private Integer level;
+    private String level;
     /**
      * 获取条件
      */

@@ -4,32 +4,108 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.noear.snack.annotation.ONodeAttr;
 
 import java.util.Date;
+
 /**
  * 系统通知
+ *
+ * @author Ho
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BilibiliNotify {
-    private long id;
-    private long cursor;
-    private int type;
+    /**
+     *
+     */
+    @ONodeAttr(name = "id")
+    private Long id;
+    /**
+     *
+     */
+    @ONodeAttr(name = "cursor")
+    private Long cursor;
+    /**
+     *
+     */
+    @ONodeAttr(name = "type")
+    private Integer type;
+    /**
+     *
+     */
+    @ONodeAttr(name = "title")
     private String title;
+    /**
+     *
+     */
+    @ONodeAttr(name = "content")
     private String content;
-    private Date time_at;
+    /**
+     *
+     */
+    @ONodeAttr(name = "time_at")
+    private Date timeAt;
+    /**
+     *
+     */
+    @ONodeAttr(name = "publisher")
     private String publisher;
+    /**
+     *
+     */
+    @ONodeAttr(name = "source")
     private String source;
-    private int card_type;
-    private String card_brief;
-    private String card_msg_brief;
-    private String card_cover;
-    private String card_story_title;
-    private String card_link;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_type")
+    private Integer cardType;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_brief")
+    private String cardBrief;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_msg_brief")
+    private String cardMsgBrief;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_cover")
+    private String cardCover;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_story_title")
+    private String cardStoryTitle;
+    /**
+     *
+     */
+    @ONodeAttr(name = "card_link")
+    private String cardLink;
+    /**
+     *
+     */
+    @ONodeAttr(name = "mc")
     private String mc;
-    private int is_station;
-    private int is_send;
-    private int notify_cursor;
+    /**
+     *
+     */
+    @ONodeAttr(name = "is_station")
+    private Integer isStation;
+    /**
+     *
+     */
+    @ONodeAttr(name = "is_send")
+    private Integer isSend;
+    /**
+     *
+     */
+    @ONodeAttr(name = "notify_cursor")
+    private Integer notifyCursor;
 }

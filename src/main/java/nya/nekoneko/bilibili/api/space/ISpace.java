@@ -12,5 +12,9 @@ public interface ISpace {
      */
     BilibiliUser getUserInfo(int uid);
 
+    /**
+     * @param uid
+     * @return
+     */
     BilibiliRelationStat getRelationStat(int uid);
 }
