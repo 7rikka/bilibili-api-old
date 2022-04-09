@@ -103,7 +103,7 @@ public class BilibiliUser {
     @ONodeAttr(name = "fans_medal")
     private BilibiliFansMedal fansMedal;
     /**
-     *
+     * 我是否关注这个用户
      */
     @ONodeAttr(name = "is_followed")
     private Boolean isFollowed;
@@ -129,6 +129,11 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "tags")
     private List<String> tags;
+    /**
+     *
+     */
+    @ONodeAttr(name = "is_elec")
+    private Integer isElec;
     /**
      * 认证信息
      */

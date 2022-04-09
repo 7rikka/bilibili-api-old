@@ -32,7 +32,7 @@ public class ReplyConverter implements Converter {
         //处理用户
         ConvertFactory.modify(node.get("user"), BilibiliUser.class);
         //处理子回复
-        if (null != node.get("replies")) {
+        if (!node.get("replies").isNull()) {
             node.get("replies").forEach(this::modify);
         }
     }

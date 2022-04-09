@@ -6,16 +6,17 @@ import nya.nekoneko.bilibili.enums.ReplyOrderType;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 import nya.nekoneko.bilibili.model.BilibiliReply;
-import nya.nekoneko.bilibili.model.BilibiliUser;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
 import okhttp3.Request;
 import org.noear.snack.ONode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author Ho
+ */
 public class ReplyApi implements IReply {
     private final BilibiliLoginInfo loginInfo;
 
@@ -56,20 +57,22 @@ public class ReplyApi implements IReply {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        List<BilibiliReply> replyList = new ArrayList<>();
-        result.getData().forEach(node -> {
-            BilibiliReply reply = node.toObject(BilibiliReply.class);
-            reply.setUser(
-                    BilibiliUser.builder()
-                            .id(node.get("mid").getInt())
-                            .name(node.get("replier").getString())
-                            .avatar(node.get("uface").getString())
-                            .build()
-            );
-            replyList.add(reply);
-            System.out.println(reply);
-        });
-        return replyList;
+        return ConvertFactory.convertList(result.getData(), BilibiliReply.class, 1);
+
+//        List<BilibiliReply> replyList = new ArrayList<>();
+//        result.getData().forEach(node -> {
+//            BilibiliReply reply = node.toObject(BilibiliReply.class);
+//            reply.setUser(
+//                    BilibiliUser.builder()
+//                            .id(node.get("mid").getInt())
+//                            .name(node.get("replier").getString())
+//                            .avatar(node.get("uface").getString())
+//                            .build()
+//            );
+//            replyList.add(reply);
+//            System.out.println(reply);
+//        });
+//        return replyList;
     }
 
     //mode 0 热度

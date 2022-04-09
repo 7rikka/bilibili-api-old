@@ -100,28 +100,18 @@ public class BilibiliReply {
     /**
      *
      */
-    @ONodeAttr(name = "relation")
-    private Integer relation;
-    /**
-     *
-     */
-    @ONodeAttr(name = "is_elec")
-    private Integer isElec;
-    /**
-     *
-     */
     @ONodeAttr(name = "type")
     private Integer type;
     /**
      *
      */
     @ONodeAttr(name = "root_info")
-    private String rootInfo;
+    private BilibiliReply rootInfo;
     /**
      *
      */
     @ONodeAttr(name = "parent_info")
-    private String parentInfo;
+    private BilibiliReply parentInfo;
     /**
      *
      */

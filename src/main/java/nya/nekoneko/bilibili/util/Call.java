@@ -27,6 +27,7 @@ public class Call {
 
     public static BiliResult doCall(Request request) {
         String result = doCallGetString(request);
+        System.out.println(result);
         return ONode.deserialize(result, BiliResult.class);
     }
 

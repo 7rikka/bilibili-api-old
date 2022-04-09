@@ -13,29 +13,41 @@ import java.util.Map;
  * @author Ho
  */
 public class ConvertFactory {
-    private static final Map<Class<?>, Converter> MAP = new HashMap<>();
+    private static final Map<Class<?>, Converter[]> MAP = new HashMap<>();
 
     static {
-        MAP.put(BilibiliReply.class, new ReplyConverter());
-        MAP.put(BilibiliUser.class, new UserConverter());
+        MAP.put(BilibiliReply.class, new Converter[]{new ReplyConverter(), new ReplyConverter2()});
+        MAP.put(BilibiliUser.class, new Converter[]{new UserConverter()});
 
     }
 
     public static <T> void modify(ONode node, Class<T> clz) {
-        Converter converter = MAP.get(clz);
+        modify(node, clz, 0);
+    }
+
+    public static <T> void modify(ONode node, Class<T> clz, int index) {
+        Converter converter = MAP.get(clz)[index];
         converter.modify(node);
     }
 
     public static <T> T convertObject(ONode node, Class<T> clz) {
+        return convertObject(node, clz, 0);
+    }
+
+    public static <T> T convertObject(ONode node, Class<T> clz, int index) {
         //获取转换器
-        Converter converter = MAP.get(clz);
+        Converter converter = MAP.get(clz)[index];
         System.out.println("转换器: " + converter);
         return converter.modifyAndConvert(node, clz);
     }
 
     public static <T> List<T> convertList(ONode node, Class<T> clz) {
+        return convertList(node, clz, 0);
+    }
+
+    public static <T> List<T> convertList(ONode node, Class<T> clz, int index) {
         //获取转换器
-        Converter converter = MAP.get(clz);
+        Converter converter = MAP.get(clz)[index];
         System.out.println("批量转换器: " + converter);
         List<T> list = new ArrayList<>();
         node.forEach(node1 -> {
