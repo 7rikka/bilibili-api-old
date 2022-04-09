@@ -77,8 +77,10 @@ public class BilibiliVipInfo {
     private Label label;
     @ONodeAttr(name = "due_remark")
     private String dueRemark;
-    @ONodeAttr(name = "due_remark")
+    @ONodeAttr(name = "access_status")
     private Integer accessStatus;
+//    @ONodeAttr(name = "theme_type")
+//    private Integer themeType;
 
     @Data
     @Builder

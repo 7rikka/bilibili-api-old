@@ -43,7 +43,7 @@ public class DanmakuApi implements IDanmaku {
             BilibiliDanmaku danmaku = node.toObject(BilibiliDanmaku.class);
             danmaku.setUser(
                     BilibiliUser.builder()
-                            .uid(node.get("mid").getInt())
+                            .id(node.get("mid").getInt())
                             .hash(node.get("mid_hash").getString())
                             .name(node.get("uname").getString())
                             .build()

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.noear.snack.annotation.ONodeAttr;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 评论
@@ -31,13 +32,23 @@ public class BilibiliReply {
     /**
      *
      */
-    @ONodeAttr(name = "message")
+    @ONodeAttr(name = "content")
     private String content;
+    /**
+     *
+     */
+    @ONodeAttr(name = "content_attr")
+    private String contentAttr;
     /**
      * 这条评论下面的回复数
      */
     @ONodeAttr(name = "count")
-    private String count;
+    private Integer count;
+    /**
+     *
+     */
+    @ONodeAttr(name = "rcount")
+    private Integer rcount;
     /**
      * 若为一级评论则为 0
      * 大于一级评论则为根评论 id
@@ -47,7 +58,7 @@ public class BilibiliReply {
     /**
      * 关联稿件aid
      */
-    @ONodeAttr(name = "oid")
+    @ONodeAttr(name = "aid")
     private Integer aid;
     /**
      *
@@ -79,7 +90,7 @@ public class BilibiliReply {
     /**
      *
      */
-    @ONodeAttr(name = "mid")
+    @ONodeAttr(name = "uid")
     private Integer uid;
     /**
      * 评论获赞数
@@ -148,12 +159,26 @@ public class BilibiliReply {
     /**
      *
      */
+    @ONodeAttr(name = "assist")
+    private Integer assist;
+    /**
+     *
+     */
+    @ONodeAttr(name = "replies")
+    private List<BilibiliReply> replies;
+    /**
+     *
+     */
+    @ONodeAttr(name = "show_follow")
+    private Boolean showFollow;
+    /**
+     *
+     */
+    @ONodeAttr(name = "invisible")
+    private Boolean invisible;
+    /**
+     *
+     */
     @ONodeAttr(name = "user")
     private BilibiliUser user;
-//    private String title;
-//    private String replier;
-//    private String uface;
-//    private String cover;
-
-
 }

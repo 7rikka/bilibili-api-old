@@ -19,7 +19,7 @@ public class BilibiliNameplate {
     /**
      * 勋章id
      */
-    @ONodeAttr(name = "nid")
+    @ONodeAttr(name = "id")
     private Integer id;
     /**
      * 勋章名称

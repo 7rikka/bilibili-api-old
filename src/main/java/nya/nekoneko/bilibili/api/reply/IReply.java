@@ -17,4 +17,6 @@ public interface IReply {
 
     List<BilibiliReply> getRecentReplyList(int pageNum, int pageSize, String bvid, ReplyOrderType orderType);
 
+    List<BilibiliReply> getVideoReplyList(int aid, int page);
+
 }

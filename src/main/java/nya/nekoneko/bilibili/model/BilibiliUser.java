@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * https://api.bilibili.com/x/space/acc/info?mid=2062760
+ *
+ * @author Ho
  */
 @Data
 @Builder
@@ -19,8 +21,8 @@ public class BilibiliUser {
     /**
      * 数字uid
      */
-    @ONodeAttr(name = "mid")
-    private Integer uid;
+    @ONodeAttr(name = "id")
+    private Integer id;
     /**
      * hash
      */
@@ -63,7 +65,7 @@ public class BilibiliUser {
     /**
      * 账号权限
      */
-    @ONodeAttr(name = "DisplayRank")
+    @ONodeAttr(name = "display_rank")
     private Integer displayRank;
     /**
      * 当前等级
@@ -140,8 +142,8 @@ public class BilibiliUser {
     /**
      * 大会员信息
      */
-    @ONodeAttr(name = "vip")
-    private BilibiliVipInfo vip;
+    @ONodeAttr(name = "vip_info")
+    private BilibiliVipInfo vipInfo;
     /**
      *
      */
@@ -192,11 +194,6 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "following")
     private String following;
-    /**
-     *
-     */
-    @ONodeAttr(name = "is_followed")
-    private String is_followed;
     /**
      *
      */
