@@ -34,6 +34,16 @@ public class BiliRequest {
     }
 
     public BiliRequest url(String url, Map<String, String> params) {
+        this.url = url;
+        if (null != params) {
+            for (Map.Entry<String, String> param : params.entrySet()) {
+                this.paramMap.put(param.getKey(), param.getValue());
+            }
+        }
+        return this;
+    }
+
+    private BiliRequest url1(String url, Map<String, String> params) {
         HttpUrl httpUrl = HttpUrl.parse(url);
         HttpUrl.Builder httpBuilder = Objects.requireNonNull(httpUrl).newBuilder();
         if (null != params) {
@@ -105,7 +115,7 @@ public class BiliRequest {
     }
 
     public Request buildRequest() {
-        url(this.url, this.paramMap);
+        url1(this.url, this.paramMap);
         addHeaders();
         return builder.build();
     }

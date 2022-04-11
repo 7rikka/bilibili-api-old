@@ -9,7 +9,10 @@ import org.noear.snack.ONode;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -23,12 +26,18 @@ public class KodoUploader implements Uploader {
     private static final int THREAD_COUNT = 16;
     private static final int CHECK_INTERVAL = 3 * 1000;
 
+    @Override
     public String upload(BilibiliLoginInfo bilibiliLoginInfo, File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
-        PrintUtil.info("使用 KodoUploader 上传: "+fileName);
+        PrintUtil.info("使用 KodoUploader 上传");
         long fileSize = file.length();
         int chunkNum = (int) Math.ceil(1.0 * fileSize / CHUNK_SIZE);
+        PrintUtil.info("文件名: " + fileName);
+        PrintUtil.info("分块数: " + chunkNum);
+        PrintUtil.info("文件大小: " + StatUtil.convertFileSize(fileSize));
+        PrintUtil.info("分块大小: " + StatUtil.convertFileSize(CHUNK_SIZE));
+        PrintUtil.info("线程数: " + THREAD_COUNT);
         //STEP1.获取上传信息
         Map<String, String> map = new HashMap<>();
         map.put("name", fileName);

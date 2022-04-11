@@ -16,6 +16,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Ho
+ */
 @Slf4j
 public class UposUploader implements Uploader {
     /**
@@ -26,7 +29,7 @@ public class UposUploader implements Uploader {
     //新
 //    private static final String profile = "ugcfx/bup";
     //旧
-    private static final String profile = "ugcupos/bup";
+    private static final String PROFILE = "ugcupos/bup";
     //upcdn:
     //  bda2
     //  qn
@@ -35,6 +38,7 @@ public class UposUploader implements Uploader {
 
     public UposUploader() {
     }
+
     public UposUploader(int type) {
         if (1 == type) {
             upcdn = "bda2";
@@ -44,12 +48,14 @@ public class UposUploader implements Uploader {
             upcdn = "qn";
         }
     }
+
     //http://member.bilibili.com/x/vupre/web/profile?scene=transAndConv&t=1648959564583
     //http://member.bilibili.com/x/vupre/web/profile?scene=videoUgc&t=1648959564583
-    public String upload(BilibiliLoginInfo bilibiliLoginInfo,File file) throws Exception {
+    @Override
+    public String upload(BilibiliLoginInfo bilibiliLoginInfo, File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
-        PrintUtil.info("使用 UposUploader("+upcdn+") 上传: "+fileName);
+        PrintUtil.info("使用 UposUploader(" + upcdn + ") 上传");
         long fileSize = file.length();
         //STEP1.获取上传信息
         Map<String, String> map = new HashMap<>();
@@ -57,7 +63,7 @@ public class UposUploader implements Uploader {
         map.put("size", String.valueOf(fileSize));
         map.put("r", "upos");
         map.put("upcdn", upcdn);
-        map.put("profile", profile);
+        map.put("profile", PROFILE);
         map.put("ssl", "0");
         map.put("version", "2.10.4.0");
         map.put("build", "2100400");
@@ -73,11 +79,14 @@ public class UposUploader implements Uploader {
         String bizId = node.get("biz_id").getString();
         int chunkSize = Integer.parseInt(node.get("chunk_size").getString());
         String endpoint = node.get("endpoint").getString();
-        String upos_uri = node.get("upos_uri").getString();
+        String uposUri = node.get("upos_uri").getString();
         int chunkNum = (int) Math.ceil(1.0 * fileSize / chunkSize);
+        PrintUtil.info("文件名: " + fileName);
         PrintUtil.info("分块数: " + chunkNum);
-        PrintUtil.info("分块大小: " + chunkSize);
-        String basicUrl = "https:" + endpoint + "/" + upos_uri.substring("upos://".length());
+        PrintUtil.info("文件大小: " + StatUtil.convertFileSize(fileSize));
+        PrintUtil.info("分块大小: " + StatUtil.convertFileSize(chunkSize));
+        PrintUtil.info("线程数: " + THREAD_COUNT);
+        String basicUrl = "https:" + endpoint + "/" + uposUri.substring("upos://".length());
         PrintUtil.info("目标地址: " + basicUrl);
         //STEP.2
         Request request2 = BiliRequestFactor.getBiliRequest()
@@ -142,7 +151,7 @@ public class UposUploader implements Uploader {
                 .url(basicUrl, new HashMap<>() {{
                     put("output", "json");
                     put("name", fileName);
-                    put("profile", profile);
+                    put("profile", PROFILE);
                     put("uploadId", uploadId);
                     put("biz_id", bizId);
                 }})
