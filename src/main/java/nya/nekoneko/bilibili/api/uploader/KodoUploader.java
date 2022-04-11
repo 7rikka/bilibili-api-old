@@ -58,19 +58,19 @@ public class KodoUploader implements Uploader {
         String biliFilename = node.get("bili_filename").getString();
         String bizId = node.get("biz_id").getString();
         String endpoint = node.get("endpoint").getString();
-        String fetchUrl = "http:"+node.get("fetch_url").getString();
+        String fetchUrl = "http:" + node.get("fetch_url").getString();
         String fetchUrls = node.get("fetch_urls").getString();
         String X_Upos_Auth = node.get("fetch_headers").get("X-Upos-Auth").getString();
         String X_Upos_Fetch_Source = node.get("fetch_headers").get("X-Upos-Fetch-Source").getString();
         String key = node.get("key").getString();
         String uptoken = node.get("uptoken").getString();
         String basicUrl = "http:" + endpoint + "/mkblk/";
-        String endUrl = "http:" + endpoint + "/mkfile/"+fileSize+"/key/"+Base64.encode(key);
+        String endUrl = "http:" + endpoint + "/mkfile/" + fileSize + "/key/" + Base64.encode(key);
         //STEP2.开始上传
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
         ThreadPoolExecutor service = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_COUNT);
         Progress progress = new Progress(fileSize);
-        Map<Integer,String> infoMap=new ConcurrentHashMap<>();
+        Map<Integer, String> infoMap = new ConcurrentHashMap<>();
         for (int chunkIndex = 0; chunkIndex < chunkNum; chunkIndex++) {
             byte[] b = new byte[CHUNK_SIZE];
             int read = bis.read(b);
@@ -87,7 +87,7 @@ public class KodoUploader implements Uploader {
                 Thread.sleep(CHECK_INTERVAL);
             }
             service.execute(() -> {
-                uploadChunk(basicUrl, uptoken, finalChunkIndex, finalB, info, progress,infoMap);
+                uploadChunk(basicUrl, uptoken, finalChunkIndex, finalB, info, progress, infoMap);
             });
         }
         service.shutdown();
@@ -100,11 +100,11 @@ public class KodoUploader implements Uploader {
         Request request3 = BiliRequestFactor.getBiliRequest()
                 .url(endUrl)
                 .postJson(sj.toString())
-                .header("Authorization","UpToken " + uptoken)
+                .header("Authorization", "UpToken " + uptoken)
                 .buildRequest();
         String result3 = Call.doCallGetString(request3);
         //STEP4.确认上传数据
-        Map<String,String> map4 = new HashMap<>();
+        Map<String, String> map4 = new HashMap<>();
         map4.put("output", "json");
         map4.put("profile", "ugcupos/fetch");
         map4.put("name", fileName);
@@ -113,8 +113,8 @@ public class KodoUploader implements Uploader {
         Request request4 = BiliRequestFactor.getBiliRequest()
                 .url(fetchUrl)
                 .postForm(map4)
-                .header("X-Upos-Auth",X_Upos_Auth)
-                .header("X-Upos-Fetch-Source",X_Upos_Fetch_Source)
+                .header("X-Upos-Auth", X_Upos_Auth)
+                .header("X-Upos-Fetch-Source", X_Upos_Fetch_Source)
                 .buildRequest();
         String result4 = Call.doCallGetString(request4);
         PrintUtil.info("fns: " + biliFilename);
@@ -122,9 +122,9 @@ public class KodoUploader implements Uploader {
         return biliFilename;
     }
 
-    private void uploadChunk(String basicUrl, String uptoken, int chunkIndex, byte[] data, String info, Progress progress, Map<Integer,String> infoMap) {
+    private void uploadChunk(String basicUrl, String uptoken, int chunkIndex, byte[] data, String info, Progress progress, Map<Integer, String> infoMap) {
         Request request = BiliRequestFactor.getBiliRequest()
-                .url(basicUrl+data.length)
+                .url(basicUrl + data.length)
                 .post(data)
                 .header("Authorization", "UpToken " + uptoken)
                 .buildRequest();
@@ -132,7 +132,7 @@ public class KodoUploader implements Uploader {
             try {
                 String result = Call.doCallGetString(request);
                 String ctx = ONode.loadStr(result).get("ctx").getString();
-                infoMap.put(chunkIndex,ctx);
+                infoMap.put(chunkIndex, ctx);
                 //进度条+1
                 progress.add(data.length, ctx);
                 break;

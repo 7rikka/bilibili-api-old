@@ -21,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Ho
+ */
 public class CosUploader implements Uploader{
     private static final int CHUNK_SIZE = 10 * 1024 * 1024;
     /**
