@@ -18,7 +18,8 @@ public class BiliRequest {
     private static final MediaType OCTET_STREAM = MediaType.parse("application/octet-stream");
     private final Request.Builder builder = new Request.Builder();
     private String url;
-    private Map<String,String> paramMap=new HashMap<>();
+    private final Map<String, String> paramMap = new HashMap<>();
+
     public BiliRequest url(String url) {
 //        builder.url(url);
         this.url = url;
@@ -31,6 +32,7 @@ public class BiliRequest {
         }
         return this;
     }
+
     public BiliRequest url(String url, Map<String, String> params) {
         HttpUrl httpUrl = HttpUrl.parse(url);
         HttpUrl.Builder httpBuilder = Objects.requireNonNull(httpUrl).newBuilder();
@@ -53,6 +55,7 @@ public class BiliRequest {
         builder.post(body);
         return this;
     }
+
     public BiliRequest postXml(String xml) {
         RequestBody body = RequestBody.create(xml, XML);
         builder.post(body);
@@ -72,7 +75,7 @@ public class BiliRequest {
     }
 
     public BiliRequest uploadFile(InputStream inputStream, String fileName, Map<String, String> form) throws IOException {
-        RequestBody requestBody = RequestBody.create(inputStream.readAllBytes(),OCTET_STREAM);
+        RequestBody requestBody = RequestBody.create(inputStream.readAllBytes(), OCTET_STREAM);
         MultipartBody.Builder multipartBodyBuilder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file_up", fileName, requestBody);
@@ -82,12 +85,14 @@ public class BiliRequest {
         builder.post(multipartBodyBuilder.build());
         return this;
     }
-    public BiliRequest post(byte[] b){
-        builder.post(RequestBody.create(b,OCTET_STREAM));
+
+    public BiliRequest post(byte[] b) {
+        builder.post(RequestBody.create(b, OCTET_STREAM));
         return this;
     }
-    public BiliRequest put(byte[] b){
-        builder.put(RequestBody.create(b,OCTET_STREAM));
+
+    public BiliRequest put(byte[] b) {
+        builder.put(RequestBody.create(b, OCTET_STREAM));
         return this;
     }
 
@@ -100,7 +105,7 @@ public class BiliRequest {
     }
 
     public Request buildRequest() {
-        url(this.url,this.paramMap);
+        url(this.url, this.paramMap);
         addHeaders();
         return builder.build();
     }
@@ -115,8 +120,8 @@ public class BiliRequest {
     /**
      * 添加Header
      */
-    public BiliRequest header(String name,String value){
-        builder.header(name,value);
+    public BiliRequest header(String name, String value) {
+        builder.header(name, value);
         return this;
     }
 }

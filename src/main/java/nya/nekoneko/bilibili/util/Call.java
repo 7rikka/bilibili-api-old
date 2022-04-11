@@ -27,7 +27,7 @@ public class Call {
 
     public static BiliResult doCall(Request request) {
         String result = doCallGetString(request);
-        System.out.println(result);
+//        System.out.println(result);
         return ONode.deserialize(result, BiliResult.class);
     }
 
@@ -69,7 +69,7 @@ public class Call {
         try {
             Response response = client.newCall(request).execute();
             if (200 != response.code()) {
-                System.out.println(response.body().string());
+//                System.out.println(response.body().string());
                 throw new RequestException(request, response, "HTTP CODE: " + response.code());
             }
             return response.header(headerName);

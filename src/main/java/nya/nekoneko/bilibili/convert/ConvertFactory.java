@@ -1,5 +1,6 @@
 package nya.nekoneko.bilibili.convert;
 
+import nya.nekoneko.bilibili.model.BilibiliDanmaku;
 import nya.nekoneko.bilibili.model.BilibiliReply;
 import nya.nekoneko.bilibili.model.BilibiliUser;
 import org.noear.snack.ONode;
@@ -18,6 +19,7 @@ public class ConvertFactory {
     static {
         MAP.put(BilibiliReply.class, new Converter[]{new ReplyConverter(), new ReplyConverter2()});
         MAP.put(BilibiliUser.class, new Converter[]{new UserConverter()});
+        MAP.put(BilibiliDanmaku.class, new Converter[]{new DanmakuConverter()});
 
     }
 
@@ -37,7 +39,6 @@ public class ConvertFactory {
     public static <T> T convertObject(ONode node, Class<T> clz, int index) {
         //获取转换器
         Converter converter = MAP.get(clz)[index];
-        System.out.println("转换器: " + converter);
         return converter.modifyAndConvert(node, clz);
     }
 
@@ -48,7 +49,6 @@ public class ConvertFactory {
     public static <T> List<T> convertList(ONode node, Class<T> clz, int index) {
         //获取转换器
         Converter converter = MAP.get(clz)[index];
-        System.out.println("批量转换器: " + converter);
         List<T> list = new ArrayList<>();
         node.forEach(node1 -> {
             list.add(converter.modifyAndConvert(node1, clz));

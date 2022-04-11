@@ -40,12 +40,12 @@ public class BilibiliDanmaku {
     /**
      * 关联视频cid
      */
-    @ONodeAttr(name = "oid")
+    @ONodeAttr(name = "cid")
     private Integer cid;
     /**
      * 发送者uid
      */
-    @ONodeAttr(name = "mid")
+    @ONodeAttr(name = "uid")
     private Integer uid;
     /**
      *
@@ -80,7 +80,7 @@ public class BilibiliDanmaku {
     /**
      *
      */
-    @ONodeAttr(name = "msg")
+    @ONodeAttr(name = "content")
     private String content;
     /**
      *
@@ -122,7 +122,10 @@ public class BilibiliDanmaku {
      */
     @ONodeAttr(name = "user_like")
     private Integer userLike;
-
+    /**
+     * 用户信息
+     */
+    @ONodeAttr(name = "user")
     private BilibiliUser user;
 
 }

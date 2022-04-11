@@ -2,6 +2,7 @@ package nya.nekoneko.bilibili.api.danmaku;
 
 import bilibili.community.service.dm.v1.Dm;
 import nya.nekoneko.bilibili.config.UrlConfig;
+import nya.nekoneko.bilibili.convert.ConvertFactory;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliDanmaku;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
@@ -10,6 +11,7 @@ import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
 import nya.nekoneko.bilibili.util.PrintUtil;
 import okhttp3.Request;
+import org.noear.snack.ONode;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -37,19 +39,23 @@ public class DanmakuApi implements IDanmaku {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        List<BilibiliDanmaku> list = new ArrayList<>();
-        result.getData().get("result").forEach(node -> {
-            node.set("ctime", node.get("ctime").getLong() * 1000);
-            BilibiliDanmaku danmaku = node.toObject(BilibiliDanmaku.class);
-            danmaku.setUser(
-                    BilibiliUser.builder()
-                            .id(node.get("mid").getInt())
-                            .hash(node.get("mid_hash").getString())
-                            .name(node.get("uname").getString())
-                            .build()
-            );
-            list.add(danmaku);
-        });
+        System.out.println(result.getData());
+        ONode node = result.getData().get("result");
+        List<BilibiliDanmaku> list = ConvertFactory.convertList(node, BilibiliDanmaku.class);
+
+//        List<BilibiliDanmaku> list = new ArrayList<>();
+//        result.getData().get("result").forEach(node -> {
+//            node.set("ctime", node.get("ctime").getLong() * 1000);
+//            BilibiliDanmaku danmaku = node.toObject(BilibiliDanmaku.class);
+//            danmaku.setUser(
+//                    BilibiliUser.builder()
+//                            .id(node.get("mid").getInt())
+//                            .hash(node.get("mid_hash").getString())
+//                            .name(node.get("uname").getString())
+//                            .build()
+//            );
+//            list.add(danmaku);
+//        });
         return list;
     }
 
