@@ -103,4 +103,8 @@ public class UrlConfig {
      * (UP主)获取充电记录
      */
     public static final String GET_RECHARGE_RECORD = "https://pay.bilibili.com/bk/brokerage/listForCustomerRechargeRecord";
+    /**
+     * (UP主)获取充电留言记录
+     */
+    public static final String GET_RECHARGE_REMARK = "https://member.bilibili.com/x/web/elec/remark/list";
 }

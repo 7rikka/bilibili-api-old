@@ -63,4 +63,23 @@ public class ElectricApi implements IElectric {
         }
         return null;
     }
+
+    /**
+     * @param page      页数
+     * @param pageSize  分页大小[1,12]
+     * @param startDate 起始日期
+     * @param endDate   结束日期(2050-01-01)
+     */
+    public void getRechargeRemarkList(int page, int pageSize, String startDate, String endDate) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_RECHARGE_REMARK)
+                .addParam("pn", page)
+                .addParam("ps", pageSize)
+                .addParam("begin", startDate)
+                .addParam("end", endDate)
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result);
+    }
 }
