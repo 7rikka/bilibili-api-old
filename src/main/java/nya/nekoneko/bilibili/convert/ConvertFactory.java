@@ -1,6 +1,7 @@
 package nya.nekoneko.bilibili.convert;
 
 import nya.nekoneko.bilibili.model.BilibiliDanmaku;
+import nya.nekoneko.bilibili.model.BilibiliRechargeRecord;
 import nya.nekoneko.bilibili.model.BilibiliReply;
 import nya.nekoneko.bilibili.model.BilibiliUser;
 import org.noear.snack.ONode;
@@ -20,6 +21,8 @@ public class ConvertFactory {
         MAP.put(BilibiliReply.class, new Converter[]{new ReplyConverter(), new ReplyConverter2()});
         MAP.put(BilibiliUser.class, new Converter[]{new UserConverter()});
         MAP.put(BilibiliDanmaku.class, new Converter[]{new DanmakuConverter()});
+        MAP.put(BilibiliRechargeRecord.class, new Converter[]{new RechargeRecordConverter()});
+
 
     }
 

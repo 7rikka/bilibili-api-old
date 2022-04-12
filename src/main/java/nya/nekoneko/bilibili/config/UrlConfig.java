@@ -96,7 +96,11 @@ public class UrlConfig {
      */
     public static final String GET_VIDEO_REPLY_LIST = "https://api.bilibili.com/x/v2/reply/main";
     /**
-     *
+     * 检查昵称可用性
      */
     public static final String CHECK_NAME_AVAILABLE = "http://passport.bilibili.com/web/generic/check/nickname";
+    /**
+     * (UP主)获取充电记录
+     */
+    public static final String GET_RECHARGE_RECORD = "https://pay.bilibili.com/bk/brokerage/listForCustomerRechargeRecord";
 }
