@@ -1,6 +1,6 @@
 package nya.nekoneko.bilibili.api.vip;
 
-import nya.nekoneko.bilibili.enums.VipPrivilegeEnum;
+import nya.nekoneko.bilibili.enums.VipPrivilegeType;
 
 /**
  * 大会员相关
@@ -12,5 +12,5 @@ public interface IVip {
      * @param type 兑换类型
      * @return 领取是否成功
      */
-    boolean recivePrivilege(VipPrivilegeEnum type);
+    boolean recivePrivilege(VipPrivilegeType type);
 }

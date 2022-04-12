@@ -76,7 +76,9 @@ public class UrlConfig {
      * 获取我的系统通知
      */
 //    public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_user_notify";
+    // 当前版本
     public static final String GET_MY_NOTITY = "https://message.bilibili.com/x/sys-msg/query_notify_list";
+//    public static final String GET_MY_NOTITY = "https://message.bilibili.com/api/notify/query.sysnotify.list.do";
     /**
      * 获取最近收到的弹幕
      */
@@ -93,4 +95,8 @@ public class UrlConfig {
      * 获取视频评论
      */
     public static final String GET_VIDEO_REPLY_LIST = "https://api.bilibili.com/x/v2/reply/main";
+    /**
+     *
+     */
+    public static final String CHECK_NAME_AVAILABLE = "http://passport.bilibili.com/web/generic/check/nickname";
 }

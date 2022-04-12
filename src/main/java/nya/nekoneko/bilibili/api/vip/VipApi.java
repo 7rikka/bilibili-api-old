@@ -1,12 +1,12 @@
 package nya.nekoneko.bilibili.api.vip;
 
-import nya.nekoneko.bilibili.enums.VipPrivilegeEnum;
+import lombok.extern.slf4j.Slf4j;
+import nya.nekoneko.bilibili.config.UrlConfig;
+import nya.nekoneko.bilibili.enums.VipPrivilegeType;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
-import lombok.extern.slf4j.Slf4j;
-import nya.nekoneko.bilibili.config.UrlConfig;
 import okhttp3.Request;
 
 import java.util.HashMap;
@@ -29,7 +29,7 @@ public class VipApi implements IVip {
      * code=69801, message=你已领取过该权益
      */
     @Override
-    public boolean recivePrivilege(VipPrivilegeEnum type) {
+    public boolean recivePrivilege(VipPrivilegeType type) {
         //准备参数
         Map<String, String> map = new HashMap<>();
         map.put("type", String.valueOf(type.value()));

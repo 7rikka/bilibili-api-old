@@ -1,5 +1,8 @@
 package nya.nekoneko.bilibili.util;
 
+/**
+ * @author Ho
+ */
 public class Progress {
     private final long start = System.currentTimeMillis();
     private long uploadedSize = 0;

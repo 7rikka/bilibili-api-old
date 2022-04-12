@@ -1,5 +1,8 @@
 package nya.nekoneko.bilibili.util;
 
+/**
+ * @author Ho
+ */
 public class PrintUtil {
     public static Printer printer = new DefaultPrinter();
 
