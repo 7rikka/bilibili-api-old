@@ -30,6 +30,11 @@ public class ReplyApi implements IReply {
     // comment_display=0
 
     @Override
+    public List<BilibiliReply> getRecentReplyList(int pageNum) {
+        return getRecentReplyList(pageNum, 10, null, ReplyOrderType.CTIME);
+    }
+
+    @Override
     public List<BilibiliReply> getRecentReplyList(int pageNum, int pageSize) {
         return getRecentReplyList(pageNum, pageSize, null, ReplyOrderType.CTIME);
     }

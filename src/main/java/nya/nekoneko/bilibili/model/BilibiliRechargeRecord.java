@@ -48,6 +48,4 @@ public class BilibiliRechargeRecord {
      */
     @ONodeAttr(name = "user")
     private BilibiliUser user;
-
-
 }

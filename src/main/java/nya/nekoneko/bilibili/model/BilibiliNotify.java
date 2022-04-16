@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.noear.snack.annotation.ONodeAttr;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 系统通知
@@ -47,7 +47,7 @@ public class BilibiliNotify {
      *
      */
     @ONodeAttr(name = "time_at")
-    private Date timeAt;
+    private LocalDateTime timeAt;
     /**
      *
      */

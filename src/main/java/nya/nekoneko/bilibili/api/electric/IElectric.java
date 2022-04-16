@@ -11,6 +11,14 @@ public interface IElectric {
     /**
      * 获取我收到的充电列表
      *
+     * @param page 页数
+     * @return 充电记录列表
+     */
+    List<BilibiliRechargeRecord> getRechargeRecordList(int page);
+
+    /**
+     * 获取我收到的充电列表
+     *
      * @param page     页数
      * @param pageSize 分页大小 范围[1,50]
      * @return 充电记录列表

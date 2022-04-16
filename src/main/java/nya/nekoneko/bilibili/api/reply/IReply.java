@@ -11,6 +11,8 @@ import java.util.List;
  * @author Ho
  */
 public interface IReply {
+    List<BilibiliReply> getRecentReplyList(int pageNum);
+
     List<BilibiliReply> getRecentReplyList(int pageNum, int pageSize);
 
     List<BilibiliReply> getRecentReplyList(int pageNum, int pageSize, String bvid);

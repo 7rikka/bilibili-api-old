@@ -24,6 +24,11 @@ public class ElectricApi implements IElectric {
         this.loginInfo = loginInfo;
     }
 
+    @Override
+    public List<BilibiliRechargeRecord> getRechargeRecordList(int page) {
+        return getRechargeRecordList(page, 10, null, null);
+    }
+
     /**
      * 获取我收到的充电列表
      *

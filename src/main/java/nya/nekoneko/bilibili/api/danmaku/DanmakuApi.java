@@ -27,7 +27,7 @@ public class DanmakuApi implements IDanmaku {
 
     /**
      * @param pageNum  页数
-     * @param pageSize 分页大小 [1,2052]
+     * @param pageSize 分页大小
      * @return
      */
     @Override
@@ -39,9 +39,7 @@ public class DanmakuApi implements IDanmaku {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result.getData());
         ONode node = result.getData().get("result");
-        List<BilibiliDanmaku> list = ConvertFactory.convertList(node, BilibiliDanmaku.class);
 
 //        List<BilibiliDanmaku> list = new ArrayList<>();
 //        result.getData().get("result").forEach(node -> {
@@ -56,7 +54,7 @@ public class DanmakuApi implements IDanmaku {
 //            );
 //            list.add(danmaku);
 //        });
-        return list;
+        return ConvertFactory.convertList(node, BilibiliDanmaku.class);
     }
 
     @Override
