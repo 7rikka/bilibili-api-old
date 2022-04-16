@@ -5,6 +5,8 @@ import nya.nekoneko.bilibili.api.archive.IArchive;
 import nya.nekoneko.bilibili.api.danmaku.DanmakuApi;
 import nya.nekoneko.bilibili.api.danmaku.IDanmaku;
 import nya.nekoneko.bilibili.api.dynamic.IDynamic;
+import nya.nekoneko.bilibili.api.electric.ElectricApi;
+import nya.nekoneko.bilibili.api.electric.IElectric;
 import nya.nekoneko.bilibili.api.fav.FavApi;
 import nya.nekoneko.bilibili.api.fav.IFav;
 import nya.nekoneko.bilibili.api.medal.IMedal;
@@ -42,6 +44,7 @@ public class BilibiliClient {
     public IDanmaku danmaku;
     public IDynamic dynamic;
     public IReply reply;
+    public IElectric electric;
 
 
     public BilibiliClient() {
@@ -70,5 +73,6 @@ public class BilibiliClient {
         this.danmaku = new DanmakuApi(loginInfo);
 //        this.dynamic
         this.reply = new ReplyApi(loginInfo);
+        this.electric = new ElectricApi(loginInfo);
     }
 }
