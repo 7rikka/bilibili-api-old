@@ -107,4 +107,8 @@ public class UrlConfig {
      * (UP主)获取充电留言记录
      */
     public static final String GET_RECHARGE_REMARK = "https://member.bilibili.com/x/web/elec/remark/list";
+    /**
+     * (旧)获取充电列表
+     */
+    public static final String OLD_GET_ELECTRIC_LIST = "http://member.bilibili.com/x/h5/elec/rank/recent";
 }

@@ -29,6 +29,12 @@ public class BilibiliRechargeRecord {
     @ONodeAttr(name = "original_third_coin")
     private Double originalThirdCoin;
     /**
+     * (旧版)电池数
+     */
+    @ONodeAttr(name = "elec_num")
+    private Integer elecNum;
+
+    /**
      * 实际到手贝壳
      */
     @ONodeAttr(name = "brokerage")

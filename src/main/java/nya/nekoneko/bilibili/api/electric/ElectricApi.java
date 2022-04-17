@@ -10,6 +10,9 @@ import nya.nekoneko.bilibili.util.Call;
 import okhttp3.Request;
 import org.noear.snack.ONode;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ import java.util.List;
  */
 public class ElectricApi implements IElectric {
     private final BilibiliLoginInfo loginInfo;
+    private final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public ElectricApi(BilibiliLoginInfo loginInfo) {
         this.loginInfo = loginInfo;
@@ -75,6 +79,7 @@ public class ElectricApi implements IElectric {
      * @param startDate 起始日期
      * @param endDate   结束日期(2050-01-01)
      */
+    @Override
     public void getRechargeRemarkList(int page, int pageSize, String startDate, String endDate) {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.GET_RECHARGE_REMARK)
@@ -86,5 +91,30 @@ public class ElectricApi implements IElectric {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         System.out.println(result);
+    }
+
+    @Override
+    public List<BilibiliRechargeRecord> getElectricList(int page) {
+        return getElectricList(page, 20);
+    }
+
+    @Override
+    public List<BilibiliRechargeRecord> getElectricList(int page, int pageSize) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.OLD_GET_ELECTRIC_LIST)
+                .addParam("pn", page)
+                .addParam("ps", pageSize)
+                .addParam("s_locale", "zh_CN")
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        List<BilibiliRechargeRecord> list = new LinkedList<>();
+        result.getData().get("list").forEach(node -> {
+            list.add(BilibiliRechargeRecord.builder()
+                    .elecNum(node.get("elec_num").getInt())
+                    .ctime(LocalDateTime.parse(node.get("ctime").getString(), df))
+                    .build());
+        });
+        return list;
     }
 }

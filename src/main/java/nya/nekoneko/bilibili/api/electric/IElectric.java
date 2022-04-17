@@ -35,4 +35,30 @@ public interface IElectric {
      * @return 充电记录列表
      */
     List<BilibiliRechargeRecord> getRechargeRecordList(int page, int pageSize, String beginTime, String endTime);
+
+    /**
+     * 获取充电留言列表
+     *
+     * @param page      页数
+     * @param pageSize  分页大小[1,12]
+     * @param startDate 起始日期
+     * @param endDate   结束日期(2050-01-01)
+     */
+    void getRechargeRemarkList(int page, int pageSize, String startDate, String endDate);
+
+    /**
+     * (旧版)获取收到的电池列表
+     *
+     * @param page
+     * @return
+     */
+    List<BilibiliRechargeRecord> getElectricList(int page);
+
+    /**
+     * (旧版)获取收到的电池列表
+     *
+     * @param page
+     * @return
+     */
+    List<BilibiliRechargeRecord> getElectricList(int page, int pageSize);
 }

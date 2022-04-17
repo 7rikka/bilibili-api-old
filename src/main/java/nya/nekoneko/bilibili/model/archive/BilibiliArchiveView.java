@@ -5,13 +5,21 @@ import org.noear.snack.annotation.ONodeAttr;
 
 import java.util.List;
 
+/**
+ * https://member.bilibili.com/x/vupre/web/archive/view
+ */
 @Data
 public class BilibiliArchiveView {
     /**
      * 稿件aid
      */
     @ONodeAttr(name = "aid")
-    private int aid;
+    private Integer aid;
+    /**
+     * 稿件aid
+     */
+    @ONodeAttr(name = "bvid")
+    private String bvid;
     /**
      * 稿件标题
      */
@@ -38,7 +46,7 @@ public class BilibiliArchiveView {
      * 分区id
      */
     @ONodeAttr(name = "tid")
-    private int tid;
+    private Integer tid;
     /**
      * 封面
      */
@@ -64,36 +72,80 @@ public class BilibiliArchiveView {
      */
     @ONodeAttr(name = "dynamic")
     private String dynamic;
-    /**
-     * 字幕设置
-     */
-    @ONodeAttr(name = "subtitle")
-    private BilibiliArchiveSubtitle subtitle;
-    /**
-     *
-     */
-    @ONodeAttr(name = "handle_staff")
-    private boolean handleStaff;
+//    /**
+//     * 字幕设置
+//     */
+//    @ONodeAttr(name = "subtitle")
+//    private BilibiliArchiveSubtitle subtitle;
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "handle_staff")
+//    private boolean handleStaff;
     /**
      * 是否为全景视频
      * -1: 否
      * 1: 是
      */
     @ONodeAttr(name = "is_360")
-    private int is_360;
-    /**
-     *
-     */
-    @ONodeAttr(name = "act_reserve_create")
-    private int act_reserve_create;
-    /**
-     *
-     */
-    @ONodeAttr(name = "origin_state")
-    private int origin_state;
-    /**
-     *
-     */
-    @ONodeAttr(name = "topic_grey")
-    private int topic_grey;
+    private int is360;
+    //    /**
+//     *
+//     */
+//    @ONodeAttr(name = "act_reserve_create")
+//    private int act_reserve_create;
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "origin_state")
+//    private int origin_state;
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "topic_grey")
+//    private int topic_grey;
+//
+    private String author;
+    private String reject_reason;
+    private String reject_reason_url;
+    private Integer duration;
+    private Integer no_reprint;
+    private Integer ugcpay;
+    private Integer order_id;
+    private String order_name;
+    private Integer adorder_id;
+    private String adorder_name;
+    private String adorder_no;
+    private Integer online_time;
+    private String new_adorder_info;
+    private Integer mission_id;
+    private String mission_name;
+    private Integer attribute;
+    private Integer state;
+    private String state_desc;
+    private Integer state_panel;
+    private String porder;
+    private String poi_object;
+    private String dtime;
+    private String ptime;
+    private String ctime;
+    private String ugcpay_info;
+    private String vote;
+    private String activity;
+    private String interactive;
+    private String hl;
+    private String no_background;
+    private String dynamic_video;
+    private String no_public;
+    private String bs_editor;
+    private String up_from;
+    private String desc_v2;
+    private String dynamic_v2;
+    private String topic_id;
+    private String topic_name;
+    private String topic_stat;
+    private String premiere;
+    private String tp_info;
+    private String attrs;
+    private String staffs;
 }

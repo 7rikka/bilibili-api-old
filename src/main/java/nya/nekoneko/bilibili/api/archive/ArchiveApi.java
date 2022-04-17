@@ -6,6 +6,8 @@ import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliActivity;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 import nya.nekoneko.bilibili.model.BilibiliVideoType;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchiveVideo;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchiveView;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
 import okhttp3.Request;
@@ -89,7 +91,7 @@ public class ArchiveApi implements IArchive {
     }
 
     @Override
-    public void getArchiveView(String bvid, String history) {
+    public BilibiliArchiveView getArchiveView(String bvid, String history) {
         Map<String, String> map = new HashMap<>();
         map.put("bvid", bvid);
         map.put("history", history);
@@ -99,11 +101,21 @@ public class ArchiveApi implements IArchive {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result);
+//        System.out.println(result);
+        ONode archive = result.getData().get("archive");
+        BilibiliArchiveView bilibiliArchiveView = archive.toObject(BilibiliArchiveView.class);
+//        System.out.println(bilibiliArchiveView);
+        ONode videos = result.getData().get("videos");
+        List<BilibiliArchiveVideo> bilibiliArchiveVideos = videos.toObjectList(BilibiliArchiveVideo.class);
+//        for (BilibiliArchiveVideo bilibiliArchiveVideo : bilibiliArchiveVideos) {
+//            System.out.println(bilibiliArchiveVideo);
+//        }
+        bilibiliArchiveView.setVideos(bilibiliArchiveVideos);
+        return bilibiliArchiveView;
     }
 
     @Override
-    public void getArchiveView(String bvid) {
-        getArchiveView(bvid, null);
+    public BilibiliArchiveView getArchiveView(String bvid) {
+        return getArchiveView(bvid, null);
     }
 }
