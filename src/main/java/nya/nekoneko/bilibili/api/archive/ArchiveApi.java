@@ -53,8 +53,8 @@ public class ArchiveApi implements IArchive {
         if (result.getCode() == 0) {
             ONode node = result.getData().get("activities");
             node.forEach(oNode -> {
-                oNode.set("stime",oNode.get("stime").getLong() * 1000);
-                oNode.set("etime",oNode.get("etime").getLong() * 1000);
+                oNode.set("stime", oNode.get("stime").getLong() * 1000);
+                oNode.set("etime", oNode.get("etime").getLong() * 1000);
             });
             return node.toObjectList(BilibiliActivity.class);
         }
@@ -82,7 +82,7 @@ public class ArchiveApi implements IArchive {
         Request request = BiliRequestFactor.getBiliRequest()
 //                .url(UrlConfig.GET_RECOVER_LIST, map)
                 .url(UrlConfig.GET_RECOVER_LIST)
-                .addParam("fns",fns)
+                .addParam("fns", fns)
                 .get()
                 .cookie(loginInfo)
                 .buildRequest();
@@ -146,32 +146,32 @@ public class ArchiveApi implements IArchive {
     }
 
     /**
-     * 21011 新增稿件分P不能为空
+     * 更新稿件
      *
-     * @param archive
+     * @param archive 稿件信息
      */
     @Override
     public void edit(BilibiliArchive archive) {
         ONode node = ONode.newObject();
-        //稿件aid
+        //稿件aid 必填
         node.set("aid", archive.getAid());
 
-        //稿件标题
+        //稿件标题 必填
         node.set("title", archive.getTitle());
-
+//        node.set("title", "\u202D");
         //稿件封面
         node.set("cover", archive.getCover());
 
-        //稿件分区id
+        //稿件分区id 必填
         node.set("tid", archive.getTid());
 
-        //稿件来源类型 1: 自制 2: 转载
+        //稿件来源类型 1: 自制 2: 转载 必填
         node.set("copyright", archive.getCopyright());
         if (archive.getCopyright() == 2) {
             node.set("source", archive.getSource());
         }
 
-        //稿件Tag
+        //稿件Tag 必填
         node.set("tag", archive.getTag());
 
         //简介
@@ -200,6 +200,7 @@ public class ArchiveApi implements IArchive {
         ONode node1 = ONode.newArray();
         for (BilibiliArchiveVideo video : archive.getVideos()) {
             ONode videoNode = ONode.newObject();
+            //必填
             videoNode.set("filename", video.getFilename());
             videoNode.set("title", video.getTitle());
             videoNode.set("desc", video.getDesc());
