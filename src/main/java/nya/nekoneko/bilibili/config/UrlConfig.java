@@ -111,4 +111,8 @@ public class UrlConfig {
      * (旧)获取充电列表
      */
     public static final String OLD_GET_ELECTRIC_LIST = "http://member.bilibili.com/x/h5/elec/rank/recent";
+    /**
+     * 修改稿件信息(网页端)
+     */
+    public static final String EDIT_ARCHIVE = "https://member.bilibili.com/x/vu/web/edit";
 }

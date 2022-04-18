@@ -14,6 +14,7 @@ public class BilibiliArchiveSubtitle {
     /**
      * 语言类型
      * 例: zh-CN
+     * 例: zh-Hans
      */
     @ONodeAttr(name = "lan")
     private String lan;

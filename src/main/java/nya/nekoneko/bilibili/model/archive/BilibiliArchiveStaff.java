@@ -23,5 +23,9 @@ public class BilibiliArchiveStaff {
     /**
      * 用户mid
      */
-    private int mid;
+    private Integer mid;
+    /**
+     * 更新时用
+     */
+    private Integer is_del;
 }

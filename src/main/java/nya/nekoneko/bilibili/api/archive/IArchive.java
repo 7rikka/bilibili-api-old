@@ -3,7 +3,7 @@ package nya.nekoneko.bilibili.api.archive;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliActivity;
 import nya.nekoneko.bilibili.model.BilibiliVideoType;
-import nya.nekoneko.bilibili.model.archive.BilibiliArchiveView;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchive;
 
 import java.util.List;
 
@@ -42,8 +42,20 @@ public interface IArchive {
      *
      * @return
      */
-    BilibiliArchiveView getArchiveView(String bvid, String history);
+    BilibiliArchive getArchiveView(String bvid, String history);
 
-    BilibiliArchiveView getArchiveView(String bvid);
+    BilibiliArchive getArchiveView(String bvid);
+
+    /**
+     * 提交稿件
+     * （只提供基础功能）
+     */
+    void submit(BilibiliArchive archive);
+
+    /**
+     * 修改稿件
+     * （只提供基础功能）
+     */
+    void edit(BilibiliArchive archive);
 
 }

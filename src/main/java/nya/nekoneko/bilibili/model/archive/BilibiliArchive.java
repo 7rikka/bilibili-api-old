@@ -7,9 +7,12 @@ import java.util.List;
 
 /**
  * https://member.bilibili.com/x/vupre/web/archive/view
+ * 稿件
+ *
+ * @author Ho
  */
 @Data
-public class BilibiliArchiveView {
+public class BilibiliArchive {
     /**
      * 稿件aid
      */
@@ -31,7 +34,7 @@ public class BilibiliArchiveView {
      * 2.转载
      */
     @ONodeAttr(name = "copyright")
-    private int copyright;
+    private Integer copyright;
     /**
      * 分p列表
      */
@@ -148,4 +151,10 @@ public class BilibiliArchiveView {
     private String tp_info;
     private String attrs;
     private String staffs;
+    /**
+     * 是否发起稿件预约
+     * 1: 发起
+     * 0: 不发起
+     */
+    private Integer act_reserve_create;
 }
