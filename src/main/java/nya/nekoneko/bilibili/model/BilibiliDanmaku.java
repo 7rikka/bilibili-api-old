@@ -102,11 +102,6 @@ public class BilibiliDanmaku {
      */
     @ONodeAttr(name = "ctime", format = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime ctime;
-//    /**
-//     * 稿件标题
-//     */
-//    @ONodeAttr(name = "title")
-//    private String title;
     /**
      *
      */

@@ -23,6 +23,8 @@ public class DanmakuConverter implements Converter {
         user.set("name", node.get("uname").getString());
         user.set("id", node.get("uid").getString());
         node.setNode("user", user);
-        user.remove("title");
+        node.remove("title");
+        node.remove("uname");
+        node.remove("mid_hash");
     }
 }

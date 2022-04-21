@@ -25,12 +25,12 @@ public class BilibiliReply {
     @ONodeAttr(name = "id")
     private Long id;
     /**
-     *
+     * 评论所在层数
      */
     @ONodeAttr(name = "floor")
     private Integer floor;
     /**
-     *
+     * 评论内容
      */
     @ONodeAttr(name = "content")
     private String content;
@@ -82,13 +82,13 @@ public class BilibiliReply {
     private Integer state;
     /**
      * 若为一级评论则为 0
-     * 若为二级评论则为根评论 rpid
-     * 大于二级评论为上一级评 论 rpid
+     * 若为二级评论则为根评论id
+     * 大于二级评论为上一级评论id
      */
     @ONodeAttr(name = "parent")
     private Long parent;
     /**
-     *
+     * 评论者uid
      */
     @ONodeAttr(name = "uid")
     private Integer uid;

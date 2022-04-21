@@ -129,11 +129,13 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "tags")
     private List<String> tags;
-//    /**
-//     *
-//     */
-//    @ONodeAttr(name = "is_elec")
-//    private Integer isElec;
+    /**
+     * 是否给我充过电
+     * 0:
+     * 1: 充过
+     */
+    @ONodeAttr(name = "is_elec")
+    private Integer isElec;
     /**
      * 认证信息
      */
