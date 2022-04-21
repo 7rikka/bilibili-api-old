@@ -42,9 +42,9 @@ public interface IArchive {
      *
      * @return
      */
-    BilibiliArchive getArchiveView(String bvid, String history);
+    BilibiliArchive getArchiveInfo(String bvid, String history);
 
-    BilibiliArchive getArchiveView(String bvid);
+    BilibiliArchive getArchiveInfo(String bvid);
 
     /**
      * 提交稿件

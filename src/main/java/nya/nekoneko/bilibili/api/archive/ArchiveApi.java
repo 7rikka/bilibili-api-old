@@ -91,7 +91,7 @@ public class ArchiveApi implements IArchive {
     }
 
     @Override
-    public BilibiliArchive getArchiveView(String bvid, String history) {
+    public BilibiliArchive getArchiveInfo(String bvid, String history) {
         Map<String, String> map = new HashMap<>();
         map.put("bvid", bvid);
         map.put("history", history);
@@ -101,22 +101,22 @@ public class ArchiveApi implements IArchive {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result);
-        ONode archive = result.getData().get("archive");
-        BilibiliArchive bilibiliArchiveView = archive.toObject(BilibiliArchive.class);
-//        System.out.println(bilibiliArchiveView);
-        ONode videos = result.getData().get("videos");
-        List<BilibiliArchiveVideo> bilibiliArchiveVideos = videos.toObjectList(BilibiliArchiveVideo.class);
-//        for (BilibiliArchiveVideo bilibiliArchiveVideo : bilibiliArchiveVideos) {
-//            System.out.println(bilibiliArchiveVideo);
-//        }
-        bilibiliArchiveView.setVideos(bilibiliArchiveVideos);
-        return bilibiliArchiveView;
+        ONode archiveNode = result.getData().get("archive");
+        archiveNode.set("ptime", archiveNode.get("ptime").getLong() * 1000);
+        archiveNode.set("ctime", archiveNode.get("ctime").getLong() * 1000);
+        BilibiliArchive archive = archiveNode.toObject(BilibiliArchive.class);
+        ONode videosNode = result.getData().get("videos");
+        videosNode.forEach(node -> {
+            node.set("ctime", node.get("ctime").getLong() * 1000);
+        });
+        List<BilibiliArchiveVideo> bilibiliArchiveVideos = videosNode.toObjectList(BilibiliArchiveVideo.class);
+        archive.setVideos(bilibiliArchiveVideos);
+        return archive;
     }
 
     @Override
-    public BilibiliArchive getArchiveView(String bvid) {
-        return getArchiveView(bvid, null);
+    public BilibiliArchive getArchiveInfo(String bvid) {
+        return getArchiveInfo(bvid, null);
     }
 
     @Override
@@ -181,12 +181,12 @@ public class ArchiveApi implements IArchive {
         node.set("dynamic", archive.getDynamic());
 
         //启用未经作者授权 禁止转载? 0: 不启用 1: 启用
-        node.set("no_reprint", archive.getNo_reprint());
+        node.set("no_reprint", archive.getNoReprint());
 
         //是否开启稿件预约 0: 不开启 1: 开启
 //        node.set("act_reserve_create", 0);
 
-        node.set("desc_format_id", archive.getDesc_format_id());
+        node.set("desc_format_id", archive.getDescFormatId());
 
         //定时发布时间
 //        node.set("dtime", archive.getDtime());

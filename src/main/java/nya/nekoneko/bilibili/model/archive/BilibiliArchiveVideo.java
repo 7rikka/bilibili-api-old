@@ -27,12 +27,12 @@ public class BilibiliArchiveVideo {
     @ONodeAttr(name = "bvid")
     private String bvid;
     /**
-     *
+     * 分p标题
      */
     @ONodeAttr(name = "title")
     private String title;
     /**
-     *
+     * 分p简介
      */
     @ONodeAttr(name = "desc")
     private String desc;
@@ -42,22 +42,23 @@ public class BilibiliArchiveVideo {
     @ONodeAttr(name = "filename")
     private String filename;
     /**
-     * 上传时的biz_id
+     * (上传时的biz_id)
      */
     @ONodeAttr(name = "cid")
     private Long cid;
     /**
-     *
+     * 分p时长
      */
     @ONodeAttr(name = "duration")
     private Integer duration;
     /**
-     *
+     * 排序序号
      */
     @ONodeAttr(name = "index")
     private Integer index;
     /**
-     *
+     * 分p状态
+     * -30:
      */
     @ONodeAttr(name = "status")
     private Integer status;
@@ -84,16 +85,16 @@ public class BilibiliArchiveVideo {
     /**
      *
      */
+    @ONodeAttr(name = "fail_desc")
+    private String failDesc;
+    /**
+     *
+     */
     @ONodeAttr(name = "xcode_state")
     private Integer xcodeState;
     /**
      *
      */
-    @ONodeAttr(name = "ctime")
+    @ONodeAttr(name = "ctime", format = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime ctime;
-//    private BilibiliArchiveEditor editor;
-    /**
-     * 是否包含动态卡片（投稿时用）
-     */
-//    private Boolean pre_command;
 }

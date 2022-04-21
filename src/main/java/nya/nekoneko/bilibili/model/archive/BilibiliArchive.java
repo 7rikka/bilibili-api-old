@@ -3,6 +3,7 @@ package nya.nekoneko.bilibili.model.archive;
 import lombok.Data;
 import org.noear.snack.annotation.ONodeAttr;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class BilibiliArchive {
     @ONodeAttr(name = "aid")
     private Integer aid;
     /**
-     * 稿件aid
+     * 稿件bvid
      */
     @ONodeAttr(name = "bvid")
     private String bvid;
@@ -64,7 +65,7 @@ public class BilibiliArchive {
      *
      */
     @ONodeAttr(name = "desc_format_id")
-    private int desc_format_id;
+    private int descFormatId;
     /**
      * 简介
      */
@@ -75,86 +76,52 @@ public class BilibiliArchive {
      */
     @ONodeAttr(name = "dynamic")
     private String dynamic;
-//    /**
-//     * 字幕设置
-//     */
-//    @ONodeAttr(name = "subtitle")
-//    private BilibiliArchiveSubtitle subtitle;
-//    /**
-//     *
-//     */
-//    @ONodeAttr(name = "handle_staff")
-//    private boolean handleStaff;
     /**
-     * 是否为全景视频
-     * -1: 否
-     * 1: 是
+     *
      */
-    @ONodeAttr(name = "is_360")
-    private int is360;
-    //    /**
-//     *
-//     */
-//    @ONodeAttr(name = "act_reserve_create")
-//    private int act_reserve_create;
-//    /**
-//     *
-//     */
-//    @ONodeAttr(name = "origin_state")
-//    private int origin_state;
-//    /**
-//     *
-//     */
-//    @ONodeAttr(name = "topic_grey")
-//    private int topic_grey;
-//
-    private String author;
-    private String reject_reason;
-    private String reject_reason_url;
+    @ONodeAttr(name = "reject_reason")
+    private String rejectReason;
+    /**
+     *
+     */
+    @ONodeAttr(name = "reject_reason_url")
+    private String rejectReasonUrl;
+    /**
+     *
+     */
+    @ONodeAttr(name = "duration")
     private Integer duration;
-    private Integer no_reprint;
-    private Integer ugcpay;
-    private Integer order_id;
-    private String order_name;
-    private Integer adorder_id;
-    private String adorder_name;
-    private String adorder_no;
-    private Integer online_time;
-    private String new_adorder_info;
-    private Integer mission_id;
-    private String mission_name;
-    private Integer attribute;
-    private Integer state;
-    private String state_desc;
-    private Integer state_panel;
-    private String porder;
-    private String poi_object;
-    private String dtime;
-    private String ptime;
-    private String ctime;
-    private String ugcpay_info;
-    private String vote;
-    private String activity;
-    private String interactive;
-    private String hl;
-    private String no_background;
-    private String dynamic_video;
-    private String no_public;
-    private String bs_editor;
-    private String up_from;
-    private String desc_v2;
-    private String dynamic_v2;
-    private String topic_id;
-    private String topic_name;
-    private String topic_stat;
-    private String premiere;
-    private String tp_info;
-    private String attrs;
-    private String staffs;
     /**
-     * 是否发起稿件预约
-     * 1: 发起
-     * 0: 不发起
+     *
      */
-    private Integer act_reserve_create;
+    @ONodeAttr(name = "no_reprint")
+    private Integer noReprint;
+    /**
+     *
+     */
+    @ONodeAttr(name = "attribute")
+    private Integer attribute;
+    /**
+     * 稿件状态
+     */
+    @ONodeAttr(name = "state")
+    private Integer state;
+    /**
+     * 稿件状态说明
+     * 0: 审核通过
+     * -30: 审核中
+     * -40: 通过审核，等待发布(定时发布)
+     */
+    @ONodeAttr(name = "state_desc")
+    private String stateDesc;
+    /**
+     *
+     */
+    @ONodeAttr(name = "ptime", format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime ptime;
+    /**
+     *
+     */
+    @ONodeAttr(name = "ctime", format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime ctime;
 }
