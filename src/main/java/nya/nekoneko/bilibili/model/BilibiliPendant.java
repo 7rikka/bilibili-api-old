@@ -33,7 +33,7 @@ public class BilibiliPendant {
      *
      */
     @ONodeAttr(name = "expire")
-    private String expire;
+    private Long expire;
     /**
      *
      */

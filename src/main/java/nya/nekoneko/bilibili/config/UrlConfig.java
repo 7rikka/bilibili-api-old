@@ -111,6 +111,7 @@ public class UrlConfig {
      * (旧)获取充电列表
      */
     public static final String OLD_GET_ELECTRIC_LIST = "http://member.bilibili.com/x/h5/elec/rank/recent";
+    public static final String MANGA_CLOCK_IN = null;
     /**
      * 修改稿件信息(网页端)
      */

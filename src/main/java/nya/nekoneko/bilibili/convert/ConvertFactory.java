@@ -19,7 +19,7 @@ public class ConvertFactory {
 
     static {
         MAP.put(BilibiliReply.class, new Converter[]{new ReplyConverter(), new ReplyConverter2()});
-        MAP.put(BilibiliUser.class, new Converter[]{new UserConverter()});
+        MAP.put(BilibiliUser.class, new Converter[]{new UserInfoConverter()});
         MAP.put(BilibiliDanmaku.class, new Converter[]{new DanmakuConverter()});
         MAP.put(BilibiliRechargeRecord.class, new Converter[]{new RechargeRecordConverter()});
 

@@ -68,38 +68,21 @@ public class BilibiliVipInfo {
     /**
      * 大会员图标角标地址
      */
-    @ONodeAttr(name = "avatarSubscript_url")
+    @ONodeAttr(name = "avatar_subscript_url")
     private String avatarSubscriptUrl;
     /**
      *
      */
     @ONodeAttr(name = "label")
-    private Label label;
+    private BilibiliVipLabel label;
+    /**
+     *
+     */
     @ONodeAttr(name = "due_remark")
     private String dueRemark;
+    /**
+     *
+     */
     @ONodeAttr(name = "access_status")
     private Integer accessStatus;
-//    @ONodeAttr(name = "theme_type")
-//    private Integer themeType;
-
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Label {
-        @ONodeAttr(name = "path")
-        private String path;
-        @ONodeAttr(name = "text")
-        private String text;
-        @ONodeAttr(name = "label_theme")
-        private String labelTheme;
-        @ONodeAttr(name = "text_color")
-        private String textColor;
-        @ONodeAttr(name = "bg_style")
-        private String bgStyle;
-        @ONodeAttr(name = "bg_color")
-        private String bgColor;
-        @ONodeAttr(name = "border_color")
-        private String borderColor;
-    }
 }

@@ -8,6 +8,8 @@ import org.noear.snack.annotation.ONodeAttr;
 
 /**
  * 直播间信息
+ *
+ * @author Ho
  */
 @Data
 @Builder
@@ -43,11 +45,11 @@ public class BilibiliLiveRoom {
      */
     @ONodeAttr(name = "cover")
     private String cover;
-    /**
-     * 人气值
-     */
-    @ONodeAttr(name = "online")
-    private Integer online;
+//    /**
+//     * 人气值
+//     */
+//    @ONodeAttr(name = "online")
+//    private Integer online;
     /**
      * 直播间id
      */
@@ -62,5 +64,10 @@ public class BilibiliLiveRoom {
      *
      */
     @ONodeAttr(name = "broadcast_type")
-    private Integer broadcast_type;
+    private Integer broadcastType;
+    /**
+     *
+     */
+    @ONodeAttr(name = "watched_show")
+    private BilibiliLiveRoomWatchedShow watchedShow;
 }

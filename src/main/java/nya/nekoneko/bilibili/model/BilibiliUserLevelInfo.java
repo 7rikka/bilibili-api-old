@@ -6,11 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.noear.snack.annotation.ONodeAttr;
 
+/**
+ * @author Ho
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BilibiliLevelInfo {
+public class BilibiliUserLevelInfo {
+    @ONodeAttr(name = "uid")
+    private Integer uid;
     @ONodeAttr(name = "current_level")
     private Integer currentLevel;
     @ONodeAttr(name = "current_min")

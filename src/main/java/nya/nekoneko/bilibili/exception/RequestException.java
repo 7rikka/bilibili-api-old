@@ -1,22 +1,35 @@
 package nya.nekoneko.bilibili.exception;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import okhttp3.Request;
 import okhttp3.Response;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class RequestException extends RuntimeException {
     private final Request request;
     private final Response response;
+    private final String rawString;
 
 
     public RequestException(Request request, Response response, String message) {
         super(message);
         this.request = request;
         this.response = response;
+        this.rawString = null;
+    }
+
+    public RequestException(Request request, Response response, String message, String rawString) {
+        super(message);
+        this.request = request;
+        this.response = response;
+        this.rawString = rawString;
     }
 
     @Override
     public void printStackTrace() {
-        System.err.println("错误: 请求路径: " + request.url() +"\n异常信息: "+this.getMessage());
+        System.err.println("错误: 请求路径: " + request.url() + "\n异常信息: " + this.getMessage() + "\n响应: " + this.rawString);
     }
 
 //    public String getExceptionInfo() throws IOException {

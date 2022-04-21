@@ -20,6 +20,7 @@ public class Call {
             .connectTimeout(Duration.ofSeconds(100))
             .callTimeout(Duration.ofSeconds(100))
             .build();
+    private static final int SUCCESS = 200;
 //    static {
 //        client.dispatcher().setMaxRequestsPerHost(16);
 //        client.dispatcher().setMaxRequests(16);
@@ -34,9 +35,12 @@ public class Call {
     public static String doCallGetString(Request request) {
         try {
             Response response = client.newCall(request).execute();
-            if (200 != response.code()) {
-                System.out.println(response.body().string());
-                throw new RequestException(request, response, "HTTP CODE: " + response.code());
+            if (SUCCESS != response.code()) {
+                String body = null;
+                if (null != response.body()) {
+                    body = response.body().string();
+                }
+                throw new RequestException(request, response, "HTTP CODE: " + response.code(), body);
             }
             ResponseBody body = response.body();
             if (null == body) {
