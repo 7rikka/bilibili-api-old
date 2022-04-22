@@ -4,6 +4,9 @@ import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliActivity;
 import nya.nekoneko.bilibili.model.BilibiliVideoType;
 import nya.nekoneko.bilibili.model.archive.BilibiliArchive;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchiveStat;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchiveVideo;
+import nya.nekoneko.bilibili.util.container.ContainerTwo;
 
 import java.util.List;
 
@@ -57,5 +60,30 @@ public interface IArchive {
      * （只提供基础功能）
      */
     void edit(BilibiliArchive archive);
+
+    /**
+     * 获取稿件的分p信息列表, 包含已经删除的分p
+     *
+     * @param bvid
+     * @return
+     */
+    List<BilibiliArchiveVideo> getArchiveAllParts(String bvid);
+
+    /**
+     * 获取稿件的分p信息列表, 包含已经删除的分p
+     *
+     * @param aid
+     * @return
+     */
+    List<BilibiliArchiveVideo> getArchiveAllParts(Integer aid);
+
+    List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page);
+
+    List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, int pageSize);
+
+    List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, String status);
+
+    List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, int pageSize, String status);
+
 
 }

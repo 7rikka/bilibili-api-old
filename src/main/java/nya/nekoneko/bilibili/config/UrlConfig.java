@@ -119,4 +119,13 @@ public class UrlConfig {
      * 修改稿件信息(网页端)
      */
     public static final String EDIT_ARCHIVE = "https://member.bilibili.com/x/vu/web/edit";
+    /**
+     * 获取稿件所有分p列表, 包含已经删除的分p
+     */
+    public static final String GET_ARCHIVE_ALL_PARTS = "https://member.bilibili.com/x/web/archive/parts";
+    /**
+     * 获取稿件列表
+     */
+    public static final String GET_ARCHIVE_LIST = "https://member.bilibili.com/x/web/archives";
+
 }

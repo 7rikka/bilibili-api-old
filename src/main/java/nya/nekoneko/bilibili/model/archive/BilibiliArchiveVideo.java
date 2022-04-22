@@ -34,8 +34,8 @@ public class BilibiliArchiveVideo {
     /**
      * 分p简介
      */
-    @ONodeAttr(name = "desc")
-    private String desc;
+    @ONodeAttr(name = "description")
+    private String description;
     /**
      *
      */
@@ -65,8 +65,8 @@ public class BilibiliArchiveVideo {
     /**
      *
      */
-    @ONodeAttr(name = "status_desc")
-    private String statusDesc;
+    @ONodeAttr(name = "status_description")
+    private String statusDescription;
     /**
      *
      */
@@ -85,8 +85,8 @@ public class BilibiliArchiveVideo {
     /**
      *
      */
-    @ONodeAttr(name = "fail_desc")
-    private String failDesc;
+    @ONodeAttr(name = "fail_description")
+    private String failDescription;
     /**
      *
      */
@@ -95,6 +95,6 @@ public class BilibiliArchiveVideo {
     /**
      *
      */
-    @ONodeAttr(name = "ctime", format = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime ctime;
+    @ONodeAttr(name = "submit_time", format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime submitTime;
 }

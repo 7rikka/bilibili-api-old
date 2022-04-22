@@ -8,6 +8,8 @@ import org.noear.snack.annotation.ONodeAttr;
 
 /**
  * 粉丝勋章领取数据总览
+ *
+ * @author Ho
  */
 @Data
 @Builder

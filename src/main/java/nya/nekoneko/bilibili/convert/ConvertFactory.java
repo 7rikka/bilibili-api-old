@@ -4,6 +4,7 @@ import nya.nekoneko.bilibili.model.BilibiliDanmaku;
 import nya.nekoneko.bilibili.model.BilibiliRechargeRecord;
 import nya.nekoneko.bilibili.model.BilibiliReply;
 import nya.nekoneko.bilibili.model.BilibiliUser;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchive;
 import org.noear.snack.ONode;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ConvertFactory {
         MAP.put(BilibiliUser.class, new Converter[]{new UserInfoConverter(), new UserConverter()});
         MAP.put(BilibiliDanmaku.class, new Converter[]{new DanmakuConverter()});
         MAP.put(BilibiliRechargeRecord.class, new Converter[]{new RechargeRecordConverter()});
+        MAP.put(BilibiliArchive.class, new Converter[]{new ArchiveConverter()});
 
 
     }

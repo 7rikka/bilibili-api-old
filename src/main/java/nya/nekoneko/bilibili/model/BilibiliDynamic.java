@@ -1,11 +1,20 @@
 package nya.nekoneko.bilibili.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 /**
  * 动态详情
  * https://t.bilibili.com/633381245297885184?tab=2
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BilibiliDynamic {
     private Long dynamic_id;
     private String timestamp;

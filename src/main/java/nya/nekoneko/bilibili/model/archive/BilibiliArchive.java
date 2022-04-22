@@ -49,8 +49,8 @@ public class BilibiliArchive {
     /**
      * 分区id
      */
-    @ONodeAttr(name = "tid")
-    private Integer tid;
+    @ONodeAttr(name = "video_type_id")
+    private Integer videoTypeId;
     /**
      * 封面
      */
@@ -64,13 +64,13 @@ public class BilibiliArchive {
     /**
      *
      */
-    @ONodeAttr(name = "desc_format_id")
-    private int descFormatId;
+    @ONodeAttr(name = "description_format_id")
+    private int descriptionFormatId;
     /**
      * 简介
      */
-    @ONodeAttr(name = "desc")
-    private String desc;
+    @ONodeAttr(name = "description")
+    private String description;
     /**
      * 粉丝动态
      */
@@ -112,16 +112,16 @@ public class BilibiliArchive {
      * -30: 审核中
      * -40: 通过审核，等待发布(定时发布)
      */
-    @ONodeAttr(name = "state_desc")
-    private String stateDesc;
+    @ONodeAttr(name = "state_description")
+    private String stateDescription;
     /**
      *
      */
-    @ONodeAttr(name = "ptime", format = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime ptime;
+    @ONodeAttr(name = "pass_time", format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime passTime;
     /**
      *
      */
-    @ONodeAttr(name = "ctime", format = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime ctime;
+    @ONodeAttr(name = "submit_time", format = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime submitTime;
 }

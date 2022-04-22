@@ -2,18 +2,22 @@ package nya.nekoneko.bilibili.api.archive;
 
 import lombok.extern.slf4j.Slf4j;
 import nya.nekoneko.bilibili.config.UrlConfig;
+import nya.nekoneko.bilibili.convert.ConvertFactory;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliActivity;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 import nya.nekoneko.bilibili.model.BilibiliVideoType;
 import nya.nekoneko.bilibili.model.archive.BilibiliArchive;
+import nya.nekoneko.bilibili.model.archive.BilibiliArchiveStat;
 import nya.nekoneko.bilibili.model.archive.BilibiliArchiveVideo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
+import nya.nekoneko.bilibili.util.container.ContainerTwo;
 import okhttp3.Request;
 import org.noear.snack.ONode;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -102,12 +106,23 @@ public class ArchiveApi implements IArchive {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         ONode archiveNode = result.getData().get("archive");
-        archiveNode.set("ptime", archiveNode.get("ptime").getLong() * 1000);
-        archiveNode.set("ctime", archiveNode.get("ctime").getLong() * 1000);
+        archiveNode.set("pass_time", archiveNode.get("ptime").getLong() * 1000);
+        archiveNode.set("submit_time", archiveNode.get("ctime").getLong() * 1000);
+        archiveNode.remove("ptime");
+        archiveNode.remove("ctime");
+        archiveNode.rename("tid", "video_type_id");
+        archiveNode.rename("desc", "description");
+        archiveNode.rename("desc_format_id", "description_format_id");
+        archiveNode.rename("state_desc", "state_description");
+
         BilibiliArchive archive = archiveNode.toObject(BilibiliArchive.class);
         ONode videosNode = result.getData().get("videos");
         videosNode.forEach(node -> {
-            node.set("ctime", node.get("ctime").getLong() * 1000);
+            node.set("submit_time", node.get("ctime").getLong() * 1000);
+            node.remove("ctime");
+            node.rename("desc", "description");
+            node.rename("status_desc", "status_description");
+            node.rename("fail_desc", "fail_description");
         });
         List<BilibiliArchiveVideo> bilibiliArchiveVideos = videosNode.toObjectList(BilibiliArchiveVideo.class);
         archive.setVideos(bilibiliArchiveVideos);
@@ -163,7 +178,7 @@ public class ArchiveApi implements IArchive {
         node.set("cover", archive.getCover());
 
         //稿件分区id 必填
-        node.set("tid", archive.getTid());
+        node.set("tid", archive.getVideoTypeId());
 
         //稿件来源类型 1: 自制 2: 转载 必填
         node.set("copyright", archive.getCopyright());
@@ -175,7 +190,7 @@ public class ArchiveApi implements IArchive {
         node.set("tag", archive.getTag());
 
         //简介
-        node.set("desc", archive.getDesc());
+        node.set("desc", archive.getDescription());
 
         //粉丝动态
         node.set("dynamic", archive.getDynamic());
@@ -186,7 +201,7 @@ public class ArchiveApi implements IArchive {
         //是否开启稿件预约 0: 不开启 1: 开启
 //        node.set("act_reserve_create", 0);
 
-        node.set("desc_format_id", archive.getDescFormatId());
+        node.set("desc_format_id", archive.getDescriptionFormatId());
 
         //定时发布时间
 //        node.set("dtime", archive.getDtime());
@@ -203,7 +218,7 @@ public class ArchiveApi implements IArchive {
             //必填
             videoNode.set("filename", video.getFilename());
             videoNode.set("title", video.getTitle());
-            videoNode.set("desc", video.getDesc());
+            videoNode.set("desc", video.getDescription());
 //            videoNode.set("cid", video.getCid());
 //            videoNode.set("editor", null);
             node1.addNode(videoNode);
@@ -228,5 +243,92 @@ public class ArchiveApi implements IArchive {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         System.out.println(result);
+    }
+
+    /**
+     * 获取稿件的分p信息列表, 包含已经删除的分p
+     *
+     * @param bvid
+     * @return
+     */
+    @Override
+    public List<BilibiliArchiveVideo> getArchiveAllParts(String bvid) {
+        return getArchiveAllParts(null, bvid);
+    }
+
+    /**
+     * 获取稿件的分p信息列表, 包含已经删除的分p
+     *
+     * @param aid
+     * @return
+     */
+    @Override
+    public List<BilibiliArchiveVideo> getArchiveAllParts(Integer aid) {
+        return getArchiveAllParts(aid, null);
+    }
+
+    @Override
+    public List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page) {
+        return getArchiveList(page, 20, "is_pubing,pubed,not_pubed");
+    }
+
+    @Override
+    public List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, int pageSize) {
+        return getArchiveList(page, pageSize, "is_pubing,pubed,not_pubed");
+    }
+
+    @Override
+    public List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, String status) {
+        return getArchiveList(page, 20, status);
+    }
+
+    @Override
+    public List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, int pageSize, String status) {
+        //coop: 1
+        //interactive: 1
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_ARCHIVE_LIST)
+                .addParam("pn", page)
+                .addParam("ps", pageSize)
+                .addParam("status", status)
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        ONode node = result.getData().get("arc_audits");
+        List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> containerTwoList = new LinkedList<>();
+        node.forEach(subNode -> {
+            ONode archiveNode = subNode.get("Archive");
+            BilibiliArchive archive = ConvertFactory.convertObject(archiveNode, BilibiliArchive.class);
+            ONode statNode = subNode.get("stat");
+            BilibiliArchiveStat stat = statNode.toObject(BilibiliArchiveStat.class);
+            stat.setBvid(archive.getBvid());
+            ContainerTwo<BilibiliArchive, BilibiliArchiveStat> containerTwo = new ContainerTwo<>();
+            containerTwo.setIndexA(archive);
+            containerTwo.setIndexB(stat);
+            containerTwoList.add(containerTwo);
+        });
+        return containerTwoList;
+    }
+
+    private List<BilibiliArchiveVideo> getArchiveAllParts(Integer aid, String bvid) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_ARCHIVE_ALL_PARTS)
+                .addParam("aid", aid)
+                .addParam("bvid", bvid)
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        List<BilibiliArchiveVideo> list = new LinkedList<>();
+        result.getData().get("part_list").forEach(node -> {
+            list.add(BilibiliArchiveVideo.builder()
+                    .aid(aid)
+                    .bvid(bvid)
+                    .cid(node.get("cid").getLong())
+                    .index(node.get("part_id").getInt())
+                    .title(node.get("part_name").getString())
+                    .status(node.get("status").getInt())
+                    .build());
+        });
+        return list;
     }
 }
