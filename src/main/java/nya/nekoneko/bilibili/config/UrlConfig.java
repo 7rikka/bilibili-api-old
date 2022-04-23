@@ -116,6 +116,10 @@ public class UrlConfig {
      */
     public static final String MANGA_CLOCK_IN = "https://manga.bilibili.com/twirp/activity.v1.Activity/ClockIn";
     /**
+     * 获取签到信息
+     */
+    public static final String MANGA_CLOCK_IN_INFO = "https://manga.bilibili.com/twirp/activity.v1.Activity/GetClockInInfo";
+    /**
      * 修改稿件信息(网页端)
      */
     public static final String EDIT_ARCHIVE = "https://member.bilibili.com/x/vu/web/edit";
@@ -127,5 +131,17 @@ public class UrlConfig {
      * 获取稿件列表
      */
     public static final String GET_ARCHIVE_LIST = "https://member.bilibili.com/x/web/archives";
+    /**
+     * 获取我的积分信息
+     */
+    public static final String GET_POINT_INFO = "https://manga.bilibili.com/twirp/pointshop.v1.Pointshop/GetUserPoint";
+    /**
+     * (漫画)获取积分商城奖品列表
+     */
+    public static final String GET_PRODUCT_LIST = "https://manga.bilibili.com/twirp/pointshop.v1.Pointshop/ListProduct";
+    /**
+     * (漫画)积分商城兑换奖品
+     */
+    public static final String EXECHANGE_PRODUCT = "https://manga.bilibili.com/twirp/pointshop.v1.Pointshop/Exchange";
 
 }

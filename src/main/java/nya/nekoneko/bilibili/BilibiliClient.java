@@ -9,6 +9,8 @@ import nya.nekoneko.bilibili.api.electric.ElectricApi;
 import nya.nekoneko.bilibili.api.electric.IElectric;
 import nya.nekoneko.bilibili.api.fav.FavApi;
 import nya.nekoneko.bilibili.api.fav.IFav;
+import nya.nekoneko.bilibili.api.manga.IManga;
+import nya.nekoneko.bilibili.api.manga.MangaApi;
 import nya.nekoneko.bilibili.api.medal.IMedal;
 import nya.nekoneko.bilibili.api.medal.MedalApi;
 import nya.nekoneko.bilibili.api.member.IMember;
@@ -27,6 +29,9 @@ import nya.nekoneko.bilibili.api.vip.IVip;
 import nya.nekoneko.bilibili.api.vip.VipApi;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
 
+/**
+ * @author Ho
+ */
 public class BilibiliClient {
     /**
      * 登录凭证
@@ -45,6 +50,7 @@ public class BilibiliClient {
     public IDynamic dynamic;
     public IReply reply;
     public IElectric electric;
+    public IManga manga;
 
 
     public BilibiliClient() {
@@ -74,5 +80,6 @@ public class BilibiliClient {
 //        this.dynamic
         this.reply = new ReplyApi(loginInfo);
         this.electric = new ElectricApi(loginInfo);
+        this.manga = new MangaApi(loginInfo);
     }
 }

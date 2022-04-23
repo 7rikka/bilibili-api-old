@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.noear.snack.annotation.ONodeAttr;
 
+/**
+ * @author Ho
+ */
 @Data
 @Builder
 @NoArgsConstructor
