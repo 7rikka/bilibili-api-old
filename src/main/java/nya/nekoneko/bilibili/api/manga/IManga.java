@@ -21,7 +21,7 @@ public interface IManga {
      *
      * @return
      */
-    BilibiliMangaClockInInfo clockInInfo();
+    BilibiliMangaClockInInfo getClockInInfo();
 
     /**
      * @return

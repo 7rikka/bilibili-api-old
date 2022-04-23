@@ -54,7 +54,7 @@ public class MangaApi implements IManga {
     }
 
     @Override
-    public BilibiliMangaClockInInfo clockInInfo() {
+    public BilibiliMangaClockInInfo getClockInInfo() {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.MANGA_CLOCK_IN_INFO)
                 .postForm(new HashMap<>())
