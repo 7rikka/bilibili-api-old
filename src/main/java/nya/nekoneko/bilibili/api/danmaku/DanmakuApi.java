@@ -40,20 +40,6 @@ public class DanmakuApi implements IDanmaku {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         ONode node = result.getData().get("result");
-
-//        List<BilibiliDanmaku> list = new ArrayList<>();
-//        result.getData().get("result").forEach(node -> {
-//            node.set("ctime", node.get("ctime").getLong() * 1000);
-//            BilibiliDanmaku danmaku = node.toObject(BilibiliDanmaku.class);
-//            danmaku.setUser(
-//                    BilibiliUser.builder()
-//                            .id(node.get("mid").getInt())
-//                            .hash(node.get("mid_hash").getString())
-//                            .name(node.get("uname").getString())
-//                            .build()
-//            );
-//            list.add(danmaku);
-//        });
         return ConvertFactory.convertList(node, BilibiliDanmaku.class);
     }
 

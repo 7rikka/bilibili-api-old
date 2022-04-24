@@ -83,6 +83,7 @@ public class UrlConfig {
      * 获取最近收到的弹幕
      */
     public static final String GET_RECENT_DANMAKU_LIST = "https://api.bilibili.com/x/v2/dm/recent";
+    public static final String SEARCH_RECENT_DANMAKU_LIST = "https://api.bilibili.com/x/v2/dm/search";
     /**
      * 获取视频实时弹幕
      */

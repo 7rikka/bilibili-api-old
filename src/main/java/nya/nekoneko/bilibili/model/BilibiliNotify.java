@@ -46,8 +46,8 @@ public class BilibiliNotify {
     /**
      *
      */
-    @ONodeAttr(name = "time_at")
-    private LocalDateTime timeAt;
+    @ONodeAttr(name = "recive_time")
+    private LocalDateTime reciveTime;
     /**
      *
      */

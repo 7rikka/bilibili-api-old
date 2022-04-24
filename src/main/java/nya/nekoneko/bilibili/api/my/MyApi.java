@@ -53,6 +53,9 @@ public class MyApi implements IMy {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         if (0 == result.getCode()) {
+            result.getData().forEach(node -> {
+                node.rename("time_at", "recive_time");
+            });
             return result.getData().toObjectList(BilibiliNotify.class);
         }
         return null;
