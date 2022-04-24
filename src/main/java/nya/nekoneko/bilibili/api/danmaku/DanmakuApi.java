@@ -24,6 +24,13 @@ public class DanmakuApi implements IDanmaku {
     public DanmakuApi(BilibiliLoginInfo loginInfo) {
         this.loginInfo = loginInfo;
     }
+    //?oid=15907738
+    // type=1
+    // keyword=
+    // order=ctime
+    // sort=desc
+    // pn=1
+    // ps=50
 
     /**
      * @param pageNum  页数
@@ -36,6 +43,29 @@ public class DanmakuApi implements IDanmaku {
                 .url(UrlConfig.GET_RECENT_DANMAKU_LIST)
                 .addParam("pn", pageNum)
                 .addParam("ps", pageSize)
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        ONode node = result.getData().get("result");
+        return ConvertFactory.convertList(node, BilibiliDanmaku.class);
+    }
+
+    @Override
+    public List<BilibiliDanmaku> searchRecentDanmakuList(int pageNum, int cid) {
+        return searchRecentDanmakuList(pageNum, 50, cid);
+    }
+
+
+    @Override
+    public List<BilibiliDanmaku> searchRecentDanmakuList(int pageNum, int pageSize, int cid) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.SEARCH_RECENT_DANMAKU_LIST)
+                .addParam("pn", pageNum)
+                .addParam("ps", pageSize)
+                .addParam("oid", cid)
+                .addParam("order", "ctime")
+                .addParam("sort", "desc")
+                .addParam("type", 1)
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
