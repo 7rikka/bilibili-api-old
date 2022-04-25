@@ -16,6 +16,7 @@ import org.noear.snack.ONode;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DanmakuApi implements IDanmaku {
@@ -69,6 +70,9 @@ public class DanmakuApi implements IDanmaku {
                 .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
+        if (result.getCode() == -404) {
+            return new LinkedList<>();
+        }
         ONode node = result.getData().get("result");
         return ConvertFactory.convertList(node, BilibiliDanmaku.class);
     }
