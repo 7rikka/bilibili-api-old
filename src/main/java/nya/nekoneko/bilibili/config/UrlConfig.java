@@ -144,5 +144,9 @@ public class UrlConfig {
      * (漫画)积分商城兑换奖品
      */
     public static final String EXECHANGE_PRODUCT = "https://manga.bilibili.com/twirp/pointshop.v1.Pointshop/Exchange";
+    /**
+     * APP开屏图片
+     */
+    public static final String GET_APP_SPLASH = "http://app.bilibili.com/x/v2/splash/brand/list";
 
 }

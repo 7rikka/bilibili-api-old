@@ -22,6 +22,10 @@ public class BilibiliLoginInfo {
      */
     private String csrf;
     /**
+     * App端access_key
+     */
+    private String accessKey;
+    /**
      * 登录状态可用性
      */
     private Boolean isAvailable;

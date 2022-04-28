@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static nya.nekoneko.bilibili.util.AppUtil.getSign;
+
 /**
  * 包装一次请求
  */
@@ -110,6 +112,14 @@ public class BiliRequest {
         if (null != loginInfo) {
             String cookie = "SESSDATA=" + loginInfo.getSESSDATA() + "; ";
             builder.header("Cookie", cookie);
+        }
+        return this;
+    }
+
+    public BiliRequest appSign(BilibiliLoginInfo loginInfo) {
+        if (null != loginInfo) {
+            String sign = getSign(paramMap, "560c52ccd288fed045859ed18bffd973");
+            addParam("sign", sign);
         }
         return this;
     }
