@@ -36,7 +36,6 @@ public class AppApi implements IApp {
                 .appSign(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result);
         if (0 == result.getCode()) {
             return result.getData().get("list").toObjectList(BilibiliAppSplash.class);
         }
