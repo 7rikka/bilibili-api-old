@@ -1,5 +1,7 @@
 package nya.nekoneko.bilibili;
 
+import nya.nekoneko.bilibili.api.app.AppApi;
+import nya.nekoneko.bilibili.api.app.IApp;
 import nya.nekoneko.bilibili.api.archive.ArchiveApi;
 import nya.nekoneko.bilibili.api.archive.IArchive;
 import nya.nekoneko.bilibili.api.danmaku.DanmakuApi;
@@ -51,6 +53,7 @@ public class BilibiliClient {
     public IReply reply;
     public IElectric electric;
     public IManga manga;
+    public IApp app;
 
 
     public BilibiliClient() {
@@ -81,5 +84,6 @@ public class BilibiliClient {
         this.reply = new ReplyApi(loginInfo);
         this.electric = new ElectricApi(loginInfo);
         this.manga = new MangaApi(loginInfo);
+        this.app = new AppApi(loginInfo);
     }
 }
