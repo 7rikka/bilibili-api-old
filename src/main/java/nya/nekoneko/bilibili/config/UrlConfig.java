@@ -125,6 +125,10 @@ public class UrlConfig {
      */
     public static final String EDIT_ARCHIVE = "https://member.bilibili.com/x/vu/web/edit";
     /**
+     * 新增稿件信息(网页端)
+     */
+    public static final String SUBMIT_ARCHIVE = "https://member.bilibili.com/x/vu/web/add";
+    /**
      * 获取稿件所有分p列表, 包含已经删除的分p
      */
     public static final String GET_ARCHIVE_ALL_PARTS = "https://member.bilibili.com/x/web/archive/parts";

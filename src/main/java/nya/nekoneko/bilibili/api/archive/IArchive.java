@@ -53,7 +53,7 @@ public interface IArchive {
      * 提交稿件
      * （只提供基础功能）
      */
-    void submit(BilibiliArchive archive);
+    void submit(BilibiliArchive archive, String str_time);
 
     /**
      * 修改稿件
@@ -84,6 +84,5 @@ public interface IArchive {
     List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, String status);
 
     List<ContainerTwo<BilibiliArchive, BilibiliArchiveStat>> getArchiveList(int page, int pageSize, String status);
-
 
 }

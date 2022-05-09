@@ -134,7 +134,8 @@ public class KodoUploader implements Uploader {
                 String ctx = ONode.loadStr(result).get("ctx").getString();
                 infoMap.put(chunkIndex, ctx);
                 //进度条+1
-                progress.add(data.length, ctx);
+//                progress.add(data.length, ctx);
+                progress.add(data.length);
                 break;
             } catch (Exception e) {
                 e.printStackTrace();

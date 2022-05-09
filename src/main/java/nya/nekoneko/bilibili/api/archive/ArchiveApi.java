@@ -16,6 +16,9 @@ import nya.nekoneko.bilibili.util.container.ContainerTwo;
 import okhttp3.Request;
 import org.noear.snack.ONode;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -135,29 +138,72 @@ public class ArchiveApi implements IArchive {
     }
 
     @Override
-    public void submit(BilibiliArchive archive) {
+    public void submit(BilibiliArchive archive, String str_time) {
+
+
+//        ONode node = ONode.newObject();
+//        //是否开启稿件预约 0: 不开启 1: 开启
+//        node.set("act_reserve_create", 0);
+//        //是否开启杜比音效? 0: 关闭 1: 开启
+//        node.set("dolby", 0);
+//        node.set("interactive", 0);
+//        //参加的任务id
+//        node.set("mission_id", null);
+//        node.set("no_disturbance", 0);
+//        //参加的话题id
+//        node.set("topic_id", null);
+//        //{from_topic_id: 3221, from_source: "arc.web.recommend"}
+//        node.set("topic_detail", null);
+//
+//        //互动设置
+//        //关闭弹幕
+//        node.set("up_close_danmu", false);
+//        //关闭评论(与 开启精选评论 不可同时选择)
+//        node.set("up_close_reply", false);
+//        //开启精选评论(与 关闭评论 不可同时选择)
+//        node.set("up_selection_reply", false);
         ONode node = ONode.newObject();
-        //是否开启稿件预约 0: 不开启 1: 开启
-        node.set("act_reserve_create", 0);
-        //是否开启杜比音效? 0: 关闭 1: 开启
-        node.set("dolby", 0);
-        node.set("interactive", 0);
-        //参加的任务id
-        node.set("mission_id", null);
-        node.set("no_disturbance", 0);
-        //参加的话题id
-        node.set("topic_id", null);
-        //{from_topic_id: 3221, from_source: "arc.web.recommend"}
-        node.set("topic_detail", null);
+        //稿件标题 必填
+        node.set("title", archive.getTitle());
+        //稿件分区id 必填
+        node.set("tid", archive.getVideoTypeId());
+        //稿件来源类型 1: 自制 2: 转载 必填
+        node.set("copyright", archive.getCopyright());
+        if (archive.getCopyright() == 2) {
+            node.set("source", archive.getSource());
+        }
+        //稿件Tag 必填
+        node.set("tag", archive.getTag());
+        //启用未经作者授权 禁止转载? 0: 不启用 1: 启用
+        node.set("no_reprint", archive.getNoReprint());
+        node.set("desc_format_id", archive.getDescriptionFormatId());
+        ONode node1 = ONode.newArray();
+        for (BilibiliArchiveVideo video : archive.getVideos()) {
+            ONode videoNode = ONode.newObject();
+            //必填
+            videoNode.set("filename", video.getFilename());
+            videoNode.set("title", video.getTitle());
+            videoNode.set("desc", video.getDescription());
+            node1.addNode(videoNode);
+        }
+        node.set("videos", node1);
+        if (null != str_time) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime parse = LocalDateTime.parse(str_time, formatter);
+            System.out.println(parse);
+            long l = parse.toInstant(ZoneOffset.ofHours(8)).toEpochMilli() / 1000;
+            node.set("dtime", l);
+        }
 
-        //互动设置
-        //关闭弹幕
-        node.set("up_close_danmu", false);
-        //关闭评论(与 开启精选评论 不可同时选择)
-        node.set("up_close_reply", false);
-        //开启精选评论(与 关闭评论 不可同时选择)
-        node.set("up_selection_reply", false);
-
+        //SUBMIT_ARCHIVE
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.SUBMIT_ARCHIVE)
+                .addParam("csrf", loginInfo.getCsrf())
+                .postJson(node.toString())
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result);
     }
 
     /**
@@ -309,6 +355,7 @@ public class ArchiveApi implements IArchive {
         });
         return containerTwoList;
     }
+
 
     private List<BilibiliArchiveVideo> getArchiveAllParts(Integer aid, String bvid) {
         Request request = BiliRequestFactor.getBiliRequest()

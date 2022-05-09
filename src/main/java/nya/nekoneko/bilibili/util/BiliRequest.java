@@ -116,6 +116,12 @@ public class BiliRequest {
         return this;
     }
 
+    /**
+     * APP用
+     *
+     * @param loginInfo
+     * @return
+     */
     public BiliRequest appSign(BilibiliLoginInfo loginInfo) {
         if (null != loginInfo) {
             String sign = getSign(paramMap, "560c52ccd288fed045859ed18bffd973");
