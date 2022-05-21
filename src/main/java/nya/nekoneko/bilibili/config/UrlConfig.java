@@ -152,5 +152,17 @@ public class UrlConfig {
      * APP开屏图片
      */
     public static final String GET_APP_SPLASH = "http://app.bilibili.com/x/v2/splash/brand/list";
+    /**
+     * 漫画详情
+     */
+    public static final String MANGA_DETAIL = "https://manga.bilibili.com/twirp/comic.v1.Comic/ComicDetail";
+    /**
+     * 获取章节图片信息
+     */
+    public static final String GET_MANGA_IMAGE_INDEX = "https://manga.bilibili.com/twirp/comic.v1.Comic/GetImageIndex";
+    /**
+     * 获取图片token
+     */
+    public static final String GET_IMAGE_TOKEN = "https://manga.bilibili.com/twirp/comic.v1.Comic/ImageToken";
 
 }
