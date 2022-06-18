@@ -164,5 +164,8 @@ public class UrlConfig {
      * 获取图片token
      */
     public static final String GET_IMAGE_TOKEN = "https://manga.bilibili.com/twirp/comic.v1.Comic/ImageToken";
-
+    /**
+     * (漫画)获取赛季信息
+     */
+    public static final String GET_SEASON_INFO = "https://manga.bilibili.com/twirp/user.v1.Season/GetSeasonInfo";
 }

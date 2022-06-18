@@ -9,6 +9,7 @@ import nya.nekoneko.bilibili.model.manga.BilibiliMangaClockInInfo;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaDetail;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaImageData;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaShopItem;
+import nya.nekoneko.bilibili.model.manga.season.BilibiliMangaSeasonInfo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
 import nya.nekoneko.bilibili.util.PrintUtil;
@@ -58,6 +59,7 @@ public class MangaApi implements IManga {
         }
     }
 
+    @Deprecated
     @Override
     public BilibiliMangaClockInInfo getClockInInfo() {
         Request request = BiliRequestFactor.getBiliRequest()
@@ -67,6 +69,20 @@ public class MangaApi implements IManga {
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         return result.getData().toObject(BilibiliMangaClockInInfo.class);
+    }
+
+    @Override
+    public BilibiliMangaSeasonInfo getSeasonInfo() {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_SEASON_INFO)
+                .addParam("device", "h5")
+                .addParam("platform", "web")
+                .postForm(new HashMap<>())
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result.getData().toJson());
+        return null;
     }
 
     @Override

@@ -4,6 +4,7 @@ import nya.nekoneko.bilibili.model.manga.BilibiliMangaClockInInfo;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaDetail;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaImageData;
 import nya.nekoneko.bilibili.model.manga.BilibiliMangaShopItem;
+import nya.nekoneko.bilibili.model.manga.season.BilibiliMangaSeasonInfo;
 
 import java.util.List;
 
@@ -23,7 +24,10 @@ public interface IManga {
      *
      * @return
      */
+    @Deprecated
     BilibiliMangaClockInInfo getClockInInfo();
+
+    BilibiliMangaSeasonInfo getSeasonInfo();
 
     /**
      * @return

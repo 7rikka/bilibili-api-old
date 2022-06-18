@@ -17,6 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Deprecated
 public class BilibiliMangaClockInInfo {
     /**
      * 连续签到天数
