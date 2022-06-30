@@ -112,7 +112,7 @@ public class MangaApi implements IManga {
     @Override
     public boolean exchangeProduct(int productId, int productNum, int point) {
         Request request = BiliRequestFactor.getBiliRequest()
-                .url(UrlConfig.MANGA_DETAIL)
+                .url(UrlConfig.EXECHANGE_PRODUCT)
                 .postForm(new HashMap<>() {{
                     put("product_id", productId);
                     put("product_num", productNum);
