@@ -37,4 +37,13 @@ public class BilibiliLoginInfo {
      * 更新时间
      */
     private LocalDateTime updateTime;
+
+    public String getSESSDATA() {
+        return SESSDATA;
+    }
+
+    public BilibiliLoginInfo setSESSDATA(String SESSDATA) {
+        this.SESSDATA = SESSDATA.replace(",", "%2C").replace("*", "%2A");
+        return this;
+    }
 }

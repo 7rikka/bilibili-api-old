@@ -138,7 +138,7 @@ public class ArchiveApi implements IArchive {
     }
 
     @Override
-    public void submit(BilibiliArchive archive, String str_time) {
+    public void submit(BilibiliArchive archive, String strTime) {
 
 
 //        ONode node = ONode.newObject();
@@ -187,9 +187,9 @@ public class ArchiveApi implements IArchive {
             node1.addNode(videoNode);
         }
         node.set("videos", node1);
-        if (null != str_time) {
+        if (null != strTime) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime parse = LocalDateTime.parse(str_time, formatter);
+            LocalDateTime parse = LocalDateTime.parse(strTime, formatter);
             System.out.println(parse);
             long l = parse.toInstant(ZoneOffset.ofHours(8)).toEpochMilli() / 1000;
             node.set("dtime", l);
@@ -202,6 +202,82 @@ public class ArchiveApi implements IArchive {
                 .postJson(node.toString())
                 .cookie(loginInfo)
                 .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result);
+    }
+
+    /**
+     * 提交稿件
+     * （只提供基础功能）
+     *
+     * @param archive
+     */
+    @Override
+    public void submit(BilibiliArchive archive) {
+        submit(archive, null);
+    }
+
+    /**
+     * 提交稿件(App端)
+     * （只提供基础功能）
+     *
+     * @param archive
+     */
+    @Override
+    public void submitWithApp(BilibiliArchive archive) {
+        submitWithApp(archive, null);
+    }
+
+    /**
+     * 提交稿件(App端)
+     * （只提供基础功能）
+     *
+     * @param archive
+     * @param strTime
+     */
+    @Override
+    public void submitWithApp(BilibiliArchive archive, String strTime) {
+        ONode node = ONode.newObject();
+        //稿件标题 必填
+        node.set("title", archive.getTitle());
+        //稿件分区id 必填
+        node.set("tid", archive.getVideoTypeId());
+        //稿件来源类型 1: 自制 2: 转载 必填
+        node.set("copyright", archive.getCopyright());
+        if (archive.getCopyright() == 2) {
+            node.set("source", archive.getSource());
+        }
+        //稿件Tag 必填
+        node.set("tag", archive.getTag());
+        //启用未经作者授权 禁止转载? 0: 不启用 1: 启用
+        node.set("no_reprint", archive.getNoReprint());
+        node.set("desc_format_id", archive.getDescriptionFormatId());
+        ONode node1 = ONode.newArray();
+        for (BilibiliArchiveVideo video : archive.getVideos()) {
+            ONode videoNode = ONode.newObject();
+            //必填
+            videoNode.set("filename", video.getFilename());
+            videoNode.set("title", video.getTitle());
+            videoNode.set("desc", video.getDescription());
+            node1.addNode(videoNode);
+        }
+        node.set("videos", node1);
+        if (null != strTime) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime parse = LocalDateTime.parse(strTime, formatter);
+            System.out.println(parse);
+            long l = parse.toInstant(ZoneOffset.ofHours(8)).toEpochMilli() / 1000;
+            System.out.println(l);
+            node.set("dtime", l);
+        }
+
+        //提交稿件
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.SUBMIT_ARCHIVE_APP)
+                .postJson(node.toString())
+                .appSign(loginInfo)
+                .buildRequest();
+        System.out.println(request);
         BiliResult result = Call.doCall(request);
         System.out.println(result);
     }

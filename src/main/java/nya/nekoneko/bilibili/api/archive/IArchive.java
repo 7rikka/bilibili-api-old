@@ -53,7 +53,25 @@ public interface IArchive {
      * 提交稿件
      * （只提供基础功能）
      */
-    void submit(BilibiliArchive archive, String str_time);
+    void submit(BilibiliArchive archive, String strTime);
+
+    /**
+     * 提交稿件
+     * （只提供基础功能）
+     */
+    void submit(BilibiliArchive archive);
+
+    /**
+     * 提交稿件(App端)
+     * （只提供基础功能）
+     */
+    void submitWithApp(BilibiliArchive archive);
+
+    /**
+     * 提交稿件(App端)
+     * （只提供基础功能）
+     */
+    void submitWithApp(BilibiliArchive archive, String strTime);
 
     /**
      * 修改稿件
