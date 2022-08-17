@@ -46,12 +46,14 @@ public class Call {
             if (null == body) {
                 throw new RequestException(request, response, "Body为空");
             }
+            BiliRequestHandler.process(response.headers());
             return body.string().strip();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RequestException(request, null, e.getMessage());
         }
     }
+
     public static byte[] doCallGetBytes(Request request) {
         try {
             Response response = client.newCall(request).execute();
@@ -69,6 +71,7 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
+
     public static String doCallGetHeader(Request request, String headerName) {
         try {
             Response response = client.newCall(request).execute();
