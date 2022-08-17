@@ -73,4 +73,14 @@ public interface IManga {
     List<String> getImageUrl(List<String> urls);
 
     List<BilibiliMangaCoupon> getCouponList();
+
+    /**
+     * 购买章节
+     *
+     * @param epId      漫画章节id
+     * @param buyMethod 购买方式 2：漫读券 5：通用券
+     * @param couponId  漫读券id
+     * @return
+     */
+    boolean buyEpisode(int epId, int buyMethod, int couponId);
 }
