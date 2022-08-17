@@ -1,9 +1,6 @@
 package nya.nekoneko.bilibili.api.manga;
 
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaClockInInfo;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaDetail;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaImageData;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaShopItem;
+import nya.nekoneko.bilibili.model.manga.*;
 import nya.nekoneko.bilibili.model.manga.season.BilibiliMangaSeasonInfo;
 
 import java.util.List;
@@ -74,4 +71,6 @@ public interface IManga {
     String getImageUrl(String url);
 
     List<String> getImageUrl(List<String> urls);
+
+    List<BilibiliMangaCoupon> getCouponList();
 }

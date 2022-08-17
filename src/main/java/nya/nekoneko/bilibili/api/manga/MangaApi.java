@@ -5,10 +5,7 @@ import nya.nekoneko.bilibili.config.UrlConfig;
 import nya.nekoneko.bilibili.exception.RequestException;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaClockInInfo;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaDetail;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaImageData;
-import nya.nekoneko.bilibili.model.manga.BilibiliMangaShopItem;
+import nya.nekoneko.bilibili.model.manga.*;
 import nya.nekoneko.bilibili.model.manga.season.BilibiliMangaSeasonInfo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
@@ -141,6 +138,7 @@ public class MangaApi implements IManga {
         }}).toString();
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.MANGA_DETAIL)
+                .addParam("access_key", loginInfo.getAccessKey())
                 .addParam("device", "android")
                 .postJson(s)
                 .buildRequest();
@@ -237,5 +235,26 @@ public class MangaApi implements IManga {
             urlList.add(url1 + "?token=" + token);
         });
         return urlList;
+    }
+
+    /**
+     * 获取漫读券列表
+     *
+     * @return
+     */
+    @Override
+    public List<BilibiliMangaCoupon> getCouponList() {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_COUPON_LIST)
+                .addParam("access_key", loginInfo.getAccessKey())
+                .postJson(ONode.load(new HashMap<String, Object>() {{
+                    put("pageNum", 1);
+                    put("pageSize", 20);
+                    put("notExpired", true);
+                }}).toString())
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        System.out.println(result.toString());
+        return result.getData().get("user_coupons").toObjectList(BilibiliMangaCoupon.class);
     }
 }

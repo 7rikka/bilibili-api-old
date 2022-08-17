@@ -176,4 +176,8 @@ public class UrlConfig {
      * (漫画)获取赛季信息
      */
     public static final String GET_SEASON_INFO = "https://manga.bilibili.com/twirp/user.v1.Season/GetSeasonInfo";
+    /**
+     * (漫画)获取漫读券列表
+     */
+    public static final String GET_COUPON_LIST = "https://manga.bilibili.com/twirp/user.v1.User/GetCoupons";
 }
