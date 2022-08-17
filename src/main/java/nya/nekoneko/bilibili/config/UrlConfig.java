@@ -180,4 +180,8 @@ public class UrlConfig {
      * (漫画)获取漫读券列表
      */
     public static final String GET_COUPON_LIST = "https://manga.bilibili.com/twirp/user.v1.User/GetCoupons";
+    /**
+     * (漫画)购买漫画章节
+     */
+    public static final String BUY_MANGA_EPISODE = "https://manga.bilibili.com/twirp/comic.v1.Comic/BuyEpisode";
 }

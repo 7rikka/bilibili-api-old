@@ -21,7 +21,6 @@ public interface IManga {
      *
      * @return
      */
-    @Deprecated
     BilibiliMangaClockInInfo getClockInInfo();
 
     BilibiliMangaSeasonInfo getSeasonInfo();

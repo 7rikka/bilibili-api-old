@@ -56,7 +56,6 @@ public class MangaApi implements IManga {
         }
     }
 
-    @Deprecated
     @Override
     public BilibiliMangaClockInInfo getClockInInfo() {
         Request request = BiliRequestFactor.getBiliRequest()
@@ -138,9 +137,11 @@ public class MangaApi implements IManga {
         }}).toString();
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.MANGA_DETAIL)
-                .addParam("access_key", loginInfo.getAccessKey())
-                .addParam("device", "android")
+//                .addParam("access_key", loginInfo.getAccessKey())
+                .addParam("device", "pc")
+                .addParam("platform", "web")
                 .postJson(s)
+                .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
         if (0 == result.getCode()) {
@@ -246,15 +247,43 @@ public class MangaApi implements IManga {
     public List<BilibiliMangaCoupon> getCouponList() {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.GET_COUPON_LIST)
-                .addParam("access_key", loginInfo.getAccessKey())
                 .postJson(ONode.load(new HashMap<String, Object>() {{
                     put("pageNum", 1);
                     put("pageSize", 20);
                     put("notExpired", true);
                 }}).toString())
+                .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCall(request);
-        System.out.println(result.toString());
         return result.getData().get("user_coupons").toObjectList(BilibiliMangaCoupon.class);
+    }
+
+    /**
+     * 购买章节
+     *
+     * @param epId      漫画章节id
+     * @param buyMethod 购买方式 2：漫读券 5：通用券
+     * @param couponId  漫读券id
+     * @return
+     */
+    @Override
+    public boolean buyEpisode(int epId, int buyMethod, int couponId) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.BUY_MANGA_EPISODE)
+                .postJson(ONode.load(new HashMap<String, Object>() {{
+                    put("epId", epId);
+                    put("buyMethod", buyMethod);
+                    put("couponId", couponId);
+                    put("autoPayGoldStatus", 2);
+                    put("isPresale", 0);
+                }}).toString())
+                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCall(request);
+        if (0 == result.getCode()) {
+            return true;
+        }
+        PrintUtil.error("购买epId:" + epId + " result: " + result);
+        return false;
     }
 }
