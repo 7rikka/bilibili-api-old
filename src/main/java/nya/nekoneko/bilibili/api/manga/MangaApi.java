@@ -270,6 +270,8 @@ public class MangaApi implements IManga {
     public boolean buyEpisode(int epId, int buyMethod, int couponId) {
         Request request = BiliRequestFactor.getBiliRequest()
                 .url(UrlConfig.BUY_MANGA_EPISODE)
+                .addParam("device", "pc")
+                .addParam("platform", "web")
                 .postJson(ONode.load(new HashMap<String, Object>() {{
                     put("epId", epId);
                     put("buyMethod", buyMethod);

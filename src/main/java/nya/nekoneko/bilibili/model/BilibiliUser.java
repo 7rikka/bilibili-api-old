@@ -22,7 +22,7 @@ public class BilibiliUser {
      * 数字uid
      */
     @ONodeAttr(name = "id")
-    private Integer id;
+    private Long id;
     /**
      * hash
      */
