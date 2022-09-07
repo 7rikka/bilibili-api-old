@@ -10,15 +10,19 @@ import java.time.LocalDateTime;
 @Data
 public class BilibiliLoginInfo {
     /**
-     * 用户UID
+     * 用户UID (DedeUserID)
      */
     private Integer uid;
+    /**
+     * DedeUserID__ckMd5
+     */
+    private String uidCkMd5;
     /**
      * SESSDATA
      */
     private String SESSDATA;
     /**
-     * bili_jct
+     * csrf (bili_jct)
      */
     private String csrf;
     /**
@@ -29,6 +33,10 @@ public class BilibiliLoginInfo {
      * 登录状态可用性
      */
     private Boolean isAvailable;
+    /**
+     * 过期时间
+     */
+    private LocalDateTime expiresTime;
     /**
      * 创建时间
      */
@@ -43,7 +51,9 @@ public class BilibiliLoginInfo {
     }
 
     public BilibiliLoginInfo setSESSDATA(String SESSDATA) {
-        this.SESSDATA = SESSDATA.replace(",", "%2C").replace("*", "%2A");
+        this.SESSDATA = SESSDATA
+                .replace(",", "%2C")
+                .replace("*", "%2A");
         return this;
     }
 }

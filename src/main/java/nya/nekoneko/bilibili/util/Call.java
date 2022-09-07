@@ -85,4 +85,21 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
+
+    public static Response doCallGetResponse(Request request) {
+        try {
+            Response response = client.newCall(request).execute();
+            if (SUCCESS != response.code()) {
+                String body = null;
+                if (null != response.body()) {
+                    body = response.body().string();
+                }
+                throw new RequestException(request, response, "HTTP CODE: " + response.code(), body);
+            }
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RequestException(request, null, e.getMessage());
+        }
+    }
 }
