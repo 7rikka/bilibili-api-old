@@ -6,12 +6,15 @@ import nya.nekoneko.bilibili.model.BilibiliLoginQRInfo;
 import nya.nekoneko.bilibili.model.BilibiliLoginQRScanInfo;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
+import nya.nekoneko.bilibili.util.PrintUtil;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.noear.snack.ONode;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static nya.nekoneko.bilibili.config.UrlConfig.*;
 
 /**
  * @author Ho
@@ -30,9 +33,8 @@ public class LoginApi implements ILogin {
      */
     @Override
     public BilibiliLoginQRInfo getQRCode() {
-        //http://passport.bilibili.com/x/passport-login/web/qrcode/generate
         Request request = BiliRequestFactor.getBiliRequest()
-                .url("https://passport.bilibili.com/x/passport-login/web/qrcode/generate")
+                .url(GET_QR)
                 .get()
                 .buildRequest();
         BiliResult s = Call.doCall(request);
@@ -54,7 +56,7 @@ public class LoginApi implements ILogin {
     @Override
     public BilibiliLoginQRScanInfo QRLogin(String key) {
         Request request = BiliRequestFactor.getBiliRequest()
-                .url("https://passport.bilibili.com/x/passport-login/web/qrcode/poll")
+                .url(GET_QR_SCAN_RESULT)
                 .addParam("qrcode_key", key)
                 .get()
                 .buildRequest();
@@ -80,6 +82,33 @@ public class LoginApi implements ILogin {
             return info;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    /**
+     * 退出登录
+     */
+    @Override
+    public void logout() {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(LOGOUT_URL)
+                .postForm(Map.of("biliCSRF", loginInfo.getCsrf()))
+                .cookie(loginInfo)
+                .buildRequest();
+        String result = Call.doCallGetString(request);
+        if (result.contains("如果你的浏览器没反应，请点击这里...")) {
+            //已经退出了
+            PrintUtil.error("已经处于未登录状态!");
+            return;
+        }
+        BiliResult biliResult = ONode.deserialize(result, BiliResult.class);
+        if (0 == biliResult.getCode()) {
+            //退出成功
+            loginInfo.setCsrf(null);
+            loginInfo.setSESSDATA(null);
+            PrintUtil.error("退出登录成功!");
+        } else {
+            PrintUtil.error("退出失败! 返回: " + result);
         }
     }
 

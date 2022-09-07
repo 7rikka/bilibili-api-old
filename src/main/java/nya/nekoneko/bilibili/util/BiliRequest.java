@@ -19,8 +19,8 @@ public class BiliRequest {
     private static final MediaType XML = MediaType.parse("application/xml");
     private static final MediaType OCTET_STREAM = MediaType.parse("application/octet-stream");
     private final Request.Builder builder = new Request.Builder();
-    private String url;
     private final Map<String, String> paramMap = new HashMap<>();
+    private String url;
 
     public BiliRequest url(String url) {
 //        builder.url(url);
@@ -110,7 +110,7 @@ public class BiliRequest {
 
     public BiliRequest cookie(BilibiliLoginInfo loginInfo) {
         if (null != loginInfo) {
-            String cookie = "SESSDATA=" + loginInfo.getSESSDATA() + "; ";
+            String cookie = "DedeUserID=" + loginInfo.getUid() + "; SESSDATA=" + loginInfo.getSESSDATA() + "; bili_jct=" + loginInfo.getCsrf();
             builder.header("Cookie", cookie);
         }
         return this;

@@ -51,9 +51,11 @@ public class BilibiliLoginInfo {
     }
 
     public BilibiliLoginInfo setSESSDATA(String SESSDATA) {
-        this.SESSDATA = SESSDATA
-                .replace(",", "%2C")
-                .replace("*", "%2A");
+        if (null != SESSDATA) {
+            this.SESSDATA = SESSDATA
+                    .replace(",", "%2C")
+                    .replace("*", "%2A");
+        }
         return this;
     }
 }

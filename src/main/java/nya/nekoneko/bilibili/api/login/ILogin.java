@@ -24,4 +24,9 @@ public interface ILogin {
      * @param key 验证码key
      */
     BilibiliLoginQRScanInfo QRLogin(String key);
+
+    /**
+     * 退出登录
+     */
+    void logout();
 }

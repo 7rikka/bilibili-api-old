@@ -184,4 +184,16 @@ public class UrlConfig {
      * (漫画)购买漫画章节
      */
     public static final String BUY_MANGA_EPISODE = "https://manga.bilibili.com/twirp/comic.v1.Comic/BuyEpisode";
+    /**
+     * 退出登录
+     */
+    public static final String LOGOUT_URL = "https://passport.bilibili.com/login/exit/v2";
+    /**
+     * 获取二维码扫描结果
+     */
+    public static final String GET_QR_SCAN_RESULT = "https://passport.bilibili.com/x/passport-login/web/qrcode/poll";
+    /**
+     * 获取登录二维码
+     */
+    public static final String GET_QR = "https://passport.bilibili.com/x/passport-login/web/qrcode/generate";
 }
