@@ -196,4 +196,8 @@ public class UrlConfig {
      * 获取登录二维码
      */
     public static final String GET_QR = "https://passport.bilibili.com/x/passport-login/web/qrcode/generate";
+    /**
+     * 获取视频播放流
+     */
+    public static final String GET_VIDEO_URL = "https://api.bilibili.com/x/player/playurl";
 }
