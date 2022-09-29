@@ -9,6 +9,7 @@ import okhttp3.ResponseBody;
 import org.noear.snack.ONode;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.Duration;
 
 /**
@@ -25,7 +26,6 @@ public class Call {
 //        client.dispatcher().setMaxRequestsPerHost(16);
 //        client.dispatcher().setMaxRequests(16);
 //    }
-
     public static BiliResult doCall(Request request) {
         String result = doCallGetString(request);
 //        System.out.println(result);
@@ -57,7 +57,7 @@ public class Call {
     public static byte[] doCallGetBytes(Request request) {
         try {
             Response response = client.newCall(request).execute();
-            if (200 != response.code()) {
+            if (200 != response.code() && 206 != response.code()) {
                 System.out.println(response.body().string());
                 throw new RequestException(request, response, "HTTP CODE: " + response.code());
             }
@@ -66,6 +66,24 @@ public class Call {
                 throw new RequestException(request, response, "Body为空");
             }
             return body.bytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RequestException(request, null, e.getMessage());
+        }
+    }
+
+    public static InputStream doCallGetInputStream(Request request) {
+        try {
+            Response response = client.newCall(request).execute();
+            if (200 != response.code() && 206 != response.code()) {
+                System.out.println(response.body().string());
+                throw new RequestException(request, response, "HTTP CODE: " + response.code());
+            }
+            ResponseBody body = response.body();
+            if (null == body) {
+                throw new RequestException(request, response, "Body为空");
+            }
+            return body.byteStream();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RequestException(request, null, e.getMessage());

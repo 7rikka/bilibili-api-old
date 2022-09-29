@@ -124,8 +124,21 @@ public class BiliRequest {
      */
     public BiliRequest appSign(BilibiliLoginInfo loginInfo) {
         if (null != loginInfo) {
-            addParam("access_key", loginInfo.getAccessKey());
+            if (null != loginInfo.getAccessKey()) {
+                addParam("access_key", loginInfo.getAccessKey());
+            }
             String sign = getSign(paramMap, "560c52ccd288fed045859ed18bffd973");
+            addParam("sign", sign);
+        }
+        return this;
+    }
+
+    public BiliRequest appSign(BilibiliLoginInfo loginInfo, String appSecret) {
+        if (null != loginInfo) {
+            if (null != loginInfo.getAccessKey()) {
+                addParam("access_key", loginInfo.getAccessKey());
+            }
+            String sign = getSign(paramMap, appSecret);
             addParam("sign", sign);
         }
         return this;
