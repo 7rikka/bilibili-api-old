@@ -37,11 +37,7 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "sex")
     private String sex;
-    /**
-     * 签名
-     */
-    @ONodeAttr(name = "sign")
-    private String sign;
+
     /**
      * 头像
      */
@@ -59,6 +55,11 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "face_nft_type")
     private Integer faceNftType;
+    /**
+     * 签名
+     */
+    @ONodeAttr(name = "sign")
+    private String sign;
     /**
      * 账号权限
      */
@@ -106,61 +107,21 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "fans_medal")
     private BilibiliFansMedal fansMedal;
-
-    /**
-     * 空间头图
-     */
-    @ONodeAttr(name = "top_photo")
-    private String topPhoto;
-    /**
-     *
-     */
-    @ONodeAttr(name = "birthday")
-    private String birthday;
-    /**
-     * 是否为硬核会员
-     * 0: 否
-     * 1: 是
-     */
-    @ONodeAttr(name = "is_senior_member")
-    private Integer isSeniorMember;
-    /**
-     * 个人tag
-     */
-    @ONodeAttr(name = "tags")
-    private List<String> tags;
-    /**
-     * 是否给我充过电
-     * 0:
-     * 1: 充过
-     */
-    @ONodeAttr(name = "is_elec")
-    private Integer isElec;
     /**
      * 认证信息
      */
     @ONodeAttr(name = "official_verify")
     private BilibiliOfficialVerify officialVerify;
     /**
-     * 头像框
-     */
-    @ONodeAttr(name = "pendant")
-    private BilibiliPendant pendant;
-    /**
      * 大会员信息
      */
     @ONodeAttr(name = "vip_info")
     private BilibiliVipInfo vipInfo;
     /**
-     *
+     * 头像框
      */
-    @ONodeAttr(name = "school_name")
-    private String schoolName;
-    /**
-     * 直播间信息
-     */
-    @ONodeAttr(name = "live_room")
-    private BilibiliLiveRoom liveRoom;
+    @ONodeAttr(name = "pendant")
+    private BilibiliPendant pendant;
     /**
      * 成就勋章
      */
@@ -171,22 +132,65 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "honour_info")
     private BilibiliUserHonourInfo honourInfo;
-
+    /**
+     * 空间头图
+     */
+    @ONodeAttr(name = "top_photo")
+    private String topPhoto;
+    /**
+     *
+     */
+    @ONodeAttr(name = "theme")
+    private String theme;
     /**
      *
      */
     @ONodeAttr(name = "sys_notice")
     private BilibiliSysNotice sysNotice;
     /**
+     * 直播间信息
+     */
+    @ONodeAttr(name = "live_room")
+    private BilibiliLiveRoom liveRoom;
+    /**
+     *
+     */
+    @ONodeAttr(name = "birthday")
+    private String birthday;
+    /**
+     *
+     */
+    @ONodeAttr(name = "school_name")
+    private String schoolName;
+    /**
      *
      */
     @ONodeAttr(name = "profession")
     private BilibiliProfession profession;
     /**
+     * 个人tag
+     */
+    @ONodeAttr(name = "tags")
+    private List<String> tags;
+    /**
      *
      */
     @ONodeAttr(name = "series")
     private BilibiliUserSeries series;
+    /**
+     * 是否为硬核会员
+     * 0: 否
+     * 1: 是
+     */
+    @ONodeAttr(name = "is_senior_member")
+    private Integer isSeniorMember;
+    /**
+     * 是否给我充过电
+     * 0:
+     * 1: 充过
+     */
+    @ONodeAttr(name = "is_elec")
+    private Integer isElec;
 //    /**
 //     *
 //     */
@@ -219,11 +223,6 @@ public class BilibiliUser {
     @ONodeAttr(name = "is_followed")
     private Boolean isFollowed;
     //=============================================================
-    /**
-     *
-     */
-    @ONodeAttr(name = "theme")
-    private String theme;
     @ONodeAttr(name = "mcnInfo")
     private String mcn_info;
     @ONodeAttr(name = "gaiaResType")

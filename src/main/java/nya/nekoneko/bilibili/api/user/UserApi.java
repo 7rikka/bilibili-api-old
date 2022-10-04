@@ -62,8 +62,6 @@ public class UserApi implements IUser {
         data.get("pendant").rename("pid", "id");
         data.get("nameplate").rename("nid", "id");
         System.out.println(data.toString());
-        BilibiliUser o = data.toObject(BilibiliUser.class);
-        System.out.println(o);
-        return null;
+        return data.toObject(BilibiliUser.class);
     }
 }

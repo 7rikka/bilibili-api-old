@@ -48,6 +48,11 @@ public class BilibiliVipInfo {
     /**
      *
      */
+    @ONodeAttr(name = "label")
+    private BilibiliVipLabel label;
+    /**
+     *
+     */
     @ONodeAttr(name = "avatar_subscript")
     private Integer avatarSubscript;
     /**
@@ -60,39 +65,35 @@ public class BilibiliVipInfo {
      */
     @ONodeAttr(name = "role")
     private Integer role;
-    /**
-     *
-     */
-    @ONodeAttr(name = "status_warn")
-    private String statusWarn;
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "status_warn")
+//    private String statusWarn;
     /**
      * 大会员图标角标地址
      */
     @ONodeAttr(name = "avatar_subscript_url")
     private String avatarSubscriptUrl;
-    /**
-     *
-     */
-    @ONodeAttr(name = "label")
-    private BilibiliVipLabel label;
-    /**
-     *
-     */
-    @ONodeAttr(name = "due_remark")
-    private String dueRemark;
-    /**
-     *
-     */
-    @ONodeAttr(name = "access_status")
-    private Integer accessStatus;
+
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "due_remark")
+//    private String dueRemark;
+//    /**
+//     *
+//     */
+//    @ONodeAttr(name = "access_status")
+//    private Integer accessStatus;
     /**
      * 电视大会员状态
      */
-    @ONodeAttr(name = "tvVipStatus")
-    private Integer tv_vip_status;
+    @ONodeAttr(name = "tv_vip_status")
+    private Integer tvVipStatus;
     /**
      * 电视大会员支付类型
      */
-    @ONodeAttr(name = "tvVipPayType")
-    private Integer tv_vip_pay_type;
+    @ONodeAttr(name = "tv_vip_pay_type")
+    private Integer tvVipPayType;
 }

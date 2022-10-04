@@ -25,6 +25,8 @@ public class BiliResult {
      */
     private String msg;
 
+    private String raw;
+
     /**
      * 获取数据 对象
      *

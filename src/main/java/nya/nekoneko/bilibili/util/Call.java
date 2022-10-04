@@ -157,7 +157,10 @@ public class Call {
                 throw new RequestException(request, response, "Body为空");
             }
             BiliRequestHandler.process(response.headers());
-            return ONode.deserialize(body.string().strip(), BiliResult.class);
+            String result = body.string().strip();
+            BiliResult biliResult = ONode.deserialize(result, BiliResult.class);
+            biliResult.setRaw(result);
+            return biliResult;
         } catch (IOException e) {
             e.printStackTrace();
             throw new RequestException(request, null, e.getMessage());
