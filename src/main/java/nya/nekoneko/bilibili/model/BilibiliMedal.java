@@ -62,6 +62,11 @@ public class BilibiliMedal {
     @ONodeAttr(name = "day_limit")
     private Integer dayLimit;
     /**
+     * 今日已获得亲密度
+     */
+    @ONodeAttr(name = "today_feed")
+    private Integer todayFeed;
+    /**
      *
      */
     @ONodeAttr(name = "medal_color_start")
@@ -97,6 +102,6 @@ public class BilibiliMedal {
      *
      */
     @ONodeAttr(name = "score")
-    private Boolean score;
+    private Integer score;
 
 }

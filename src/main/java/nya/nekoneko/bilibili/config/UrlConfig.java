@@ -200,4 +200,8 @@ public class UrlConfig {
      * 获取视频播放流
      */
     public static final String GET_VIDEO_URL = "https://api.bilibili.com/x/player/playurl";
+    /**
+     * 获取用户信息
+     */
+    public static final String GET_USER_INFO = "https://api.bilibili.com/x/space/acc/info";
 }

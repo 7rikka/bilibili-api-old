@@ -85,4 +85,14 @@ public class BilibiliVipInfo {
      */
     @ONodeAttr(name = "access_status")
     private Integer accessStatus;
+    /**
+     * 电视大会员状态
+     */
+    @ONodeAttr(name = "tvVipStatus")
+    private Integer tv_vip_status;
+    /**
+     * 电视大会员支付类型
+     */
+    @ONodeAttr(name = "tvVipPayType")
+    private Integer tv_vip_pay_type;
 }

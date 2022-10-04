@@ -3,10 +3,12 @@ package nya.nekoneko.bilibili.api.user;
 import nya.nekoneko.bilibili.config.UrlConfig;
 import nya.nekoneko.bilibili.model.BiliResult;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
+import nya.nekoneko.bilibili.model.BilibiliUser;
 import nya.nekoneko.bilibili.util.BiliRequestFactor;
 import nya.nekoneko.bilibili.util.Call;
 import nya.nekoneko.bilibili.util.PrintUtil;
 import okhttp3.Request;
+import org.noear.snack.ONode;
 
 /**
  * @author Ho
@@ -39,5 +41,29 @@ public class UserApi implements IUser {
         }
         PrintUtil.info("昵称: " + name + " 不可用, 原因: " + result.getMessage() + ".");
         return false;
+    }
+
+    @Override
+    public BilibiliUser getUserInfo(Long uid) {
+        Request request = BiliRequestFactor.getBiliRequest()
+                .url(UrlConfig.GET_USER_INFO)
+                .addParam("mid", String.valueOf(uid))
+                .get()
+//                .cookie(loginInfo)
+                .buildRequest();
+        BiliResult result = Call.doCallWithProxy(request);
+        ONode data = result.getData();
+        data.rename("mid", "id");
+        data.rename("face", "avatar");
+        data.rename("official", "official_verify");
+        data.rename("vip", "vip_info");
+        data.rename("user_honour_info", "honour_info");
+        data.set("school_name", data.get("school").get("name").getRawString());
+        data.get("pendant").rename("pid", "id");
+        data.get("nameplate").rename("nid", "id");
+        System.out.println(data.toString());
+        BilibiliUser o = data.toObject(BilibiliUser.class);
+        System.out.println(o);
+        return null;
     }
 }

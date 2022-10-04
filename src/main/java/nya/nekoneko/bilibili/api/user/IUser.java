@@ -1,5 +1,7 @@
 package nya.nekoneko.bilibili.api.user;
 
+import nya.nekoneko.bilibili.model.BilibiliUser;
+
 /**
  * @author Ho
  */
@@ -11,4 +13,11 @@ public interface IUser {
      * @return true: 可用 false: 不可用
      */
     boolean checkNameAvailable(String name);
+
+    /**
+     * 获取用户信息
+     * @param uid
+     * @return
+     */
+    BilibiliUser getUserInfo(Long uid);
 }

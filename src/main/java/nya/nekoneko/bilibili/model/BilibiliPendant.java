@@ -18,7 +18,7 @@ public class BilibiliPendant {
      *
      */
     @ONodeAttr(name = "id")
-    private Integer pid;
+    private Integer id;
     /**
      *
      */

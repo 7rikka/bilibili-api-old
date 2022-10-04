@@ -15,7 +15,7 @@ public class AppUtil {
         Object[] keyArray = map.keySet().toArray();
         Arrays.sort(keyArray);
         for (Object key : keyArray) {
-            sj.add(key + "=" + map.get((String) key));
+            sj.add(key + "=" + UrlUtil.escape(map.get((String) key)));
         }
         return SecureUtil.md5(sj + appSecret);
     }

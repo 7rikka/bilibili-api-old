@@ -54,11 +54,11 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "face_nft")
     private Integer faceNft;
-//    /**
-//     * 待定
-//     */
-//    @ONodeAttr(name = "face_nft_new")
-//    private Integer faceNftNew;
+    /**
+     *
+     */
+    @ONodeAttr(name = "face_nft_type")
+    private Integer faceNftType;
     /**
      * 账号权限
      */
@@ -224,4 +224,14 @@ public class BilibiliUser {
      */
     @ONodeAttr(name = "theme")
     private String theme;
+    @ONodeAttr(name = "mcnInfo")
+    private String mcn_info;
+    @ONodeAttr(name = "gaiaResType")
+    private Integer gaia_res_type;
+    @ONodeAttr(name = "gaiaData")
+    private String gaia_data;
+    @ONodeAttr(name = "isRisk")
+    private Boolean is_risk;
+    @ONodeAttr(name = "elec")
+    private String elec;
 }

@@ -49,4 +49,29 @@ public class BilibiliVipLabel {
      */
     @ONodeAttr(name = "border_color")
     private String borderColor;
+    /**
+     *
+     */
+    @ONodeAttr(name = "use_img_label")
+    private Boolean use_img_label;
+    /**
+     *
+     */
+    @ONodeAttr(name = "img_label_uri_hans")
+    private String img_label_uri_hans;
+    /**
+     *
+     */
+    @ONodeAttr(name = "img_label_uri_hant")
+    private String img_label_uri_hant;
+    /**
+     *
+     */
+    @ONodeAttr(name = "img_label_uri_hans_static")
+    private String img_label_uri_hans_static;
+    /**
+     *
+     */
+    @ONodeAttr(name = "img_label_uri_hant_static")
+    private String img_label_uri_hant_static;
 }

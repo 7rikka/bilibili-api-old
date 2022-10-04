@@ -30,7 +30,7 @@ public class BiliRequest {
 
     public BiliRequest addParam(String key, Object value) {
         if (null != value) {
-            paramMap.put(key, String.valueOf(value));
+            paramMap.put(key, UrlUtil.unescape(String.valueOf(value)));
         }
         return this;
     }
