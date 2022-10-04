@@ -27,6 +27,8 @@ import nya.nekoneko.bilibili.api.space.ISpace;
 import nya.nekoneko.bilibili.api.space.SpaceApi;
 import nya.nekoneko.bilibili.api.upload.IUpload;
 import nya.nekoneko.bilibili.api.upload.UploadApi;
+import nya.nekoneko.bilibili.api.user.IUser;
+import nya.nekoneko.bilibili.api.user.UserApi;
 import nya.nekoneko.bilibili.api.vip.IVip;
 import nya.nekoneko.bilibili.api.vip.VipApi;
 import nya.nekoneko.bilibili.model.BilibiliLoginInfo;
@@ -54,6 +56,8 @@ public class BilibiliClient {
     public IElectric electric;
     public IManga manga;
     public IApp app;
+
+    public IUser user;
 
 
     public BilibiliClient() {
@@ -85,5 +89,6 @@ public class BilibiliClient {
         this.electric = new ElectricApi(loginInfo);
         this.manga = new MangaApi(loginInfo);
         this.app = new AppApi(loginInfo);
+        this.user = new UserApi(loginInfo);
     }
 }

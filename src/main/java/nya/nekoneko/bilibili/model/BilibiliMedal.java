@@ -20,12 +20,12 @@ public class BilibiliMedal {
      * 此用户uid
      */
     @ONodeAttr(name = "uid")
-    private Integer uid;
+    private Long uid;
     /**
      * 粉丝勋章所属UP的uid
      */
     @ONodeAttr(name = "target_id")
-    private Integer targetId;
+    private Long targetId;
     /**
      * 粉丝勋章id
      */

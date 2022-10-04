@@ -1,6 +1,7 @@
 package nya.nekoneko.bilibili.util;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import nya.nekoneko.bilibili.exception.RequestException;
 import nya.nekoneko.bilibili.model.BiliResult;
 import okhttp3.OkHttpClient;
@@ -19,6 +20,7 @@ import java.time.Duration;
  * 发起网络请求
  */
 @Data
+@Slf4j
 public class Call {
     private static final OkHttpClient client = new OkHttpClient().newBuilder()
             .readTimeout(Duration.ofSeconds(100))
@@ -132,19 +134,21 @@ public class Call {
     }
 
     public static BiliResult doCallWithProxy(Request request) {
-        String proxy = proxyProvider.getProxy();
-        String[] split = proxy.split(":");
-        String ip = split[0];
-        Integer port = Integer.valueOf(split[1]);
-
-        OkHttpClient client = new OkHttpClient().newBuilder()
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
                 .readTimeout(Duration.ofSeconds(100))
                 .connectTimeout(Duration.ofSeconds(100))
-                .callTimeout(Duration.ofSeconds(100))
-                .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip,port)))
-                .build();
+                .callTimeout(Duration.ofSeconds(100));
+        String proxy = proxyProvider.getProxy();
+        if (null != proxy) {
+            String[] split = proxy.split(":");
+            String ip = split[0];
+            int port = Integer.parseInt(split[1]);
+            log.info("使用代理: {}",proxy);
+            builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
+        }
+        OkHttpClient client1 = builder.build();
         try {
-            Response response = client.newCall(request).execute();
+            Response response = client1.newCall(request).execute();
             if (SUCCESS != response.code()) {
                 String body = null;
                 if (null != response.body()) {

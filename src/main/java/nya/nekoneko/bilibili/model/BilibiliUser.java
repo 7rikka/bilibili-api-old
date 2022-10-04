@@ -26,6 +26,7 @@ public class BilibiliUser {
     /**
      * hash
      */
+    @ONodeAttr(name = "hash")
     private String hash;
     /**
      * 用户名
@@ -223,14 +224,14 @@ public class BilibiliUser {
     @ONodeAttr(name = "is_followed")
     private Boolean isFollowed;
     //=============================================================
-    @ONodeAttr(name = "mcnInfo")
-    private String mcn_info;
-    @ONodeAttr(name = "gaiaResType")
-    private Integer gaia_res_type;
-    @ONodeAttr(name = "gaiaData")
-    private String gaia_data;
-    @ONodeAttr(name = "isRisk")
-    private Boolean is_risk;
+    @ONodeAttr(name = "mcn_info")
+    private String mcnInfo;
+    @ONodeAttr(name = "gaia_res_type")
+    private Integer gaiaResType;
+    @ONodeAttr(name = "gaia_data")
+    private String gaiaData;
+    @ONodeAttr(name = "is_risk")
+    private Boolean isRisk;
     @ONodeAttr(name = "elec")
     private String elec;
 }

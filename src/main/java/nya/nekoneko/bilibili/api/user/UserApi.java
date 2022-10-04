@@ -61,6 +61,7 @@ public class UserApi implements IUser {
         data.set("school_name", data.get("school").get("name").getRawString());
         data.get("pendant").rename("pid", "id");
         data.get("nameplate").rename("nid", "id");
+        data.get("fans_medal").get("medal").rename("medal_id", "id");
         System.out.println(data.toString());
         return data.toObject(BilibiliUser.class);
     }
