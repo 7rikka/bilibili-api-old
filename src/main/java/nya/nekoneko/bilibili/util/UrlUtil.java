@@ -16,6 +16,7 @@ public class UrlUtil {
         map.put("%0A", "\n");
         map.put("%3D", "=");
         map.put("%2B", "\\+");
+        map.put("%20", " ");
     }
 
     /**

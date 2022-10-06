@@ -52,6 +52,10 @@ public class UserApi implements IUser {
 //                .cookie(loginInfo)
                 .buildRequest();
         BiliResult result = Call.doCallWithProxy(request);
+        if (result.getCode() == -404) {
+            return null;
+        }
+        System.out.println(result);
         ONode data = result.getData();
         data.rename("mid", "id");
         data.rename("face", "avatar");
@@ -62,7 +66,6 @@ public class UserApi implements IUser {
         data.get("pendant").rename("pid", "id");
         data.get("nameplate").rename("nid", "id");
         data.get("fans_medal").get("medal").rename("medal_id", "id");
-        System.out.println(data.toString());
         return data.toObject(BilibiliUser.class);
     }
 }
