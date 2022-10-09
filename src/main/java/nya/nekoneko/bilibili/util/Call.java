@@ -140,10 +140,10 @@ public class Call {
                 .callTimeout(Duration.ofSeconds(100));
         String proxy = proxyProvider.getProxy();
         if (null != proxy) {
+            log.info("使用代理: {}", proxy);
             String[] split = proxy.split(":");
             String ip = split[0];
             int port = Integer.parseInt(split[1]);
-            log.info("使用代理: {}",proxy);
             builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
         }
         OkHttpClient client1 = builder.build();
