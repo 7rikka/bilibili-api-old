@@ -203,5 +203,5 @@ public class UrlConfig {
     /**
      * 获取用户信息
      */
-    public static final String GET_USER_INFO = "https://api.bilibili.com/x/space/acc/info";
+    public static final String GET_USER_INFO = "http://api.bilibili.com/x/space/acc/info";
 }

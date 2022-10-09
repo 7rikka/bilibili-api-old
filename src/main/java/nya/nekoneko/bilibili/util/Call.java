@@ -162,6 +162,7 @@ public class Call {
             }
             BiliRequestHandler.process(response.headers());
             String result = body.string().strip();
+            log.info(result);
             BiliResult biliResult = ONode.deserialize(result, BiliResult.class);
             biliResult.setRaw(result);
             return biliResult;
