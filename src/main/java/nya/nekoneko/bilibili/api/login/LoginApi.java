@@ -105,7 +105,7 @@ public class LoginApi implements ILogin {
         if (0 == biliResult.getCode()) {
             //退出成功
             loginInfo.setCsrf(null);
-            loginInfo.setSESSDATA(null);
+            loginInfo.setSessData(null);
             PrintUtil.error("退出登录成功!");
         } else {
             PrintUtil.error("退出失败! 返回: " + result);

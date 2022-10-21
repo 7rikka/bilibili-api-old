@@ -110,7 +110,7 @@ public class BiliRequest {
 
     public BiliRequest cookie(BilibiliLoginInfo loginInfo) {
         if (null != loginInfo) {
-            String cookie = "DedeUserID=" + loginInfo.getUid() + "; SESSDATA=" + loginInfo.getSESSDATA() + "; bili_jct=" + loginInfo.getCsrf();
+            String cookie = "DedeUserID=" + loginInfo.getUid() + "; SESSDATA=" + loginInfo.getSessData() + "; bili_jct=" + loginInfo.getCsrf();
             builder.header("Cookie", cookie);
         }
         return this;

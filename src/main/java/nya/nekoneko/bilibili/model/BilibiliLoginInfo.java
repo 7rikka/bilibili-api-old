@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 /**
  * 用户登录信息
+ *
+ * @author Ho
  */
 @Data
 public class BilibiliLoginInfo {
@@ -20,7 +22,7 @@ public class BilibiliLoginInfo {
     /**
      * SESSDATA
      */
-    private String SESSDATA;
+    private String sessData;
     /**
      * csrf (bili_jct)
      */
@@ -46,13 +48,13 @@ public class BilibiliLoginInfo {
      */
     private LocalDateTime updateTime;
 
-    public String getSESSDATA() {
-        return SESSDATA;
+    public String getSessData() {
+        return sessData;
     }
 
-    public BilibiliLoginInfo setSESSDATA(String SESSDATA) {
-        if (null != SESSDATA) {
-            this.SESSDATA = SESSDATA
+    public BilibiliLoginInfo setSessData(String sessData) {
+        if (null != sessData) {
+            this.sessData = sessData
                     .replace(",", "%2C")
                     .replace("*", "%2A");
         }
