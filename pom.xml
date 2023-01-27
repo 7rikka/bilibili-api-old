@@ -88,7 +88,7 @@
                     <archive>
                         <!-- 此处，要改成自己的程序入口（即 main 函数类） -->
                         <manifest>
-                            <mainClass>nya.nekoneko.bilibili.Test</mainClass>
+                            <mainClass>nya.nekoneko.bilibili.T2</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -35,17 +35,36 @@ public class UposUploader implements Uploader {
     //  qn
     //  ws
     private static String upcdn = "qn";
+    private static String zone = "cs";
 
     public UposUploader() {
     }
 
     public UposUploader(int type) {
         if (1 == type) {
+            //sz-bda2
             upcdn = "bda2";
+            zone = "sz";
         } else if (2 == type) {
-            upcdn = "ws";
-        } else {
+            //sz-qn
             upcdn = "qn";
+            zone = "sz";
+        } else if (3 == type) {
+            //cs-bda2
+            upcdn = "bda2";
+            zone = "cs";
+        } else if (4 == type) {
+            //cs-qn
+            upcdn = "qn";
+            zone = "cs";
+        } else if (5 == type) {
+            //cs-qnhk
+            upcdn = "qnhk";
+            zone = "cs";
+        } else if (6 == type) {
+            //cs-bldsa
+            upcdn = "bldsa";
+            zone = "cs";
         }
     }
 
@@ -55,15 +74,16 @@ public class UposUploader implements Uploader {
     public String upload(BilibiliLoginInfo bilibiliLoginInfo, File file) throws Exception {
         long start = System.currentTimeMillis();
         String fileName = file.getName();
-        PrintUtil.info("使用 UposUploader(" + upcdn + ") 上传");
+        PrintUtil.info("使用 UposUploader(cdn：" + upcdn + " zone：" + zone + ") 上传");
         long fileSize = file.length();
         //STEP1.获取上传信息
         Map<String, String> map = new HashMap<>();
         map.put("name", fileName);
-        map.put("size", String.valueOf(fileSize));
         map.put("r", "upos");
-        map.put("upcdn", upcdn);
         map.put("profile", PROFILE);
+        map.put("zone", zone);
+        map.put("size", String.valueOf(fileSize));
+        map.put("upcdn", upcdn);
         map.put("ssl", "0");
         map.put("version", "2.10.4.0");
         map.put("build", "2100400");
@@ -98,12 +118,13 @@ public class UposUploader implements Uploader {
                 .header("X-Upos-Auth", auth)
                 .buildRequest();
         String result2 = Call.doCallGetString(request2);
-//        PrintUtil.info("result2: "+result2 );
+        PrintUtil.info("result2: "+result2 );
         ONode node2 = ONode.loadStr(result2);
         String uploadId = node2.get("upload_id").getString();
         String bucket = node2.get("bucket").getString();
         String key = node2.get("key").getString();
         //STEP3.开始上传
+        System.out.println("STEP3.开始上传");
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
         ThreadPoolExecutor service = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_COUNT);
         Progress progress = new Progress(fileSize);

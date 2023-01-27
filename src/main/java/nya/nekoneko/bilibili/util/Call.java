@@ -171,4 +171,38 @@ public class Call {
             throw new RequestException(request, null, e.getMessage());
         }
     }
+    public static String doCallWithProxyGetString(Request request) {
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder()
+                .readTimeout(Duration.ofSeconds(100))
+                .connectTimeout(Duration.ofSeconds(100))
+                .callTimeout(Duration.ofSeconds(100));
+        String proxy = proxyProvider.getProxy();
+        if (null != proxy) {
+            log.info("使用代理: {}", proxy);
+            String[] split = proxy.split(":");
+            String ip = split[0];
+            int port = Integer.parseInt(split[1]);
+            builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port)));
+        }
+        OkHttpClient client1 = builder.build();
+        try {
+            Response response = client1.newCall(request).execute();
+            if (SUCCESS != response.code()) {
+                String body = null;
+                if (null != response.body()) {
+                    body = response.body().string();
+                }
+                throw new RequestException(request, response, "HTTP CODE: " + response.code(), body);
+            }
+            ResponseBody body = response.body();
+            if (null == body) {
+                throw new RequestException(request, response, "Body为空");
+            }
+            BiliRequestHandler.process(response.headers());
+            return body.string().strip();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RequestException(request, null, e.getMessage());
+        }
+    }
 }
